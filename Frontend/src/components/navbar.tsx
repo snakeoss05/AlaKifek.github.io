@@ -89,6 +89,7 @@ function Navbar() {
         collapseOnSelect
         expand="sm"
         variant="light"
+        className="shadow"
       >
         <div className="container border-nav">
           <Navi.Toggle aria-controls="basic-navbar-nav" />

@@ -2,9 +2,10 @@ import { MongoClient } from "mongodb";
 import Product from "../Models/Product.js";
 import mongodb from "mongodb";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 const ObjectId = mongodb.ObjectId;
 let products;
-
+dotenv.config();
 export default class ProductDAO {
   static async injectDB() {
     if (products) {
@@ -12,16 +13,14 @@ export default class ProductDAO {
     }
 
     try {
-      const client = await MongoClient.connect(
-        "mongodb+srv://Admin:Admin@cluster0.uhdnbun.mongodb.net/Productlist?retryWrites=true&w=majority",
-        {
-          useNewUrlParser: true,
+      const client = await MongoClient.connect(process.env.URI_CONNECTION, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
 
-          socketTimeoutMS: 40000,
-        }
-      );
-      const db = client.db("Productlist");
-      products = db.collection("Productlist");
+      products = client.db().collection("Productlist");
+
+      console.log("Connected to MongoDB!");
     } catch (error) {
       console.error(`Unable to connect to MongoDB: ${error}`);
     }

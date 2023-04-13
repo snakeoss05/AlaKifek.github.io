@@ -1,7 +1,10 @@
 import { MongoClient } from "mongodb";
 import mongodb from "mongodb";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
 import ClientCommands from "../Models/FormData.js";
+dotenv.config();
 const ObjectId = mongodb.ObjectId;
 let form;
 
@@ -11,14 +14,10 @@ export default class FormDAO {
       return;
     }
     try {
-      const client = await MongoClient.connect(
-        "mongodb+srv://Admin:Admin@cluster0.uhdnbun.mongodb.net/Productlist?retryWrites=true&w=majority",
-        {
-          useNewUrlParser: true,
-
-          socketTimeoutMS: 40000,
-        }
-      );
+      const client = await MongoClient.connect(process.env.URI_CONNECTION, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
       form = client.db("Productlist").collection("ClientCommands");
     } catch (e) {
       console.error(`Unable to connect to MongoDB: ${e}`);
