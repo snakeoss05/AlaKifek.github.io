@@ -1,5 +1,5 @@
 import express from "express";
-import FormController from "../controller/formController";
+import FormController from "../controller/formController.js";
 
 const router = express.Router();
 

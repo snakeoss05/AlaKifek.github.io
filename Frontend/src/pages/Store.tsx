@@ -1,6 +1,6 @@
 import Carousell from "../components/carousel";
 import Card from "../components/storeitem";
-
+import { useShoppingCart } from "../context/shopingcartcontext";
 import Footer from "../components/footer";
 import React, { useState, useEffect } from "react";
 import HandleChange from "./checkout";

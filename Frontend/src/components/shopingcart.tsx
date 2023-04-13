@@ -1,7 +1,7 @@
 import { Offcanvas, Stack } from "react-bootstrap";
 
-import "./carditem/carditem";
-import { Carditem } from "./carditem/carditem";
+import "./carditem";
+import { Carditem } from "./carditem";
 import { NavLink } from "react-router-dom";
 import { useProducts } from "../data/product";
 import { useShoppingCart } from "../context/shopingcartcontext";
@@ -11,7 +11,7 @@ type Shopingcartprops = {
 
 export default function Shopingcart({ isOpen }: Shopingcartprops) {
   const { CloseCart, cartItems } = useShoppingCart();
-const items = useProducts();
+  const items = useProducts();
   return (
     <>
       <Offcanvas show={isOpen} placement="end" onHide={CloseCart}>

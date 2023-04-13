@@ -6,11 +6,7 @@ import "./navbar.css";
 
 import { useShoppingCart } from "../context/shopingcartcontext";
 
-import { useProducts } from "../data/product";
-
 function Navbar() {
-  const items = useProducts();
-  const catagorybt = [...new Set(items.map((item) => item.category))];
   const { cartQuantity } = useShoppingCart();
 
   const [navbarColor, setNavbarColor] = useState("#ffeb60");
@@ -118,13 +114,17 @@ function Navbar() {
                 </NavLink>
               </li>
               <Dropdown>
-                <NavLink to="/store" className="nav-link">
-                  <Dropdown.Toggle id="dropdown-basic">
-                    {" "}
-                    Accessoires et Périphériques
-                  </Dropdown.Toggle>
+                <NavLink
+                  to="/store"
+                  className="nav-link"
+                  data-bs-toggle="dropdown"
+                  data-bs-auto-close="true"
+                  aria-expanded="false"
+                >
+                  {" "}
+                  Accessoires et Périphériques
                 </NavLink>
-                <Dropdown.Menu className="dropdown-menu-lg">
+                <ul className="dropdown-menu dropdown-menu-scroll bg-shadow">
                   <div className="d-flex flex-column flex-lg-row ">
                     <li className=" m-2 ">
                       <NavLink
@@ -186,7 +186,7 @@ function Navbar() {
                       </ul>
                     </li>
                   </div>
-                </Dropdown.Menu>
+                </ul>
               </Dropdown>
               <li className="nav-item dropdown">
                 <NavLink

@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Stack } from "react-bootstrap";
 import "./carditem.css";
-
-import { useShoppingCart } from "/Users/Snakeoss/Desktop/Alakifek/src/context/shopingcartcontext";
-import { useProducts } from "../../data/product";
+import { useShoppingCart } from "../context/shopingcartcontext";
+import { useProducts } from "../data/product";
 type CarditemProps = {
   id: any;
   quantity: number;
