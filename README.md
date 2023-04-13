@@ -1,2 +1,2 @@
 # shop-with-react
-Mern Stack 
+mern stack project
