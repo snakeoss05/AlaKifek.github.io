@@ -1,0 +1,127 @@
+.shop {
+  font-size: 10px !important;
+}
+
+.space {
+  letter-spacing: 0.8px !important;
+}
+
+.second a:hover {
+  color: rgb(92, 92, 92) !important;
+}
+
+.active-2 {
+  color: rgb(92, 92, 92) !important;
+}
+
+.breadcrumb > li + li:before {
+  content: "" !important;
+}
+
+.breadcrumb {
+  padding: 0px !important;
+  font-size: 10px !important;
+  color: #aaa !important;
+}
+
+.first {
+  background-color: white !important;
+}
+
+a {
+  text-decoration: none !important;
+  color: #aaa;
+}
+
+.btn-lg,
+.form-control-sm:focus,
+.form-control-sm:active,
+a:focus,
+a:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.form-control-sm:focus {
+  border: 1.5px solid #4bb8a9 !important;
+}
+
+.btn-group-lg > .btn,
+.btn-lg {
+  padding: 0.5rem 0.1rem !important;
+  font-size: 1rem !important;
+  border-radius: 0 !important;
+  color: white !important;
+  background-color: #4bb8a9 !important;
+  height: 2.8rem !important;
+  border-radius: 0.2rem !important;
+}
+
+.btn-group-lg > .btn:hover,
+.btn-lg:hover {
+  background-color: #26a69a !important;
+}
+
+.btn-outline-primary {
+  background-color: #fff !important;
+  color: #4bb8a9 !important;
+  border-radius: 0.2rem !important;
+  border: 1px solid #4bb8a9 !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: #4bb8a9 !important;
+  color: #fff !important;
+  border: 1px solid #4bb8a9 !important;
+}
+
+.card-2 {
+  margin-top: 40px !important;
+}
+
+.card-header {
+  background-color: #fff !important;
+  border-bottom: 0px solid #aaaa !important;
+}
+
+p {
+  font-size: 13px;
+}
+
+.small {
+  font-size: 12px !important;
+}
+
+.form-control-sm {
+  height: calc(2.2em + 0.5rem + 2px) !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  border-radius: 0 !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.boxed {
+  padding: 0px 8px 0 8px !important;
+  background-color: #4bb8a9 !important;
+  color: white !important;
+}
+
+.boxed-1 {
+  padding: 0px 8px 0 8px !important;
+  color: black !important;
+  border: 1px solid #aaaa !important;
+}
+
+.bell {
+  opacity: 0.5 !important;
+  cursor: pointer !important;
+}
+
+@media (max-width: 767px) {
+  .breadcrumb-item + .breadcrumb-item {
+    padding-left: 0 !important;
+  }
+}
