@@ -191,7 +191,7 @@ function Tabse() {
       </Tab>
       <Tab eventKey="profile" title="Delete Product">
         <div>
-          <form className="row col-3 mx-auto mb-3" onSubmit={searchitems}>
+          <div className="row col-3 mx-auto mb-3">
             {" "}
             <div className="row col-12 ms-2">
               <label className="col-12 text-start" htmlFor="id">
@@ -207,7 +207,9 @@ function Tabse() {
                 />
               </div>
 
-              <button className="btn btn-warning rounded-5 col-2">
+              <button
+                className="btn btn-warning rounded-5 col-2"
+                onClick={searchitems}>
                 <i
                   className="fa-solid fa-magnifying-glass"
                   style={{ color: "white" }}></i>
@@ -239,7 +241,7 @@ function Tabse() {
             ) : (
               <></>
             )}
-          </form>
+          </div>
         </div>
       </Tab>
       <Tab eventKey="longer-tab" title="Update Product">

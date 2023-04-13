@@ -18,7 +18,7 @@ export default class ProductDAO {
         useUnifiedTopology: true,
       });
 
-      products = client.db().collection("Productlist");
+      products = client.db("Productlist").collection("Productlist");
 
       console.log("Connected to MongoDB!");
     } catch (error) {
