@@ -3,6 +3,8 @@ import Tabs from "react-bootstrap/Tabs";
 import { React, useState } from "react";
 import axios from "axios";
 function Tabse() {
+  const [id, setId] = useState(null);
+  const [item, setItems] = useState(null);
   const [formDataproduct, setformDataproduct] = useState({
     category: "",
     title: "",
@@ -15,9 +17,46 @@ function Tabse() {
     img3: "",
     img4: "",
   });
+  const [product, setProduct] = useState({
+    price: {
+      value: "",
+      isEditing: false,
+    },
 
-  const [id, setId] = useState(null);
-  const [item, setItems] = useState(null);
+    title: {
+      value: "",
+      isEditing: false,
+    },
+    descreption: {
+      value: "",
+      isEditing: false,
+    },
+    quantity: {
+      value: "",
+      isEditing: false,
+    },
+  });
+
+  const handleIconClick = (property) => {
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [property]: {
+        ...prevProduct[property],
+        isEditing: !prevProduct[property].isEditing,
+      },
+    }));
+  };
+  const handleValueChange = (event, property) => {
+    const value = event.target.value;
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [property]: {
+        ...prevProduct[property],
+        value: value,
+      },
+    }));
+  };
+
   function HandleChange(event) {
     const { name, value } = event.target;
 
@@ -59,12 +98,18 @@ function Tabse() {
     }
     alert("Prouct Delete success");
   };
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const handleFormSubmit = async () => {
+    const updateproduct = {
+      title: product.title.value,
+      price: product.price.value,
+      quantity: product.quantity.value,
+      descreption: product.descreption.value,
+    };
     try {
+      console.log();
       const response = await axios.put(
-        `http://localhost:5000/api/products/products/update/${id}`,
-        formDataproduct
+        `http://localhost:5000/api/products/update/${id}`,
+        updateproduct
       );
       console.log(response.data); // do something with the response data
     } catch (error) {
@@ -299,7 +344,26 @@ function Tabse() {
                 </div>
               </div>
               <div className="d-flex flex-column  py-2 py-lg-5 px-3 bg-body right-side">
-                <h1 className="fw-bolder my-3">{item?.title}</h1>
+                <div className="d-flex flex-row align-items-center align-content-center my-2">
+                  {" "}
+                  {product.title.isEditing ? (
+                    <input
+                      type="text"
+                      name="title"
+                      className="form-control"
+                      placeholder="Right Your New Title"
+                      onChange={(event) => handleValueChange(event, "title")}
+                    />
+                  ) : (
+                    <h1 className="fw-bolder my-3">{item?.title}</h1>
+                  )}
+                  <button
+                    className="btn btn-outline-dark rounded-4 ms-2"
+                    onClick={() => handleIconClick("title")}>
+                    {" "}
+                    <i class="fa-solid fa-pen "></i>
+                  </button>
+                </div>
                 <p className="text-black fw-bold">
                   Réference:<p className="text-muted ">{item?._id}</p>
                 </p>{" "}
@@ -313,24 +377,85 @@ function Tabse() {
                     (34 customer reviews)
                   </p>
                 </div>
-                <h2 className="text-warning opacity-50">{item?.price} DT</h2>
-                <p className="w-100 overflow-y-auto">{item?.descreption}</p>
+                <div className="d-flex flex-row align-items-center me-auto align-content-center my-2">
+                  {" "}
+                  {product.price.isEditing ? (
+                    <input
+                      type="number"
+                      name="price"
+                      className="form-control w-25"
+                      onChange={(event) =>
+                        handleValueChange(event, "price")
+                      }></input>
+                  ) : (
+                    <h2 className="text-warning opacity-50 ">
+                      {item?.price} DT
+                    </h2>
+                  )}
+                  <button
+                    className="btn btn-outline-dark rounded-4 ms-2 "
+                    onClick={() => handleIconClick("price")}>
+                    <i class="fa-solid fa-pen "></i>
+                  </button>
+                </div>
+                {product.descreption.isEditing ? (
+                  <textarea
+                    className="w-100 rounded-4 p-2 text-bg-light my-2"
+                    name="descreption"
+                    type="text"
+                    onChange={(event) =>
+                      handleValueChange(event, "descreption")
+                    }></textarea>
+                ) : (
+                  <p className="w-100 overflow-y-auto">{item?.descreption}</p>
+                )}
+                <button
+                  className="btn btn-outline-dark rounded-4 ms-2"
+                  onClick={() => handleIconClick("descreption")}>
+                  {" "}
+                  <i class="fa-solid fa-pen "></i>
+                </button>
                 <div className="d-flex flex-row me-auto justify-content-around align-content-center align-items-center w-50 p-2 border-bottom mt-5 fs-4">
                   <i className="fa-solid fa-truck"></i>
                   <i className="fa-solid fa-shield-halved"></i>
                   <i className="fa-regular fa-clock"></i>
                 </div>
                 <div className="mt-0 ms-lg-5 ms-1 d-flex flex-row">
-                  <div className="mt-0  ms-auto d-flex flex-row align-content-center justify-content-center align-items-center">
+                  <div className="mt-0  ms-auto d-flex flex-row align-content-center justify-content-end align-items-center">
                     <span className="me-2 fs-5 fw-bold text-muted">
-                      Disponibilté:
+                      Quantity:
                     </span>
-                    {item.quantity ? (
-                      <span className="fs-5 text-success">En Stock</span>
+
+                    {product.quantity.isEditing ? (
+                      <div className=" w-25">
+                        <input
+                          type="number"
+                          className="form-control"
+                          name="quantity"
+                          onChange={(event) =>
+                            handleValueChange(event, "quantity")
+                          }
+                        />
+                      </div>
                     ) : (
-                      <span className="fs-5 text-danger">Out Of Stock</span>
+                      <span className="fs-5 text-success">{item.quantity}</span>
                     )}
+
+                    <button
+                      className="btn btn-outline-dark rounded-4 ms-2 "
+                      onClick={() => handleIconClick("quantity")}>
+                      {" "}
+                      <i class="fa-solid fa-pen "></i>
+                    </button>
                   </div>
+                </div>
+                <div className="mt-5 col-12 w-50">
+                  {" "}
+                  <button
+                    className="btn btn-success col-8 rounded-4 fw-semibold"
+                    onClick={handleFormSubmit}>
+                    Update
+                  </button>
                 </div>
               </div>
             </section>

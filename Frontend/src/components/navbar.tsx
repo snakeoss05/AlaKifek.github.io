@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
-import { Navbar as Navi, Nav, Dropdown } from "react-bootstrap";
+import { Navbar as Navi } from "react-bootstrap";
 
 import "./navbar.css";
 
@@ -22,10 +22,14 @@ function Navbar() {
     if (scrollTop > 50) {
       setNavbarColor("white");
     } else {
-      setNavbarColor("#ffeb60");
+      setNavbarColor("white");
     }
   };
+  const [isOpen, setIsOpen] = useState(false);
 
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <>
       <nav className="navbar col-logo nav1 bg-black d-none d-lg-flex ">
@@ -84,12 +88,9 @@ function Navbar() {
       </nav>
 
       <Navi
-        style={{ backgroundColor: navbarColor, maxHeight: "50px !impotant" }}
+        style={{ backgroundColor: navbarColor, height: "100px" }}
         sticky="top"
-        collapseOnSelect
         expand="sm"
-        variant="light"
-        className="shadow"
       >
         <div className="container border-nav">
           <Navi.Toggle aria-controls="basic-navbar-nav" />
@@ -101,63 +102,59 @@ function Navbar() {
           </div>
 
           <Navi.Collapse>
-            <ul className="navbar-nav ms-lg-5 me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-lg-5 me-auto mb-2 mb-lg-0 ">
               <li className="nav-item">
                 <NavLink
                   to="/"
-                  className="nav-link"
+                  className="nav-link text-black fw-semibold text-uppercase"
                   type="button"
-                  id="dropdownMenuButton"
-                  data-mdb-toggle="dropdown"
-                  aria-expanded="false"
                 >
                   Home
                 </NavLink>
               </li>
-              <Dropdown>
+              <li className="nav-item dropdown">
+                {" "}
                 <NavLink
                   to="/store"
-                  className="nav-link"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="true"
+                  id="megamneu"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
                   aria-expanded="false"
+                  className="nav-link dropdown-toggle text-black fw-semibold text-uppercase"
                 >
-                  {" "}
-                  Accessoires et Périphériques
+                  Store
                 </NavLink>
-                <ul className="dropdown-menu dropdown-menu-scroll bg-shadow">
-                  <div className="d-flex flex-column flex-lg-row ">
-                    <li className=" m-2 ">
+                <ul className="dropdown-menu border-0 pt-3 m-0  dropdown-menu-scroll ">
+                  <div className="d-flex flex-column flex-lg-row animated">
+                    <li className=" m-2 col-2">
                       <NavLink
-                        className="fs-5 dropdown-item  text-warning fw-medium border-bottom border-2 "
                         to="/store"
+                        className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2"
                       >
                         Accessoires Pc
                       </NavLink>
-                      <ul className="list-unstyled ms-2 ps-1">
+                      <ul className="list-unstyled ms-2 ps-1 ">
                         <li>
-                          <a className="links row">Casque & Écouteurs</a>
+                          <a className="nav-link">Casque & Écouteurs</a>
                         </li>
                         <li>
-                          <a className="links row">Souris</a>
+                          <a className="nav-link">Souris</a>
                         </li>
                         <li>
-                          <a className="links row">Clavier</a>
+                          <a className="nav-link">Clavier</a>
                         </li>
                         <li>
-                          <a className="links row">
-                            Ensemble Clavier Et Souris
-                          </a>
+                          <a className="nav-link">Ensemble Clavier Et Souris</a>
                         </li>
                         <li>
-                          <a className="links row">Tapis De Souris</a>
+                          <a className="nav-link">Tapis De Souris</a>
                         </li>
                         <li>
-                          <a className="links row">Webcam</a>
+                          <a className="nav-link">Webcam</a>
                         </li>
                       </ul>
                     </li>
-                    <li className="m-2">
+                    <li className="m-2 col-3">
                       <a
                         className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2 "
                         href="#"
@@ -166,42 +163,27 @@ function Navbar() {
                       </a>
                       <ul className="list-unstyled ms-1 ps-1 ">
                         <li>
-                          <a className="links row">Etuis et coques </a>
+                          <a className="nav-link">Etuis et coques </a>
                         </li>
 
                         <li>
-                          <a className="links row">Protection Ecran</a>
+                          <a className="nav-link">Protection Ecran</a>
                         </li>
                         <li>
-                          <a className="links row">Power bank</a>
+                          <a className="nav-link">Power bank</a>
                         </li>
                         <li>
-                          <a className="links row">Tige Selfie</a>
+                          <a className="nav-link">Tige Selfie</a>
                         </li>
                         <li>
-                          <a className="links row">Chargeur</a>
+                          <a className="nav-link">Chargeur</a>
                         </li>
                         <li>
-                          <a className="links row">Câble Chargeur</a>
+                          <a className="nav-link">Câble Chargeur</a>
                         </li>
                       </ul>
                     </li>
-                  </div>
-                </ul>
-              </Dropdown>
-              <li className="nav-item dropdown">
-                <NavLink
-                  className="nav-link"
-                  to="/contact"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="true"
-                  aria-expanded="false"
-                >
-                  Composant Informatique
-                </NavLink>
-                <ul className="dropdown-menu dropdown-menu-scroll bg-shadow">
-                  <div className="d-flex flex-column flex-lg-row px-2 scroll-menu">
-                    <li className=" mx-2">
+                    <li className=" m-2 col-3">
                       <a
                         className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2 "
                         href="#"
@@ -210,39 +192,39 @@ function Navbar() {
                       </a>
                       <ul className="list-unstyled">
                         <li>
-                          <a className="links row">Disque Dur Interne</a>
+                          <a className="nav-link">Disque Dur Interne</a>
                         </li>
 
                         <li>
-                          <a className="links row">Afficheur</a>
+                          <a className="nav-link">Afficheur</a>
                         </li>
 
                         <li>
-                          <a className="links row">
+                          <a className="nav-link">
                             Ventilateur & Refroidisseur
                           </a>
                         </li>
                         <li>
-                          <a className="links row">Processeur</a>
+                          <a className="nav-link">Processeur</a>
                         </li>
                         <li>
-                          <a className="links row">Barrette Mémoire</a>
+                          <a className="nav-link">Barrette Mémoire</a>
                         </li>
                         <li>
-                          <a className="links row">Carte Mère</a>
+                          <a className="nav-link">Carte Mère</a>
                         </li>
                         <li>
-                          <a className="links row">Carte Graphique</a>
+                          <a className="nav-link">Carte Graphique</a>
                         </li>
                         <li>
-                          <a className="links row">Boîte D'alimentation</a>
+                          <a className="nav-link">Boîte D'alimentation</a>
                         </li>
                         <li>
-                          <a className="links row">Boîtier</a>
+                          <a className="nav-link">Boîtier</a>
                         </li>
                       </ul>
                     </li>
-                    <li className="mx-2">
+                    <li className="m-2 col-3">
                       <a
                         className="dropdown-item col  fs-5 text-warning fw-medium border-bottom border-2 "
                         href="#"
@@ -250,80 +232,29 @@ function Navbar() {
                         Composants De Pc Portable
                       </a>
                       <ul className="list-unstyled ">
-                        <li>
-                          <a className="links row">Disque Dur Interne</a>
+                        <li className="nav-item">
+                          <a className="nav-link">Disque Dur Interne</a>
                         </li>
 
-                        <li>
-                          <a className="links row">Afficheur</a>
+                        <li className="nav-item">
+                          <a className="nav-link">Afficheur</a>
                         </li>
 
-                        <li>
-                          <a className="links row">
+                        <li className="nav-item">
+                          <a className="nav-link">
                             Ventilateur & Refroidisseur
                           </a>
                         </li>
 
-                        <li>
-                          <a className="links row">Barrette Mémoire</a>
+                        <li className="nav-item">
+                          <a className="nav-link">Barrette Mémoire</a>
                         </li>
 
-                        <li>
-                          <a className="links row">Chargeur Pour Pc Portable</a>
+                        <li className="nav-item">
+                          <a className="nav-link">Chargeur Pour Pc Portable</a>
                         </li>
-                        <li>
-                          <a className="links row">Batterie Pour Pc Portable</a>
-                        </li>
-                        <li>
-                          <a className="links row">Clavier Pour Pc Portable</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </div>
-                </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <NavLink
-                  className="nav-link"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="true"
-                  aria-expanded="false"
-                  to="/impression"
-                >
-                  Impression
-                </NavLink>
-                <ul className="dropdown-menu bg-shadow">
-                  <div className="d-flex flex-column flex-lg-row px-2">
-                    <li className=" mx-2 ">
-                      <a
-                        className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2 "
-                        href="#"
-                      >
-                        Photocopieurs
-                      </a>
-                      <ul className="list-unstyled">
-                        <li>
-                          <a className="links row">Photocopieurs A4 | A3</a>
-                        </li>
-                        <li>
-                          <a className="links row">Accessoires Photocopieurs</a>
-                        </li>
-                        <li>
-                          <a className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2">
-                            Papier
-                          </a>
-                        </li>
-                        <li>
-                          <a className="links row">Papier A4</a>
-                        </li>
-                        <li>
-                          <a className="links row">Papier A3</a>
-                        </li>
-                        <li>
-                          <a className="links row">Enveloppe</a>
-                        </li>
-                        <li>
-                          <a className="links row">Papier Photo</a>
+                        <li className="nav-item">
+                          <a className="nav-link">Batterie Pour Pc Portable</a>
                         </li>
                       </ul>
                     </li>
@@ -332,7 +263,10 @@ function Navbar() {
               </li>
 
               <li className="nav-item">
-                <NavLink className="nav-link" to="/contact">
+                <NavLink
+                  className="nav-link fw-semibold text-uppercase"
+                  to="/contact"
+                >
                   Contact
                 </NavLink>
               </li>

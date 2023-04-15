@@ -75,16 +75,71 @@ export default class ProductsController {
       res.status(500).send({ error: e });
     }
   }
-  static async  updateProduct(req, res) {
-  const { id } = req.params;
-  const { title, descreption, quantity, price, mainimg, secimg, thirdimg, category, fourimg } = req.body;
+  static async updateProduct(req, res) {
+    const { id } = req.params;
+    const { title, descreption, quantity, price } = req.body;
 
-  const updatedProduct = await ProductDAO.updateProduct(id, title, descreption, quantity, price, mainimg, secimg, thirdimg, category, fourimg);
+    const updates = {
+      $set: {},
+    };
 
-  if (updatedProduct.error) {
-    return res.status(500).send({ message: 'Unable to update product', error: updatedProduct.error });
+    if (title) {
+      updates.$set.title = title;
+    }
+    if (quantity) {
+      updates.$set.quantity = quantity;
+    }
+
+    if (descreption) {
+      updates.$set.descreption = descreption;
+    }
+
+    if (price) {
+      updates.$set.price = price;
+    }
+
+    try {
+      const product = await ProductDAO.getProductById(id);
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+
+      const updatedProduct = await ProductDAO.updateProduct(id, updates);
+
+      const response = {
+        message: "Product updated successfully",
+        originalValues: {},
+        updatedValues: {},
+      };
+
+      if (title) {
+        response.originalValues.title = product.title;
+        response.updatedValues.title = updatedProduct.title;
+      }
+
+      if (description) {
+        response.originalValues.description = product.description;
+        response.updatedValues.description = updatedProduct.description;
+      }
+
+      if (price) {
+        response.originalValues.price = product.price;
+        response.updatedValues.price = updatedProduct.price;
+      }
+
+      res.json(response);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
-
-  return res.status(200).send({ message: 'Product updated successfully', product: updatedProduct });
-}
+  static async getProductsByCategory(req, res) {
+    try {
+      const { category } = req.params;
+      const products = await ProductDAO.filterProductsByCategory(category);
+      res.json(products);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: error.message });
+    }
+  }
 }

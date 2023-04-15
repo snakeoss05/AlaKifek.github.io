@@ -9,10 +9,11 @@ import { event } from "jquery";
 import axios from "axios";
 export default function Store() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [posteperpage, setposteperpage] = useState(8);
+  const [filtreditems, setfiltereditems] = useState<Product[]>([]);
+  const [items, setItems] = useState<Product[]>([]);
 
-  function handleCategorySelect(category: any) {
-    setSelectedCategory(category);
-  }
   interface Product {
     _id: string;
     category: string;
@@ -29,8 +30,6 @@ export default function Store() {
     mark: string;
   }
 
-  const [items, setItems] = useState<Product[]>([]);
-
   useEffect(() => {
     axios
       .get<Product[]>("http://localhost:5000/api/products/get")
@@ -38,18 +37,23 @@ export default function Store() {
         setItems(response.data);
       });
   }, []);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [posteperpage, setposteperpage] = useState(8);
+
   const lastpostindex = currentPage * posteperpage;
   const firstpostindex = lastpostindex - posteperpage;
-  const currentposts = items.slice(firstpostindex, lastpostindex);
+  const currentposts = filtreditems.slice(firstpostindex, lastpostindex);
   useEffect(() => {
-    const filteredItems =
-      selectedCategory === "All"
-        ? items
-        : items.filter((item) => item.category === selectedCategory);
-    setItems(filteredItems);
+    if (selectedCategory === "All") {
+      setfiltereditems(items);
+    } else {
+      const filteritems = items.filter(
+        (item) => item.category == selectedCategory
+      );
+      setfiltereditems(filteritems);
+    }
   }, [selectedCategory, items]);
+  function handleCategorySelect(category: any) {
+    setSelectedCategory(category);
+  }
   const sortByPriceAscending = () => {
     const sortedProducts = [...items].sort((a, b) => a.price - b.price);
     setItems(sortedProducts);
@@ -75,7 +79,7 @@ export default function Store() {
             <h1 className="fw-bold text-bg-warning text-center p-3 fs-2 rounded-3 mt-5 mx-auto mt-lg-2">
               Filter
             </h1>
-            <div className="d-flex flex-lg-column rounded-4 align-content-center  justify-content-center flex-wrap border bg-white px-3 py-2 align-items-start position-relative mx-auto ">
+            <div className="d-flex flex-lg-column rounded-4 align-content-center  justify-content-center flex-wrap border bg-white px-3 py-2 align-items-start position-relative mx-auto mb-3">
               <p className=" w-75 rounded-4  p-2   text-center m-2   fw-bolder border-bottom">
                 Categorys
               </p>

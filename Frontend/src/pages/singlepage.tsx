@@ -103,7 +103,7 @@ export default function Singlepage() {
               <span className="me-2 fs-5 fw-bold text-muted">
                 Disponibilté:
               </span>
-              {item.quantity ? (
+              {item?.quantity != 0 ? (
                 <span className="fs-5 text-success">En Stock</span>
               ) : (
                 <span className="fs-5 text-danger">Out Of Stock</span>

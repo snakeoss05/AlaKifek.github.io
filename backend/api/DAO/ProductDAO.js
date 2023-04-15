@@ -82,40 +82,16 @@ export default class ProductDAO {
       return { error: e };
     }
   }
-  static async updateProduct(
-    id,
-    title,
-    descreption,
-    quantity,
-    price,
-    mainimg,
-    secimg,
-    thirdimg,
-    category,
-    fourimg
-  ) {
+  static async updateProduct(id, updates) {
     try {
       const updatedProduct = await products.findOneAndUpdate(
-        { _id: mongoose.Types.ObjectId(id) },
-        {
-          $set: {
-            title: title,
-            descreption: descreption,
-            quantity: quantity,
-            price: price,
+        { _id: new mongoose.Types.ObjectId(id) },
 
-            imgurl: {
-              mainimg: mainimg,
-              secimg: secimg,
-              thirdimg: thirdimg,
-              fourimg: fourimg,
-            },
-            category: category,
-          },
-        },
-        { returnOriginal: false }
+        updates,
+
+        { new: true }
       );
-      return new Product(updatedProduct.value);
+      return updatedProduct;
     } catch (e) {
       console.error(`Unable to update product with id ${id}: ${e}`);
       return { error: e };
@@ -132,6 +108,15 @@ export default class ProductDAO {
     } catch (e) {
       console.error(`Unable to delete product with id ${id}: ${e}`);
       return { error: e };
+    }
+  }
+  static async filterProductsByCategory(category) {
+    try {
+      const productlist = await products.find({ category: category }).toArray();
+      return productlist;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error filtering products by category");
     }
   }
 }

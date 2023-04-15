@@ -6,6 +6,8 @@ import axios from "axios";
 export default function Singleproduct({ id }: any) {
   const [mainimg, setmainimg] = useState(null);
   const [item, setProduct] = useState(null);
+
+  const { increaseItemQuantity } = useShoppingCart();
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/products/get/${id}`)
@@ -16,8 +18,6 @@ export default function Singleproduct({ id }: any) {
   }, [id]);
 
   if (item == null) return null;
-
-  const { increaseItemQuantity } = useShoppingCart();
 
   return (
     <div key={id}>
@@ -71,7 +71,7 @@ export default function Singleproduct({ id }: any) {
           <div className="mt-lg-2 mt-0 ms-lg-5 ms-1">
             <button
               onClick={() => {
-                if (item.stock === true) increaseItemQuantity(id);
+                if (item?.quantity != 0) increaseItemQuantity(id);
                 else alert("items out of stock");
               }}
               type="button"

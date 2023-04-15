@@ -66,7 +66,7 @@ export default function Card({
         </h1>
 
         <div className="d-flex flex-row align-items-center justify-content-around align-content-center position-absolute bottom-0 my-2 py-2 pe-2 w-100">
-          {quantity ? (
+          {quantity != 0 ? (
             <span className="text-muted">
               Disponibilté:{" "}
               <i
