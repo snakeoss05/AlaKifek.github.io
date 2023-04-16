@@ -21,7 +21,7 @@ export function useProducts() {
 
   useEffect(() => {
     axios
-      .get<Product[]>("http://localhost:5000/api/products/get")
+      .get<Product[]>("http://192.168.1.6:5000/api/products/get")
       .then((response) => {
         setItems(response.data);
       });

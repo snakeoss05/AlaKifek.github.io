@@ -1,19 +1,21 @@
-import Carousell from "../components/carousel";
 import Card from "../components/storeitem";
-import { useShoppingCart } from "../context/shopingcartcontext";
+
 import Footer from "../components/footer";
 import React, { useState, useEffect } from "react";
-import HandleChange from "./checkout";
+
 import { Pagination } from "../context/pagination";
-import { event } from "jquery";
+
 import axios from "axios";
 export default function Store() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedMark, setSelectedMark] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const [posteperpage, setposteperpage] = useState(8);
-  const [filtreditems, setfiltereditems] = useState<Product[]>([]);
   const [items, setItems] = useState<Product[]>([]);
-
+  const [filtreditems, setfiltereditems] = useState<Product[]>(items);
+  const lastpostindex = currentPage * posteperpage;
+  const firstpostindex = lastpostindex - posteperpage;
+  const currentposts = filtreditems.slice(firstpostindex, lastpostindex);
   interface Product {
     _id: string;
     category: string;
@@ -32,27 +34,35 @@ export default function Store() {
 
   useEffect(() => {
     axios
-      .get<Product[]>("http://localhost:5000/api/products/get")
+      .get<Product[]>("http://192.168.1.6:5000/api/products/get")
       .then((response) => {
         setItems(response.data);
       });
   }, []);
 
-  const lastpostindex = currentPage * posteperpage;
-  const firstpostindex = lastpostindex - posteperpage;
-  const currentposts = filtreditems.slice(firstpostindex, lastpostindex);
   useEffect(() => {
-    if (selectedCategory === "All") {
-      setfiltereditems(items);
-    } else {
-      const filteritems = items.filter(
-        (item) => item.category == selectedCategory
+    let newFilteredItems = items;
+
+    if (selectedCategory !== "All") {
+      newFilteredItems = newFilteredItems.filter(
+        (item) => item.category === selectedCategory
       );
-      setfiltereditems(filteritems);
     }
-  }, [selectedCategory, items]);
+
+    if (selectedMark !== "All") {
+      newFilteredItems = newFilteredItems.filter(
+        (item) => item.mark === selectedMark
+      );
+    }
+
+    setfiltereditems(newFilteredItems);
+  }, [selectedCategory, selectedMark, items]);
+
   function handleCategorySelect(category: any) {
     setSelectedCategory(category);
+  }
+  function handleMarkSelect(mark: string) {
+    setSelectedMark(mark);
   }
   const sortByPriceAscending = () => {
     const sortedProducts = [...items].sort((a, b) => a.price - b.price);
@@ -80,11 +90,11 @@ export default function Store() {
               Filter
             </h1>
             <div className="d-flex flex-lg-column rounded-4 align-content-center  justify-content-center flex-wrap border bg-white px-3 py-2 align-items-start position-relative mx-auto mb-3">
-              <p className=" w-75 rounded-4  p-2   text-center m-2   fw-bolder border-bottom">
+              <p className=" w-100 rounded-4  p-2   text-center m-2   fw-bolder border-bottom">
                 Categorys
               </p>
               <button
-                className="rounded-4 p-2 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn  text-center m-2 fw-bolder catbtn"
+                className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn  text-center m-2 fw-bolder catbtn"
                 onClick={() => setSelectedCategory("All")}
               >
                 <span className="text-muted">All</span>
@@ -94,9 +104,9 @@ export default function Store() {
               {catagorybt.map((category: string) => {
                 return (
                   <button
-                    className="rounded-4 p-2 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder catbtn"
+                    className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder btn-outline-warning border-0 catbtn"
                     key={category}
-                    onClick={() => setSelectedCategory(category)}
+                    onClick={() => handleCategorySelect(category)}
                   >
                     <span className="text-muted">{category}</span>
                     <i className="fa-solid fa-angle-right ms-auto"></i>
@@ -104,19 +114,19 @@ export default function Store() {
                 );
               })}
 
-              <div className="d-flex flex-column w-75">
+              <div className="d-flex flex-column w-100">
                 <p className="  rounded-4  p-2   text-center m-2   fw-bolder border-bottom">
                   Sort By Price
                 </p>
                 <button
-                  className="btn btn-outline-dark mt-3 rounded-4 border"
+                  className="btn btn-outline-dark  mt-3 rounded-4 border-0"
                   onClick={sortByPriceAscending}
                 >
                   Ascending
                   <i className="fa-solid fa-arrow-down-9-1 mx-2 fs-4"></i>
                 </button>
                 <button
-                  className="btn btn-outline-dark mt-3 rounded-4 border"
+                  className="btn btn-outline-dark  mt-3 rounded-4 border-0"
                   onClick={sortByPricedescending}
                 >
                   Descending
@@ -124,16 +134,16 @@ export default function Store() {
                 </button>
               </div>
 
-              <p className="rounded-4 w-75 p-2   text-center m-2   fw-bolder border-bottom">
+              <p className="rounded-4 w-100 p-2   text-center m-2   fw-bolder border-bottom">
                 Mark
               </p>
 
               {marks.map((mark: string) => {
                 return (
                   <button
-                    className="rounded-4 p-2 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder catbtn"
+                    className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center btn-outline-warning border-0 m-2 fw-bolder catbtn"
                     key={mark}
-                    onClick={() => setSelectedCategory(mark)}
+                    onClick={() => handleMarkSelect(mark)}
                   >
                     <span className="text-muted">{mark}</span>
                     <i className="fa-solid fa-angle-right ms-auto"></i>

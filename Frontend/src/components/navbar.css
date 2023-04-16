@@ -148,6 +148,9 @@ body {
 .border-nav {
   background-color: ghostwhite;
 }
+.animated {
+  background-color: ghostwhite !important;
+}
 @media (min-width: 990px) {
   .navi {
     height: 110px !important;
@@ -158,6 +161,13 @@ body {
   .dropdown-menu-scroll {
     max-height: fit-content !important;
     overflow-y: unset !important;
+  }
+  .animated {
+    background-color: white !important;
+    width: 70vw !important;
+    position: absolute !important;
+    left: -20% !important;
+    overflow: hidden;
   }
 }
 
@@ -185,7 +195,6 @@ body {
 .dropdown-menu {
   margin-top: 0 !important;
   opacity: 0 !important;
-  transition: opacity 0.5s ease-in-out !important;
 }
 
 .dropdown:hover .dropdown-menu,
@@ -193,7 +202,7 @@ body {
   opacity: 1 !important;
 }
 .animated {
-  animation: FadeUp 0.3s ease-in-out !important;
+  animation: FadeUp 0.5s ease-in-out !important;
 }
 @keyframes FadeUp {
   from {

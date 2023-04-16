@@ -4,6 +4,7 @@ import { useShoppingCart } from "../context/shopingcartcontext";
 import { useProducts } from "../data/product";
 import "./checkoutstyle.css";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 export default function Checkout() {
   const { cartItems, getItemQuantity } = useShoppingCart();
   const { openCart } = useShoppingCart();
@@ -25,17 +26,26 @@ export default function Checkout() {
     }));
   }
 
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    console.log(formData);
-
+  const sendform = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/submit-form/post",
+        "http://192.168.1.6:5000/api/submit-form/post",
 
         formData
       );
-
+      toast.success(
+        "Your Order has been Send it Successfuly Please Wait To Call You Back 📞",
+        {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        }
+      );
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -126,7 +136,7 @@ export default function Checkout() {
                       <hr className="my-0" />
                     </div>
                     <div className="card-body">
-                      <form onSubmit={handleSubmit}>
+                      <form>
                         <div className="form-group">
                           <label className="small text-muted mb-1">
                             First Name
@@ -233,9 +243,14 @@ export default function Checkout() {
                         </div>
                         <div className="row mb-md-5 my-3">
                           <div className="d-grid my-3">
-                            <button type="submit" className="btn btn-lg  ">
+                            <button
+                              type="button"
+                              className="btn btn-lg  "
+                              onClick={sendform}
+                            >
                               PURCHASE
                             </button>
+                            <ToastContainer />
                           </div>
                         </div>
                       </form>

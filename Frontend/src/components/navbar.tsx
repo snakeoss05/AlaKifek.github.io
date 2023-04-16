@@ -91,6 +91,7 @@ function Navbar() {
         style={{ backgroundColor: navbarColor, height: "100px" }}
         sticky="top"
         expand="sm"
+        className="p-0"
       >
         <div className="container border-nav">
           <Navi.Toggle aria-controls="basic-navbar-nav" />
@@ -120,144 +121,152 @@ function Navbar() {
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
-                  className="nav-link dropdown-toggle text-black fw-semibold text-uppercase"
+                  className="nav-link dropdown-toggle border-0 text-black fw-semibold text-uppercase"
                 >
                   Store
                 </NavLink>
-                <ul className="dropdown-menu border-0 pt-3 m-0  dropdown-menu-scroll ">
-                  <div className="d-flex flex-column flex-lg-row animated">
-                    <li className=" m-2 col-2">
-                      <NavLink
-                        to="/store"
-                        className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2"
-                      >
-                        Accessoires Pc
-                      </NavLink>
-                      <ul className="list-unstyled ms-2 ps-1 ">
-                        <li>
-                          <a className="nav-link">Casque & Écouteurs</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Souris</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Clavier</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Ensemble Clavier Et Souris</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Tapis De Souris</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Webcam</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="m-2 col-3">
-                      <a
-                        className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2 "
-                        href="#"
-                      >
-                        Accessoires Téléphones
-                      </a>
-                      <ul className="list-unstyled ms-1 ps-1 ">
-                        <li>
-                          <a className="nav-link">Etuis et coques </a>
-                        </li>
+                <ul className="dropdown-menu border-0 p-0 dropdown-menu-scroll">
+                  <div className="animated pt-lg-4 pt-0">
+                    <div className="d-flex flex-column flex-lg-row shadow-sm">
+                      <li className=" m-2 col-lg-3 col-8 ">
+                        <NavLink
+                          to="/store"
+                          className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2"
+                        >
+                          Accessoires Pc
+                        </NavLink>
+                        <ul className="list-unstyled ms-2 ps-1 ">
+                          <li>
+                            <a className="nav-link">Casque & Écouteurs</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Souris</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Clavier</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">
+                              Ensemble Clavier Et Souris
+                            </a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Tapis De Souris</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Webcam</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li className="m-2 col-lg-3 col-8">
+                        <a
+                          className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2 "
+                          href="#"
+                        >
+                          Accessoires Téléphones
+                        </a>
+                        <ul className="list-unstyled ms-1 ps-1 ">
+                          <li>
+                            <a className="nav-link">Etuis et coques </a>
+                          </li>
 
-                        <li>
-                          <a className="nav-link">Protection Ecran</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Power bank</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Tige Selfie</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Chargeur</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Câble Chargeur</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className=" m-2 col-3">
-                      <a
-                        className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2 "
-                        href="#"
-                      >
-                        Composants De Pc Bureau
-                      </a>
-                      <ul className="list-unstyled">
-                        <li>
-                          <a className="nav-link">Disque Dur Interne</a>
-                        </li>
+                          <li>
+                            <a className="nav-link">Protection Ecran</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Power bank</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Tige Selfie</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Chargeur</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Câble Chargeur</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li className=" m-2 col-lg-3 col-8">
+                        <a
+                          className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2 "
+                          href="#"
+                        >
+                          Composants De Pc Bureau
+                        </a>
+                        <ul className="list-unstyled">
+                          <li>
+                            <a className="nav-link">Disque Dur Interne</a>
+                          </li>
 
-                        <li>
-                          <a className="nav-link">Afficheur</a>
-                        </li>
+                          <li>
+                            <a className="nav-link">Afficheur</a>
+                          </li>
 
-                        <li>
-                          <a className="nav-link">
-                            Ventilateur & Refroidisseur
-                          </a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Processeur</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Barrette Mémoire</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Carte Mère</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Carte Graphique</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Boîte D'alimentation</a>
-                        </li>
-                        <li>
-                          <a className="nav-link">Boîtier</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="m-2 col-3">
-                      <a
-                        className="dropdown-item col  fs-5 text-warning fw-medium border-bottom border-2 "
-                        href="#"
-                      >
-                        Composants De Pc Portable
-                      </a>
-                      <ul className="list-unstyled ">
-                        <li className="nav-item">
-                          <a className="nav-link">Disque Dur Interne</a>
-                        </li>
+                          <li>
+                            <a className="nav-link">
+                              Ventilateur & Refroidisseur
+                            </a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Processeur</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Barrette Mémoire</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Carte Mère</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Carte Graphique</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Boîte D'alimentation</a>
+                          </li>
+                          <li>
+                            <a className="nav-link">Boîtier</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li className="m-2 col-lg-3 col-8">
+                        <a
+                          className="dropdown-item col  fs-5 text-warning fw-medium border-bottom border-2 "
+                          href="#"
+                        >
+                          Composants De Pc Portable
+                        </a>
+                        <ul className="list-unstyled ">
+                          <li className="nav-item">
+                            <a className="nav-link">Disque Dur Interne</a>
+                          </li>
 
-                        <li className="nav-item">
-                          <a className="nav-link">Afficheur</a>
-                        </li>
+                          <li className="nav-item">
+                            <a className="nav-link">Afficheur</a>
+                          </li>
 
-                        <li className="nav-item">
-                          <a className="nav-link">
-                            Ventilateur & Refroidisseur
-                          </a>
-                        </li>
+                          <li className="nav-item">
+                            <a className="nav-link">
+                              Ventilateur & Refroidisseur
+                            </a>
+                          </li>
 
-                        <li className="nav-item">
-                          <a className="nav-link">Barrette Mémoire</a>
-                        </li>
+                          <li className="nav-item">
+                            <a className="nav-link">Barrette Mémoire</a>
+                          </li>
 
-                        <li className="nav-item">
-                          <a className="nav-link">Chargeur Pour Pc Portable</a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link">Batterie Pour Pc Portable</a>
-                        </li>
-                      </ul>
-                    </li>
+                          <li className="nav-item">
+                            <a className="nav-link">
+                              Chargeur Pour Pc Portable
+                            </a>
+                          </li>
+                          <li className="nav-item">
+                            <a className="nav-link">
+                              Batterie Pour Pc Portable
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                    </div>
                   </div>
                 </ul>
               </li>

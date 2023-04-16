@@ -10,7 +10,7 @@ export default function Singleproduct({ id }: any) {
   const { increaseItemQuantity } = useShoppingCart();
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/get/${id}`)
+      .get(`http://192.168.1.6:5000/api/products/get/${id}`)
       .then((response) => {
         setProduct(response.data);
         setmainimg(response.data?.imgurl.mainimg);

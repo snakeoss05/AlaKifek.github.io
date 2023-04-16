@@ -11,11 +11,12 @@ import $ from "jquery";
 import { ShoppingCartProvider } from "./context/shopingcartcontext";
 import Checkout from "./pages/checkout";
 import "./privat.css";
-
+import Floatbutton from "./components/floatbutton";
 import Singlepage from "./pages/singlepage";
 import Items from "./components/Items";
 import Form from "./pages/Commands";
 
+import "react-toastify/dist/ReactToastify.css";
 export default function App() {
   return (
     <ShoppingCartProvider>
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/Product/:id" element={<Singlepage />} />
           <Route path="/commands" element={<Form />} />
         </Routes>
+        <Floatbutton />
       </div>
     </ShoppingCartProvider>
   );

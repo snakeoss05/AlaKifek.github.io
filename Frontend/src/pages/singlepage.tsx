@@ -24,7 +24,7 @@ export default function Singlepage() {
   }
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/get/${id}`)
+      .get(`http://192.168.1.6:5000/api/products/get/${id}`)
       .then((response) => {
         setProduct(response.data);
         setmainimg(response.data?.imgurl.mainimg);
@@ -39,7 +39,7 @@ export default function Singlepage() {
 
   return (
     <div key={id}>
-      <section className="container bg-white my-4 d-flex flex-column flex-lg-row ">
+      <section className="container  bg-white my-4 d-flex flex-column flex-lg-row ">
         <div className="d-flex flex-wrap  flex-lg-row left-side">
           <img
             className="object-fit-contain bg-white  m-2  h-75  bg-light w-100 rounded-4  mainimg"

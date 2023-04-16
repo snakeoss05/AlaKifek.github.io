@@ -5,9 +5,10 @@ import FormDAO from "./api/DAO/FormDAO.js";
 import ProductDAO from "./api/DAO/ProductDAO.js";
 
 dotenv.config();
+
 const port = process.env.PORT || 8000;
 const MongoClient = mongodb.MongoClient;
-
+const hostname = "192.168.1.6";
 MongoClient.connect(process.env.URI_PRODUCT, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -16,7 +17,7 @@ MongoClient.connect(process.env.URI_PRODUCT, {
   .then(async (client) => {
     await FormDAO.injectDB(client);
     await ProductDAO.injectDB(client);
-    app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
+    app.listen(port, hostname, () => {
+      console.log(`Server running at http://${hostname}:${port}`);
     });
   });
