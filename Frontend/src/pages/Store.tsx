@@ -58,12 +58,6 @@ export default function Store() {
     setfiltereditems(newFilteredItems);
   }, [selectedCategory, selectedMark, items]);
 
-  function handleCategorySelect(category: any) {
-    setSelectedCategory(category);
-  }
-  function handleMarkSelect(mark: string) {
-    setSelectedMark(mark);
-  }
   const sortByPriceAscending = () => {
     const sortedProducts = [...items].sort((a, b) => a.price - b.price);
     setItems(sortedProducts);
@@ -95,7 +89,7 @@ export default function Store() {
               </p>
               <button
                 className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn  text-center m-2 fw-bolder catbtn"
-                onClick={() => setSelectedCategory("All")}
+                onClick={() => setfiltereditems(items)}
               >
                 <span className="text-muted">All</span>
                 <i className="fa-solid fa-angle-right ms-auto"></i>
@@ -106,7 +100,7 @@ export default function Store() {
                   <button
                     className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder btn-outline-warning border-0 catbtn"
                     key={category}
-                    onClick={() => handleCategorySelect(category)}
+                    onClick={() => setSelectedCategory(category)}
                   >
                     <span className="text-muted">{category}</span>
                     <i className="fa-solid fa-angle-right ms-auto"></i>
@@ -143,7 +137,7 @@ export default function Store() {
                   <button
                     className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center btn-outline-warning border-0 m-2 fw-bolder catbtn"
                     key={mark}
-                    onClick={() => handleMarkSelect(mark)}
+                    onClick={() => setSelectedMark(mark)}
                   >
                     <span className="text-muted">{mark}</span>
                     <i className="fa-solid fa-angle-right ms-auto"></i>
