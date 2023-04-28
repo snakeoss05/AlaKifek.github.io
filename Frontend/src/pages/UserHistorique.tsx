@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import Cookies from "js-cookie";
+import { isArray } from "lodash";
 interface User {
   FirstName: string;
   LastName: string;
@@ -26,7 +27,7 @@ interface Order {
 }
 
 export default function UserHistorique() {
-  const [myOrder, setmyOrder] = useState<Order>();
+  const [myOrder, setmyOrder] = useState<Order[]>([]);
 
   const [user, setuser] = useState<User | null>();
   const [myemail, setmyemail] = useState();

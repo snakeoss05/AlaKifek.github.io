@@ -15,7 +15,13 @@ interface ServerData {
   AddressLine: string;
   _id: any;
 }
-
+type ProfileProperty =
+  | "email"
+  | "FirstName"
+  | "City"
+  | "LastName"
+  | "AddressLine"
+  | "PhoneNumber";
 export default function ProfileInformation() {
   const [userProfile, setUserProfile] = useState<ServerData>();
   const [imageUrl, setImageUrl] = useState<string | null>();
@@ -48,7 +54,7 @@ export default function ProfileInformation() {
     },
   });
 
-  const handleIconClick = (property: any) => {
+  const handleIconClick = (property: ProfileProperty) => {
     setProfile((prevProduct) => ({
       ...prevProduct,
       [property]: {
@@ -62,7 +68,7 @@ export default function ProfileInformation() {
     property: any
   ) => {
     const value = event.target.value;
-    setProfile((prevProduct) => ({
+    setProfile((prevProduct: any) => ({
       ...prevProduct,
       [property]: {
         ...prevProduct[property],
@@ -99,7 +105,7 @@ export default function ProfileInformation() {
     reader.readAsDataURL(file);
 
     reader.onload = () => {
-      setImageUrl(reader.result);
+      setImageUrl(reader.result as string);
     };
   }
   function Logout() {
@@ -156,24 +162,29 @@ export default function ProfileInformation() {
           });
           setUserProfile({
             email:
-              formValues.email === "" ? userProfile.email : formValues.email,
+              formValues.email === ""
+                ? userProfile?.email || ""
+                : formValues.email,
             AddressLine:
               formValues.AddressLine === ""
-                ? userProfile.AddressLine
+                ? userProfile?.AddressLine || ""
                 : formValues.AddressLine,
             PhoneNumber:
               formValues.PhoneNumber === ""
-                ? userProfile.PhoneNumber
+                ? userProfile?.PhoneNumber || ""
                 : formValues.PhoneNumber,
             FirstName:
               formValues.FirstName === ""
-                ? userProfile.FirstName
+                ? userProfile?.FirstName || ""
                 : formValues.FirstName,
             LastName:
               formValues.LastName === ""
-                ? userProfile.LastName
+                ? userProfile?.LastName || ""
                 : formValues.LastName,
-            City: formValues.City === "" ? userProfile.City : formValues.City,
+            City:
+              formValues.City === ""
+                ? userProfile?.City || ""
+                : formValues.City,
             _id: userProfile?._id,
           });
         });

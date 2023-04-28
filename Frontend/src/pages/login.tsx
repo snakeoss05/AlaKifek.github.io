@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Form, Button } from "react-bootstrap";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import jwt from "jsonwebtoken";
 import Cookies from "js-cookie";
 import UserAccount from "./UserAcoount";
@@ -30,27 +30,22 @@ export default function Logaccount() {
     }));
   }
   console.log(UserData);
-  const registerform = async (e: any) => {
+  async function registerform(e: any) {
     e.preventDefault();
     try {
-      const response = await axios
-        .post(
-          "http://localhost:5000/api/ath/register",
+      const response: AxiosResponse = await axios.post(
+        "http://localhost:5000/api/ath/register",
+        UserData
+      );
+      setsigninmsg(response.data);
+      const timeoutId = setTimeout(() => {
+        setsigninmsg("");
+      }, 3000);
 
-          UserData
-        )
-        .then((response) => {
-          setsigninmsg(response.data);
-          const timeoutId = setTimeout(() => {
-            setsigninmsg("");
-          }, 3000);
-
-          return () => {
-            clearTimeout(timeoutId);
-          };
-        });
+      return () => {
+        clearTimeout(timeoutId);
+      };
     } catch (error) {
-      setVerificationMessage(error.response.data);
       const timeoutId = setTimeout(() => {
         setVerificationMessage("");
       }, 3000);
@@ -59,7 +54,7 @@ export default function Logaccount() {
         clearTimeout(timeoutId);
       };
     }
-  };
+  }
 
   const loginform = async (e: any) => {
     e.preventDefault();
@@ -78,8 +73,7 @@ export default function Logaccount() {
       window.location.replace("/profile");
     } catch (error) {
       console.error(error);
-      console.log(error.response.data);
-      setVerificationMessagett(error.response.data);
+
       const timeoutId = setTimeout(() => {
         setVerificationMessagett("");
       }, 3000);

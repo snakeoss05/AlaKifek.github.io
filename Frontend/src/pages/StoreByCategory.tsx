@@ -81,7 +81,7 @@ export default function StoreByCategory() {
       <section className="landing">
         <img
           className="hero__image"
-          src="/src/assets/Home img/Dimensions personnalisées 1920x350 px.png"
+          src="https://lh3.googleusercontent.com/pw/AJFCJaW8Og7OAtVetv6N6LP_ofarWwxf8wX-hznmKZed7kwFlhGZ4eJLTcCxDO00CfjJ9nfXYcSh94kZoqP4rp4Ppn7ieORu7hyw6hdNe9erSMZx2DRuhjBJNoiwm5IwysKUKXcF4dkGABR7mz1ja2LsxYL5VLYQYNfUzoi-Ftkk46rNAoBVle6Q510NIwaMi_WoE0FCoZ9QF9w8zmF3q4RQKgE7uUbLQZQb8uQUxJFWD6nWqqdyK3edoq7O9ZKDbgrhByGTO04jaJtScmm8KbgPPhB5oqszoER3GoRGBbHkFosaHX992_Lh5CTqG2BXh9X2cAbZb2vPhSxyeqrE8mdl2DkYtLMm2qvCGYilSjeBA2i5cdTTDR1PnSw3dpwjRin185GyrBSuE__ddPryIujXr2JNWCNHOuQrawP6RsCmitJIwKhtytZyF9HdPj3P9MDoNk_VK5nxWwPYPMiBe2wkEYeJCH2uy6GwKQmaPJ47S_2e_dkp118FXai_BYhv1HlHa9LhVBYkuXmgSuQahGKKVjWB9xj9iG0LYwcjxFFLJYct41-sgTChMwg5zvsOsQQ37wRCb_tkF0-hrWzu1BVKk2vyhTj7Rf0ypPkU4_mqeULXWcaNW--2iSCoRj0QmaNyoY-N8JsshFvTN0rL5MI9Z5LfgLHj8zgSGb9RlA69BMBHdguEYhhteaJRqQ_i7fHOgc-UCPyh4mJp51i8n2Rf5lYa7SJckyldgCcJrzkbqGClkA26qklrEWrHI9-d9sehxL45-ztjDXTmbLnjj5qRyqObChtoXMt_fEnp8ybJh3ELg-fHX3ZrVdGk2zJwI8UUZ3VpnymTn4_FGolTSoq2U0JPJ-v7MQ_RAQkUs_BF8ZIE3Nzw2G3HQ0xlqH0vy4SHcV4x58smvMOOkRsoZlDiyIxAYD-Cc27PgDaADrrdz5Zd54JoLHdf8c85zpyl_oybwBE7SgQ4G9K6zMpfAdL0PKiOduAEI1HQPYnKQOCQ9eJKLIuf2qlY4iyU2hcWYa2pVw=w1920-h350-s-no?authuser=0"
         />
       </section>
       <section className="container-fluid ">
