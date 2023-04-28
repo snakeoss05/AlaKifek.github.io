@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useShoppingCart } from "../context/shopingcartcontext";
-import { useProducts } from "../data/product";
+import Cookies from "js-cookie";
 import "./checkoutstyle.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+interface User {
+  FirstName: string;
+  LastName: string;
+  AddressLine: string;
+  PhoneNumber: number;
+  City: string;
+  email: string;
+}
+
 export default function Checkout() {
   const { cartItems, getItemQuantity } = useShoppingCart();
   const { openCart } = useShoppingCart();
+  const [user, setuser] = useState<User>();
   const [formData, setformData] = useState({
     firstname: "",
     lastname: "",
@@ -17,7 +27,17 @@ export default function Checkout() {
     phoneNumber: "",
     cartitems: [...cartItems],
   });
-  const items = useProducts();
+  const formDataone = {
+    firstname: user?.FirstName,
+    lastname: user?.LastName,
+    adresse: user?.AddressLine,
+    city: user?.City,
+    phoneNumber: user?.PhoneNumber,
+    cartitems: [...cartItems],
+    clientId: user?.email,
+  };
+
+  // Handle input Changer
   function HandleChange(event: any) {
     const { name, value } = event.target;
     setformData((prevFormdata) => ({
@@ -26,13 +46,15 @@ export default function Checkout() {
     }));
   }
 
+  // Post Order Form
   const sendform = async () => {
     try {
       const response = await axios.post(
-        "http://192.168.1.6:5000/api/submit-form/post",
+        "http://localhost:5000/api/submit-form/post",
 
-        formData
+        user ? formDataone : formData
       );
+
       toast.success(
         "Your Order has been Send it Successfuly Please Wait To Call You Back 📞",
         {
@@ -51,7 +73,25 @@ export default function Checkout() {
       console.error(error);
     }
   };
+  // Get User Inforamtion From Local Session
 
+  useEffect(() => {
+    const getUserById = async () => {
+      var token = Cookies.get("token");
+      try {
+        const response = await axios.get(`http://localhost:5000/api/ath/user`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setuser(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (!user) getUserById();
+  }, []);
   return (
     <>
       <div className=" container-fluid my-5 ">
@@ -125,7 +165,7 @@ export default function Checkout() {
                   </nav>
                 </div>
               </div>
-              <div className="row justify-content-around">
+              <div className="row justify-content-around ">
                 <div className="col-md-5">
                   <div className="card border-0">
                     <div className="card-header pb-0">
@@ -136,111 +176,148 @@ export default function Checkout() {
                       <hr className="my-0" />
                     </div>
                     <div className="card-body">
-                      <form>
-                        <div className="form-group">
-                          <label className="small text-muted mb-1">
-                            First Name
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control form-control-sm"
-                            name="firstname"
-                            onChange={HandleChange}
-                            value={formData.firstname}
-                            placeholder="Example: Ahmed"
-                            required
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label className="small text-muted mb-1">
-                            Last Name
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control form-control-sm"
-                            name="lastname"
-                            onChange={HandleChange}
-                            value={formData.lastname}
-                            placeholder="Example: Ben Torkia"
-                            required
-                          />
-                          <label className="small text-muted mb-1">
-                            Adresse
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control form-control-sm"
-                            name="adresse"
-                            onChange={HandleChange}
-                            value={formData.adresse}
-                            placeholder="Example: 48 Rue zouhour"
-                            required
-                          />
-                        </div>
-                        <div className="row no-gutters">
-                          <div className="col-sm-6 pr-sm-2">
+                      <form className="text-capitalize">
+                        {user != null ? (
+                          <>
                             <div className="form-group">
-                              <label
-                                htmlFor="NAME"
-                                className="small text-muted mb-1"
-                              >
+                              <label className="small text-muted mb-1">
+                                FirstName
+                              </label>
+                              <h5>{user.FirstName}</h5>
+                            </div>
+                            <div className="form-group">
+                              <label className="small text-muted mb-1">
+                                LastName
+                              </label>
+                              <h5>{user.LastName}</h5>
+                            </div>
+                            <div className="form-group">
+                              <label className="small text-muted mb-1">
                                 City
+                              </label>
+                              <h5>{user.City}</h5>
+                            </div>
+                            <div className="form-group">
+                              <label className="small text-muted mb-1">
+                                Location
+                              </label>
+                              <h5>{user.AddressLine}</h5>
+                            </div>
+                            <div className="form-group">
+                              <label className="small text-muted mb-1">
+                                Phone Number
+                              </label>
+                              <h5>{user.PhoneNumber}</h5>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="form-group">
+                              <label className="small text-muted mb-1">
+                                First Name
                               </label>
                               <input
                                 type="text"
                                 className="form-control form-control-sm"
-                                name="city"
+                                name="firstname"
                                 onChange={HandleChange}
-                                value={formData.city}
-                                placeholder="Tunis"
+                                value={formData.firstname}
+                                placeholder="Example: Ahmed"
                                 required
                               />
                             </div>
-                          </div>
-                          <div className="col-sm-6">
                             <div className="form-group">
-                              <label
-                                htmlFor="NAME"
-                                className="small text-muted mb-1"
-                              >
-                                Code Postal
+                              <label className="small text-muted mb-1">
+                                Last Name
                               </label>
                               <input
-                                type="number"
-                                className="form-control form-control-sm "
-                                name="CodePostal"
+                                type="text"
+                                className="form-control form-control-sm"
+                                name="lastname"
                                 onChange={HandleChange}
-                                value={formData.CodePostal}
-                                placeholder={"Example: 2042"}
+                                value={formData.lastname}
+                                placeholder="Example: Ben Torkia"
+                                required
+                              />
+                              <label className="small text-muted mb-1">
+                                Adresse
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control form-control-sm"
+                                name="adresse"
+                                onChange={HandleChange}
+                                value={formData.adresse}
+                                placeholder="Example: 48 Rue zouhour"
                                 required
                               />
                             </div>
-                          </div>
-                          <div className="input-group  form-control-sm my-2 me-auto px-3">
-                            <label
-                              htmlFor="NAME"
-                              className="small text-muted mb-1 col-12"
-                            >
-                              Phone Number
-                            </label>
+                            <div className="row no-gutters">
+                              <div className="col-sm-6 pr-sm-2">
+                                <div className="form-group">
+                                  <label
+                                    htmlFor="NAME"
+                                    className="small text-muted mb-1"
+                                  >
+                                    City
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control form-control-sm"
+                                    name="city"
+                                    onChange={HandleChange}
+                                    value={formData.city}
+                                    placeholder="Tunis"
+                                    required
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-sm-6">
+                                <div className="form-group">
+                                  <label
+                                    htmlFor="NAME"
+                                    className="small text-muted mb-1"
+                                  >
+                                    Code Postal
+                                  </label>
+                                  <input
+                                    type="number"
+                                    className="form-control form-control-sm "
+                                    name="CodePostal"
+                                    onChange={HandleChange}
+                                    value={formData.CodePostal}
+                                    placeholder={"Example: 2042"}
+                                    required
+                                  />
+                                </div>
+                              </div>
+                              <div className="input-group  form-control-sm my-2 me-auto px-3">
+                                <label
+                                  htmlFor="NAME"
+                                  className="small text-muted mb-1 col-12"
+                                >
+                                  Phone Number
+                                </label>
 
-                            <span
-                              className="input-group-text "
-                              id="basic-addon1"
-                            >
-                              216
-                            </span>
-                            <input
-                              type="number"
-                              className="form-control form-control-sm "
-                              placeholder="Example: 27 768 325"
-                              name="phoneNumber"
-                              onChange={HandleChange}
-                              value={formData.phoneNumber}
-                              required
-                            />
-                          </div>
-                        </div>
+                                <span
+                                  className="input-group-text "
+                                  id="basic-addon1"
+                                >
+                                  216
+                                </span>
+                                <input
+                                  type="number"
+                                  className="form-control form-control-sm "
+                                  placeholder="Example: 27 768 325"
+                                  name="phoneNumber"
+                                  onChange={HandleChange}
+                                  value={formData.phoneNumber}
+                                  required
+                                />
+                              </div>
+                            </div>
+                          </>
+                        )}
                         <div className="row mb-md-5 my-3">
                           <div className="d-grid my-3">
                             <button
@@ -270,7 +347,6 @@ export default function Checkout() {
                     </div>
                     <div className="card-body pt-0 ">
                       {cartItems.map((item) => {
-                        const Item = items.find((i) => i._id === item.id);
                         const quantity = getItemQuantity(item.id);
                         return (
                           <div
@@ -281,7 +357,7 @@ export default function Checkout() {
                               <div className="d-flex my-1 flex-row flex-sm-row">
                                 <img
                                   className=" img-fluid"
-                                  src={Item?.imgurl.mainimg}
+                                  src={item.imgurl}
                                   width={62}
                                   height={62}
                                 />
@@ -289,10 +365,11 @@ export default function Checkout() {
                                   <div className="row">
                                     <div className="col-auto">
                                       <p className="mb-1 text-uppercase">
-                                        <b>{Item?.title}</b>
+                                        <b>{item.title}</b>
                                       </p>
                                       <small className="text-muted">
-                                        Réference:{Item?._id}
+                                        Réference:
+                                        {item.id}
                                       </small>
                                     </div>
                                   </div>
@@ -306,7 +383,7 @@ export default function Checkout() {
                             <div className=" pl-0 flex-sm-col col-auto  my-auto ">
                               <p>
                                 <b>
-                                  {(Item?.price || 0) * quantity || 0}
+                                  {(item.price || 0) * quantity || 0}
                                   <span className="text-warning"> TND</span>
                                 </b>
                               </p>
@@ -328,12 +405,9 @@ export default function Checkout() {
                               <p className="mb-1">
                                 <b>
                                   {cartItems.reduce((total, Cartitem) => {
-                                    const item = items.find(
-                                      (i) => i._id === Cartitem.id
-                                    );
                                     return (
                                       total +
-                                      (item?.price || 0) * Cartitem.quantity
+                                      (Cartitem.price || 0) * Cartitem.quantity
                                     );
                                   }, 0)}
                                   <span> TND</span>
@@ -363,12 +437,9 @@ export default function Checkout() {
                               <p className="mb-1">
                                 <b>
                                   {cartItems.reduce((total, Cartitem) => {
-                                    const item = items.find(
-                                      (i) => i._id === Cartitem.id
-                                    );
                                     return (
                                       total +
-                                      (item?.price || 0) * Cartitem.quantity
+                                      (Cartitem.price || 0) * Cartitem.quantity
                                     );
                                   }, 5)}
                                   <span> TND</span>

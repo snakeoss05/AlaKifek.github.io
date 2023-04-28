@@ -3,11 +3,11 @@ import axios from "axios";
 
 function ClientCommands() {
   const [clientCommands, setClientCommands] = useState([]);
-  const [items, setItems] = useState([]);
+
   useEffect(() => {
     // Make a GET request to your Express backend to retrieve clientCommands data
     axios
-      .get("http://192.168.1.6:5000/api/submit-form/clientCommands")
+      .get("http://localhost:5000/api/submit-form/clientCommands")
       .then((res) => {
         setClientCommands(res.data.clientCommands);
       })
@@ -16,15 +16,10 @@ function ClientCommands() {
       });
   }, []);
 
-  useEffect(() => {
-    axios.get("http://192.168.1.6:5000/api/products/get").then((response) => {
-      setItems(response.data);
-    });
-  }, []);
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `http://192.168.1.6:5000/api/submit-form/delete/${id}`
+        `http://localhost:5000/api/submit-form/delete/${id}`
       );
       // Update the clientCommands state to remove the deleted item
       setClientCommands((prevState) =>
@@ -45,7 +40,7 @@ function ClientCommands() {
             <th>Last Name</th>
             <th>Address</th>
             <th>City</th>
-            <th>Postal Code</th>
+
             <th>Phone Number</th>
             <th>Items</th>
             <th>Delete Order</th>
@@ -60,25 +55,24 @@ function ClientCommands() {
               <td>{clientCommand.lastname}</td>
               <td>{clientCommand.adresse}</td>
               <td>{clientCommand.city}</td>
-              <td>{clientCommand.CodePostal}</td>
+
               <td>{clientCommand.phoneNumber}</td>
 
               <td className="col-4">
                 <ul className="list-unstyled">
                   {clientCommand.cartitems.map((detail) => {
-                    let item = items.find((item) => item._id === detail.id);
                     return (
                       <li
                         key={detail.id}
                         className="d-flex align-items-center justify-content-start mb-2">
                         <img
-                          src={item?.imgurl.mainimg}
+                          src={detail.imgurl}
                           width="50"
                           height="50"
                           className="mr-2"
                         />
                         <div className="d-flex flex-column justify-content-start ms-2">
-                          <h6 className="mb-1">{item?.title}</h6>
+                          <h6 className="mb-1">{detail.title}</h6>
                           <span className="text-muted me-auto">
                             Quantity: {detail.quantity}
                           </span>

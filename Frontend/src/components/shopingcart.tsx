@@ -1,9 +1,10 @@
 import { Offcanvas, Stack } from "react-bootstrap";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./carditem";
 import { Carditem } from "./carditem";
 import { NavLink } from "react-router-dom";
-import { useProducts } from "../data/product";
+
 import { useShoppingCart } from "../context/shopingcartcontext";
 type Shopingcartprops = {
   isOpen: boolean;
@@ -11,7 +12,7 @@ type Shopingcartprops = {
 
 export default function Shopingcart({ isOpen }: Shopingcartprops) {
   const { CloseCart, cartItems } = useShoppingCart();
-  const items = useProducts();
+
   return (
     <>
       <Offcanvas show={isOpen} placement="end" onHide={CloseCart}>
@@ -33,8 +34,7 @@ export default function Shopingcart({ isOpen }: Shopingcartprops) {
               <span className="text ">Subtotal:</span>
               <span className="text total">
                 {cartItems.reduce((total, Cartitem) => {
-                  const item = items.find((i) => i._id === Cartitem.id);
-                  return total + (item?.price || 0) * Cartitem.quantity;
+                  return total + (Cartitem.price || 0) * Cartitem.quantity;
                 }, 0)}
                 TND
               </span>

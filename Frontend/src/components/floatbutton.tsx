@@ -3,12 +3,19 @@ import "./floatbutton.css";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 export default function Floatbutton() {
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Header as="h3">Popover right</Popover.Header>
-      <Popover.Body>
-        Alakifek@gmail.com Or Noussaier.bibani@gmail.com
-      </Popover.Body>
+  const popovermail = (
+    <Popover id="popover-basic" className="me-4">
+      <Popover.Body>Alakifek@gmail.com</Popover.Body>
+    </Popover>
+  );
+  const popoverphone = (
+    <Popover id="popover-basic" className="me-4">
+      <Popover.Body>27768325</Popover.Body>
+    </Popover>
+  );
+  const popovermessenger = (
+    <Popover id="popover-basic" className="me-4">
+      <Popover.Body>Alakifek@gmail.com</Popover.Body>
     </Popover>
   );
   return (
@@ -16,21 +23,34 @@ export default function Floatbutton() {
       <div className="floating-container">
         <div className="floating-button">+</div>
         <div className="element-container">
-          <a href="google.com">
-            {" "}
-            <span className="float-element tooltip-left">
+          {" "}
+          <span className="float-element tooltip-left">
+            <OverlayTrigger
+              trigger="click"
+              placement="left"
+              overlay={popoverphone}
+            >
               <i className="fa-solid fa-phone" style={{ color: "#ffffff" }}></i>
-            </span>
-          </a>
-          <span className="float-element">
-            <i
-              className="fa-solid fa-envelope"
-              style={{ color: "#ffffff" }}
-            ></i>
+            </OverlayTrigger>
           </span>
-
           <span className="float-element">
-            <OverlayTrigger trigger="click" placement="left" overlay={popover}>
+            <OverlayTrigger
+              trigger="click"
+              placement="left"
+              overlay={popovermessenger}
+            >
+              <i
+                className="fa-solid fa-envelope"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </OverlayTrigger>
+          </span>
+          <span className="float-element">
+            <OverlayTrigger
+              trigger="click"
+              placement="left"
+              overlay={popovermail}
+            >
               <i
                 className="fa-brands fa-rocketchat"
                 style={{ color: "#ffffff" }}

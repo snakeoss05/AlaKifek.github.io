@@ -7,7 +7,7 @@ import ClientCommands from "../Models/FormData.js";
 dotenv.config();
 const ObjectId = mongodb.ObjectId;
 let form;
-
+let ordersCollection;
 export default class FormDAO {
   static async injectDB() {
     if (form) {
@@ -19,6 +19,7 @@ export default class FormDAO {
         useUnifiedTopology: true,
       });
       form = client.db("Productlist").collection("ClientCommands");
+      ordersCollection = client.db("Productlist").collection("orders");
     } catch (e) {
       console.error(`Unable to connect to MongoDB: ${e}`);
     }
@@ -31,7 +32,8 @@ export default class FormDAO {
     city,
     CodePostal,
     phoneNumber,
-    cartitems
+    cartitems,
+    clientId
   ) {
     try {
       const newClientCommand = new ClientCommands({
@@ -42,9 +44,11 @@ export default class FormDAO {
         CodePostal: CodePostal,
         phoneNumber: phoneNumber,
         cartitems: cartitems,
+        clientId: clientId,
       });
 
-      return await form.insertOne(newClientCommand);
+      await ordersCollection.insertOne(newClientCommand);
+      await form.insertOne(newClientCommand);
     } catch (e) {
       console.error(`Unable to post Form ${e}`);
       return { error: e };
@@ -54,6 +58,17 @@ export default class FormDAO {
   static async getClientCommands() {
     try {
       const clientCommands = await form.find().toArray();
+      return clientCommands;
+    } catch (e) {
+      console.error(`Unable to retrieve client commands ${e}`);
+      return { error: e };
+    }
+  }
+  static async getClientCommandsbyemail(email) {
+    try {
+      const clientCommands = await ordersCollection
+        .find({ clientId: email })
+        .toArray();
       return clientCommands;
     } catch (e) {
       console.error(`Unable to retrieve client commands ${e}`);

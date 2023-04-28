@@ -1,15 +1,67 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Navbar as Navi } from "react-bootstrap";
-
+import axios from "axios";
 import "./navbar.css";
-
 import { useShoppingCart } from "../context/shopingcartcontext";
+import { debounce } from "lodash";
+interface results {
+  _id: any;
+  title: string;
+  price: number;
+  imgurl: { mainimg: string };
+  quantity: number;
+}
 
 function Navbar() {
   const { cartQuantity } = useShoppingCart();
+  const { cartItems } = useShoppingCart();
+  const [navbarColor, setNavbarColor] = useState("white");
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<results[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [category, setLinkValue] = useState("");
 
-  const [navbarColor, setNavbarColor] = useState("#ffeb60");
+  const elementRef = useRef(null);
+  useEffect(() => {
+    // add event listener to document
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      // remove event listener when component unmounts
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
+
+  const handleClick = (e: any) => {
+    // check if click occurred outside of element
+    if (elementRef.current && !elementRef.current.contains(e.target)) {
+      setQuery("");
+    }
+  };
+
+  const handleSearch = async () => {
+    console.log(`Query: ${query}`);
+    try {
+      const response = await axios.get<results[]>(
+        `http://localhost:5000/api/products/get/Search/${query}`
+      );
+      if (query) {
+        setResults(response.data);
+      } else {
+        setResults([]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const debouncedHandleSearch = debounce(handleSearch, 500);
+
+  const handleInputChange = (event: any) => {
+    setQuery(event.target.value);
+    debouncedHandleSearch();
+  };
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -120,122 +172,178 @@ function Navbar() {
                   id="megamneu"
                   data-toggle="dropdown"
                   aria-haspopup="true"
-                  aria-expanded="false"
                   className="nav-link dropdown-toggle border-0 text-black fw-semibold text-uppercase"
                 >
                   Store
                 </NavLink>
-                <ul className="dropdown-menu border-0 p-0 dropdown-menu-scroll">
-                  <div className="animated pt-lg-4 pt-0">
-                    <div className="d-flex flex-column flex-lg-row shadow-sm">
-                      <li className=" m-2 col-lg-3 col-8 ">
+                <ul className="dropdown-menu border-0 p-0 dropdown-menu-scroll  ">
+                  <div className="animated pt-lg-4 pt-0  position-absolute start-0">
+                    <div className="d-flex flex-row  col-lg-12 shadow-sm bg-white vw-100">
+                      <li className=" m-2 col-3 ps-3 ">
                         <NavLink
-                          to="/store"
-                          className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2"
+                          to={`/Category/Accessoires Pc`}
+                          className="groupeList nav-header "
                         >
-                          Accessoires Pc
+                          <i className="fa-regular fa-keyboard "></i>
+                          <span>Accessoires Pc</span>
                         </NavLink>
-                        <ul className="list-unstyled ms-2 ps-1 ">
-                          <li>
-                            <a className="nav-link">Casque & Écouteurs</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Souris</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Clavier</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">
-                              Ensemble Clavier Et Souris
-                            </a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Tapis De Souris</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Webcam</a>
-                          </li>
+
+                        <ul className="list-unstyled  menu2  ms-2 ps-1 ">
+                          <Link
+                            to={`/Category/Casque & Écouteurs`}
+                            className="nav-link"
+                          >
+                            Casque & Écouteurs
+                          </Link>
+                          <Link to={`/Category/Souris`} className="nav-link">
+                            Souris
+                          </Link>
+                          <Link to={`/Category/Clavier`} className="nav-link">
+                            Clavier
+                          </Link>
+
+                          <Link
+                            to={`/Category/Ensemble Clavier Et Souris`}
+                            className="nav-link"
+                          >
+                            Ensemble Clavier Et Souris
+                          </Link>
+                          <Link
+                            to={`/Category/Tapis De Souris`}
+                            className="nav-link"
+                          >
+                            Tapis De Souris
+                          </Link>
+                          <Link to={`/Category/Webcam`} className="nav-link">
+                            Webcam
+                          </Link>
                         </ul>
                       </li>
-                      <li className="m-2 col-lg-3 col-8">
-                        <a
-                          className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2 "
-                          href="#"
+                      <li className=" m-2 col-3 ps-3">
+                        <NavLink
+                          to={`/Category/Accessoires Téléphones`}
+                          className="groupeList"
                         >
-                          Accessoires Téléphones
-                        </a>
-                        <ul className="list-unstyled ms-1 ps-1 ">
-                          <li>
-                            <a className="nav-link">Etuis et coques </a>
-                          </li>
+                          <i className="fa-solid fa-mobile-screen-button fs-5 ms-1"></i>
+                          <span className="fw-500 ">
+                            {" "}
+                            Accessoires Téléphones
+                          </span>
+                        </NavLink>
 
-                          <li>
-                            <a className="nav-link">Protection Ecran</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Power bank</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Tige Selfie</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Chargeur</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Câble Chargeur</a>
-                          </li>
+                        <ul className="list-unstyled menu2 ms-2 ps-1  ">
+                          <Link
+                            to={`/Category/Etuis et coques`}
+                            className="nav-link"
+                          >
+                            Etuis et coques
+                          </Link>
+
+                          <Link
+                            to={`/Category/Protection Ecran`}
+                            className="nav-link"
+                          >
+                            Protection Ecran
+                          </Link>
+                          <Link
+                            to={`/Category/Power bank`}
+                            className="nav-link"
+                          >
+                            Power bank
+                          </Link>
+                          <Link
+                            to={`/Category/Tige Selfie`}
+                            className="nav-link"
+                          >
+                            Tige Selfie
+                          </Link>
+                          <Link to={`/Category/Chargeur`} className="nav-link">
+                            Chargeur
+                          </Link>
+                          <Link
+                            to={`/Category/Câble Chargeur`}
+                            className="nav-link"
+                          >
+                            Câble Chargeur
+                          </Link>
                         </ul>
                       </li>
-                      <li className=" m-2 col-lg-3 col-8">
-                        <a
-                          className="dropdown-item fs-5 text-warning fw-medium border-bottom border-2 "
-                          href="#"
+                      <li className="m-2 col-3 ps-3">
+                        <NavLink
+                          to={`/Category/Composants De Pc Bureau`}
+                          className="groupeList"
                         >
-                          Composants De Pc Bureau
-                        </a>
-                        <ul className="list-unstyled">
-                          <li>
-                            <a className="nav-link">Disque Dur Interne</a>
-                          </li>
+                          <i className="fa-solid fa-desktop fs-5"></i>
+                          <span className="fw-500 ">
+                            {" "}
+                            Composants De Pc Bureau
+                          </span>
+                        </NavLink>
+                        <ul className="list-unstyled ms-2 ps-1 menu2 ">
+                          <Link
+                            to={`/Category/Disque Dur Interne`}
+                            className="nav-link"
+                          >
+                            Disque Dur Interne
+                          </Link>
 
-                          <li>
-                            <a className="nav-link">Afficheur</a>
-                          </li>
+                          <Link to={`/Category/Afficheur`} className="nav-link">
+                            Afficheur
+                          </Link>
 
-                          <li>
-                            <a className="nav-link">
-                              Ventilateur & Refroidisseur
-                            </a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Processeur</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Barrette Mémoire</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Carte Mère</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Carte Graphique</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Boîte D'alimentation</a>
-                          </li>
-                          <li>
-                            <a className="nav-link">Boîtier</a>
-                          </li>
+                          <Link
+                            to={`/Category/Ventilateur & Refroidisseur`}
+                            className="nav-link"
+                          >
+                            Ventilateur & Refroidisseur
+                          </Link>
+                          <Link
+                            to={`/Category/Processeur`}
+                            className="nav-link"
+                          >
+                            Processeur
+                          </Link>
+                          <Link
+                            to={`/Category/Barrette Mémoire`}
+                            className="nav-link"
+                          >
+                            Barrette Mémoire
+                          </Link>
+                          <Link
+                            to={`/Category/Carte Mère`}
+                            className="nav-link"
+                          >
+                            Carte Mère
+                          </Link>
+                          <Link
+                            to={`/Category/Carte Graphique`}
+                            className="nav-link"
+                          >
+                            Carte Graphique
+                          </Link>
+                          <Link
+                            to={`/Category/Boîte D'alimentation`}
+                            className="nav-link"
+                          >
+                            Boîte D'alimentation
+                          </Link>
+                          <Link to={`/Category/Boîtier`} className="nav-link">
+                            Boîtier
+                          </Link>
                         </ul>
                       </li>
-                      <li className="m-2 col-lg-3 col-8">
-                        <a
-                          className="dropdown-item col  fs-5 text-warning fw-medium border-bottom border-2 "
-                          href="#"
+                      <li className="m-2 col-3 ps-3">
+                        <NavLink
+                          to={`/Category/Composants De Pc Portable`}
+                          className="groupeList"
                         >
-                          Composants De Pc Portable
-                        </a>
-                        <ul className="list-unstyled ">
+                          <i className="fa-solid fa-laptop fs-5"></i>
+                          <span className="fw-500 ">
+                            {" "}
+                            Composants De Pc Portable
+                          </span>
+                        </NavLink>
+                        <ul className="list-unstyled menu2 ms-2 ps-1 ">
                           <li className="nav-item">
                             <a className="nav-link">Disque Dur Interne</a>
                           </li>
@@ -280,15 +388,75 @@ function Navbar() {
                 </NavLink>
               </li>
             </ul>
-            <div className="searchbar mt-4 me-4">
+            <div className="searchbar mt-4 me-4 ">
               <form action="#">
-                <input type="search" placeholder="" />
+                <input
+                  type="text"
+                  value={query}
+                  onChange={handleInputChange}
+                  placeholder="2 Caractères minimum"
+                />
                 <i className="fa fa-search" id="search-icon"></i>
               </form>
+              <div id="searchBody" ref={elementRef}>
+                {query &&
+                  results?.map((product) => (
+                    <Link to={`/Product/${product._id}`}>
+                      <li
+                        key={product._id}
+                        className="row d-flex align-items-center border-bottom overflow-hidden text-black"
+                      >
+                        <span className="text-uppercase fs-6 col-md-6 ">
+                          {product.title}
+                        </span>
+                        <div className="col-md-6 col-lg-3  ps-4">
+                          <img
+                            src={product.imgurl.mainimg}
+                            width="100"
+                            height="100"
+                            className="object-fit-content ms-3 ms-lg-0"
+                          />
+                        </div>
+                        <div className="col-md-6 col-lg-3 ps-2 ">
+                          <div className="d-flex flex-row ">
+                            {product.quantity != 0 ? (
+                              <span className="text-muted me-auto">
+                                Disponibilté:{" "}
+                                <i
+                                  className="fa-solid fa-circle fa-beat-fade mx-1"
+                                  style={{ color: "green" }}
+                                ></i>
+                              </span>
+                            ) : (
+                              <span className="text-muted me-auto">
+                                Disponibilté:{" "}
+                                <i
+                                  className="fa-solid fa-circle fa-beat-fade mx-1"
+                                  style={{ color: "red" }}
+                                ></i>
+                              </span>
+                            )}
+                            <span className="fw-semibold text-warning ms-auto">
+                              {product.price} DT
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                    </Link>
+                  ))}
+              </div>
             </div>
           </Navi.Collapse>
 
-          <ul className="navbar-nav d-flex flex-row justify-content-center">
+          <ul className="navbar-nav d-flex flex-row justify-content-center  align-items-center">
+            <li className="nav-item me-3 me-lg-0 ">
+              <i className="fa-regular fa-heart fs-5 me-2 text-black"></i>
+            </li>
+            <li className="nav-item me-3 me-lg-0 mb-1">
+              <NavLink to="/login" className="nav-link">
+                <i className="fa-solid fa-user text-black"></i>
+              </NavLink>
+            </li>
             <li className="nav-item me-3 me-lg-0 position-relative">
               <a className="nav-link">
                 <button
@@ -306,11 +474,15 @@ function Navbar() {
                 </button>
               </a>
             </li>
-            <li className="nav-item me-3 me-lg-0">
-              <NavLink to="/login" className="nav-link">
-                <i className="fa-solid fa-user"></i>
-              </NavLink>
-            </li>
+            <div className="d-flex flex-column mx-2 mt-4">
+              <span className="fw-semibold">TOTAL</span>
+              <p className="text-muted">
+                {cartItems.reduce((total, Cartitem) => {
+                  return total + (Cartitem.price || 0) * Cartitem.quantity;
+                }, 0)}
+                TND
+              </p>
+            </div>
           </ul>
         </div>
       </Navi>

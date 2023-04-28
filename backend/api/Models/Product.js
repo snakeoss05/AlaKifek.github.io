@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const productSchema = new Schema({
+  groupe: { type: String },
+
   category: {
     type: String,
   },
@@ -12,9 +14,11 @@ const productSchema = new Schema({
   price: {
     type: Number,
   },
+  promotion: { type: String },
   mark: {
     type: String,
   },
+
   imgurl: {
     mainimg: {
       type: String,

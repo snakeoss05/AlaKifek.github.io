@@ -10,13 +10,22 @@ type ShoppingCartContext = {
   cartQuantity: number;
   cartItems: CartItem[];
   getItemQuantity: (id: any) => number;
-  increaseItemQuantity: (id: any) => void;
+  increaseItemQuantity: (
+    id: any,
+    imgurl: string,
+    title: string,
+    price: number
+  ) => void;
   decreaseItemQuantity: (id: any) => void;
   removeFromCArt: (id: any) => void;
 };
+
 type CartItem = {
   id: any;
   quantity: number;
+  imgurl: string;
+  title: string;
+  price: number;
 };
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
 export function useShoppingCart() {
@@ -37,14 +46,22 @@ export function ShoppingCartProvider({ children }: Shoppingcartproviderprops) {
   function getItemQuantity(id: number) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
   }
-  function increaseItemQuantity(id: any) {
+  function increaseItemQuantity(
+    id: any,
+    imgurl: string,
+    title: string,
+    price: number
+  ) {
     setCArtItems((currItems) => {
       if (currItems.find((item) => item.id === id) == null) {
-        return [...cartItems, { id, quantity: 1 }];
+        return [...cartItems, { id, quantity: 1, imgurl, title, price }];
       } else {
         return currItems.map((item) => {
           if (item.id === id) {
-            return { ...item, quantity: item.quantity + 1 };
+            return {
+              ...item,
+              quantity: item.quantity + 1,
+            };
           } else {
             return item;
           }

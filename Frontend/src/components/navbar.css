@@ -1,8 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,700&family=Roboto:ital,wght@0,400;0,500;1,300;1,400&display=swap");
 body {
   font-family: "Roboto", sans-serif;
+  font-weight: 300;
 }
-
+.dropdown-menu {
+  position: absolute !important;
+  left: -675% !important;
+}
 .dropdown-menu-scroll {
   max-height: 400px !important;
   overflow-y: scroll !important;
@@ -26,7 +30,7 @@ body {
 .searchbar > form input {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 36px;
   line-height: 20px;
@@ -35,7 +39,8 @@ body {
   display: none;
   font-size: 0.9rem;
   border-radius: 20px;
-  padding: 0 20px;
+  padding-right: 20px;
+  padding-left: 50px !important;
 }
 
 .searchbar form:hover {
@@ -64,7 +69,7 @@ body {
   height: 38px;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   border-radius: 50%;
   color: #07051a;
   text-align: center;
@@ -82,7 +87,25 @@ body {
   width: 150px !important;
   transition: ease-in-out 0.3s;
 }
-
+#searchBody li:hover {
+  background-color: #f3f3f3;
+}
+#searchBody {
+  background-color: white;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  left: 0% !important;
+  width: 100% !important;
+  max-height: 500px !important;
+  top: 320% !important;
+  overflow-y: auto !important;
+  padding: 0 2rem !important;
+  z-index: 2;
+}
+#searchBody:focus {
+  display: none !important;
+}
 .navbar-icon-circle {
   background-color: #000000;
   color: rgb(255, 255, 255);
@@ -139,8 +162,12 @@ body {
 .links:hover {
   color: #ffbf00;
 }
-.nav-link {
-  color: rgba(0, 0, 0, 0.5) !important;
+.groupeList .nav-link {
+  color: #2510c4 !important;
+  font-weight: 600 !important;
+  display: block !important;
+  font-family: sans-serif;
+  padding: 14px 40px !important;
 }
 .nav-link:hover {
   color: #ffbf00 !important;
@@ -150,10 +177,18 @@ body {
 }
 .animated {
   background-color: ghostwhite !important;
+  z-index: 3 !important;
 }
 @media (min-width: 990px) {
   .navi {
     height: 110px !important;
+  }
+  #searchBody {
+    position: absolute !important;
+    padding: 0 1rem !important;
+    left: 25% !important;
+    width: 50% !important;
+    top: 100% !important;
   }
   .border-nav {
     background-color: transparent;
@@ -163,11 +198,10 @@ body {
     overflow-y: unset !important;
   }
   .animated {
-    background-color: white !important;
+    background-color: transparent !important;
     width: 70vw !important;
     position: absolute !important;
     left: -20% !important;
-    overflow: hidden;
   }
 }
 
@@ -211,4 +245,10 @@ body {
   to {
     opacity: 100%;
   }
+}
+.dropdown-menu li span,
+.dropdown-menu li i {
+  color: #ffbf00 !important;
+  margin: 5px;
+  font-size: 20px;
 }

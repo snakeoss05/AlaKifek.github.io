@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { useProducts } from "../data/product";
 import { useShoppingCart } from "../context/shopingcartcontext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+
+interface Product {
+  _id: string;
+  category: string;
+  title: string;
+  price: number;
+
+  imgurl: {
+    mainimg: string;
+    secimg: string;
+    thirdimg: string;
+    fourimg: string;
+  };
+
+  quantity: number;
+  descreption: string;
+  stock: boolean;
+  mark: string;
+}
 export default function Singlepage() {
   let { id } = useParams();
-  const [item, setProduct] = useState(null);
-  const [mainimg, setmainimg] = useState(null); // add mainimg state here
-  interface Product {
-    _id: string;
-    category: string;
-    title: string;
-    price: number;
-    imgurl: {
-      mainimg: string;
-      secimg: string;
-      thirdimg: string;
-      fourimg: string;
-    };
-    quantity: number;
-    descreption: string;
-    stock: boolean;
-  }
+  const [item, setProduct] = useState<Product>();
+  const [mainimg, setmainimg] = useState("");
+
   useEffect(() => {
     axios
-      .get(`http://192.168.1.6:5000/api/products/get/${id}`)
+      .get<Product>(`http://localhost:5000/api/products/get/${id}`)
       .then((response) => {
         setProduct(response.data);
         setmainimg(response.data?.imgurl.mainimg);
@@ -70,7 +74,8 @@ export default function Singlepage() {
         <div className="d-flex flex-column  py-2 py-lg-5 px-3 bg-body right-side">
           <h1 className="fw-bolder my-3">{item?.title}</h1>
           <p className="text-black fw-bold">
-            Réference:<p className="text-muted ">{item?._id}</p>
+            Réference:
+            <p className="text-muted ">{item?._id}</p>
           </p>{" "}
           <div className="d-flex flex-row my-2 align-items-baseline text-warningn">
             <i className="fa-solid fa-star"></i>
@@ -92,7 +97,12 @@ export default function Singlepage() {
           <div className="mt-lg-2 mt-0 ms-lg-5 ms-1 d-flex flex-row">
             <button
               onClick={() => {
-                increaseItemQuantity(id);
+                increaseItemQuantity(
+                  id,
+                  item.imgurl.mainimg,
+                  item.title,
+                  item.price
+                );
               }}
               type="button"
               className="btn  fw-semibold   my-2 btn-outline-dark  rounded-4 mt-lg-5 mt-0"

@@ -11,7 +11,6 @@ type storeitemprops = {
   price: number;
   imgurl: string;
   quantity: number;
-  description: string;
 };
 export default function Card({
   id,
@@ -19,7 +18,6 @@ export default function Card({
   price,
   imgurl,
   quantity,
-  description,
 }: storeitemprops) {
   const { increaseItemQuantity } = useShoppingCart();
 
@@ -88,7 +86,7 @@ export default function Card({
             type="button"
             className="btn fw-semibold btn-outline-dark p-2 rounded-pill"
             onClick={() => {
-              if (quantity != 0) increaseItemQuantity(id);
+              if (quantity != 0) increaseItemQuantity(id, imgurl, title, price);
               else alert("items out of stock");
             }}
           >

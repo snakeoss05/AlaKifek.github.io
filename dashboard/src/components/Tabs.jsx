@@ -16,6 +16,8 @@ function Tabse() {
     img2: "",
     img3: "",
     img4: "",
+    groupe: "",
+    promotion: "",
   });
   const [product, setProduct] = useState({
     price: {
@@ -70,7 +72,7 @@ function Tabse() {
     console.log(formDataproduct);
 
     axios
-      .post("http://192.168.1.6:5000/api/products/add", formDataproduct)
+      .post("http://localhost:5000/api/products/add", formDataproduct)
       .then((response) => {
         console.log(response.data);
       })
@@ -80,7 +82,7 @@ function Tabse() {
   };
   const searchitems = async () => {
     axios
-      .get(`http://192.168.1.6:5000/api/products/get/${id}`)
+      .get(`http://localhost:5000/api/products/get/${id}`)
       .then((response) => {
         setItems(response.data);
       });
@@ -89,7 +91,7 @@ function Tabse() {
   const handleSubmite = async () => {
     try {
       const response = await axios.delete(
-        `http://192.168.1.6:5000/api/products/delete/${id}`
+        `http://localhost:5000/api/products/delete/${id}`
       );
       setItems((prevestate) => (prevestate = null));
       console.log(response.data.message);
@@ -106,9 +108,8 @@ function Tabse() {
       descreption: product.descreption.value,
     };
     try {
-      console.log();
       const response = await axios.put(
-        `http://192.168.1.6:5000/api/products/update/${id}`,
+        `http://localhost:5000/api/products/update/${id}`,
         updateproduct
       );
       console.log(response.data); // do something with the response data
@@ -116,7 +117,22 @@ function Tabse() {
       console.log(error.response.data.error);
     }
   };
-
+  function ClearInput() {
+    setformDataproduct({
+      category: "",
+      title: "",
+      price: "",
+      quantity: "",
+      descreption: "",
+      mark: "",
+      img1: "",
+      img2: "",
+      img3: "",
+      img4: "",
+      groupe: "",
+      promotion: "",
+    });
+  }
   return (
     <Tabs
       defaultActiveKey="profile"
@@ -126,19 +142,52 @@ function Tabse() {
       <Tab eventKey="home" title="Add Product To Database">
         <div>
           <h1>Add Product To Storage</h1>
-
+          <button
+            className="btn btn-warning d-block text-white mt-4 px-4 ms-3 me-auto"
+            onClick={ClearInput}>
+            Clear Inputs
+          </button>
           <form
             onSubmit={handleSubmit}
             className="d-grid gap-4 mx-3 my-5 text-start ">
             <div className="d-flex flex-column flex-wrap flex-lg-row gap-4 text-capitalize">
               <div className="col-lg-2 col-8">
+                <label>Groupe</label>
+
+                <select
+                  value={formDataproduct.groupe}
+                  onChange={HandleChange}
+                  name="groupe"
+                  className=" col-12 form-select ">
+                  <option defaultValue="Select Groupe">Select Groupe</option>
+                  <option value="Accessoires Pc">Accessoires Pc</option>
+                  <option value="Accessoires Téléphones">
+                    Accessoires Téléphones
+                  </option>
+                  <option value="Composants De Pc Bureau">
+                    Composants De Pc Bureau
+                  </option>
+                  <option value="Composants De Pc Portable">
+                    Composants De Pc Portable
+                  </option>
+                </select>
+              </div>
+              <div className="col-lg-2 col-8">
                 <label>category</label>
-                <input
-                  type="text"
-                  name="category"
+                <select
                   value={formDataproduct.category}
                   onChange={HandleChange}
-                  className="form-control"></input>
+                  name="category"
+                  className=" col-12 form-select ">
+                  <option value="Souris">Souris</option>
+                  <option value=" Clavier">Clavier</option>
+                  <option value="Tapis De Souris">Tapis De Souris</option>
+                  <option value="Webcam">Webcam</option>
+                  <option value="Casque & Écouteurs">Casque & Écouteurs</option>
+                  <option value="Ensemble Clavier Et Souris">
+                    Ensemble Clavier Et Souris
+                  </option>
+                </select>
               </div>
               <div className="col-lg-2 col-8">
                 <label>title</label>
@@ -224,8 +273,10 @@ function Tabse() {
                     value={formDataproduct.img4}
                     className="form-control"></input>
                 </div>
-                <div className=" col-1">
-                  <button type="submit" className="btn btn-success  mt-4 px-4 ">
+                <div className=" col-3">
+                  <button
+                    type="submit"
+                    className="btn btn-success  mt-4 px-4 mx-2">
                     Save{" "}
                   </button>
                 </div>
@@ -253,7 +304,7 @@ function Tabse() {
               </div>
 
               <button
-                className="btn btn-warning rounded-5 col-2"
+                className="btn btn-warning rounded-5 col-2 "
                 onClick={searchitems}>
                 <i
                   className="fa-solid fa-magnifying-glass"
@@ -261,10 +312,10 @@ function Tabse() {
               </button>
             </div>
             {item != null ? (
-              <div className="mx-auto p-3 border col-11 my-3 rounded-4">
+              <div className="mx-auto p-3 border col-11 my-3 rounded-4 ">
                 <li
                   key={item?._id}
-                  className="d-flex align-items-center justify-content-start mb-2">
+                  className="d-flex align-items-center justify-content-start mb-2 me-2">
                   <img
                     src={item?.imgurl.mainimg}
                     width="50"
@@ -275,7 +326,7 @@ function Tabse() {
                     <h6 className="mb-1">{item?.title}</h6>
                   </div>
                   <button
-                    className="btn btn-outline-danger   my-3 mx-2"
+                    className="btn btn-outline-danger   my-3  ms-auto"
                     onClick={handleSubmite}>
                     <i
                       class="fa-solid fa-trash"

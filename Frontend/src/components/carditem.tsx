@@ -4,14 +4,16 @@ import axios from "axios";
 import { Stack } from "react-bootstrap";
 import "./carditem.css";
 import { useShoppingCart } from "../context/shopingcartcontext";
-import { useProducts } from "../data/product";
+
 type CarditemProps = {
   id: any;
   quantity: number;
+  imgurl: string;
+  title: string;
+  price: number;
 };
 
-export function Carditem({ id }: CarditemProps) {
-  const items = useProducts();
+export function Carditem({ id, imgurl, title, price }: CarditemProps) {
   const {
     increaseItemQuantity,
     decreaseItemQuantity,
@@ -20,8 +22,7 @@ export function Carditem({ id }: CarditemProps) {
   } = useShoppingCart();
 
   const quantity = getItemQuantity(id);
-  const Item = items.find((i) => i._id === id);
-  if (Item == null) return null;
+
   return (
     <Stack
       direction="horizontal"
@@ -30,20 +31,20 @@ export function Carditem({ id }: CarditemProps) {
     >
       <img
         className="rounded-4"
-        src={Item.imgurl.mainimg}
+        src={imgurl}
         style={{ width: "125px", height: "75px", objectFit: "contain" }}
       />
       <div className="me-auto fs-6 w-50">
         <span className="align-middle text-center text-capitalize">
-          {Item.title}
+          {title}
         </span>
         <div className="text-muted" style={{ fontSize: "0.75rem" }}>
-          {Item.price} TND
+          {price} TND
         </div>
         <div className="mx-auto my-2">
           <button
             className="btn btn-sm btn-outline-warning me-2 rounded-4"
-            onClick={() => increaseItemQuantity(id)}
+            onClick={() => increaseItemQuantity(id, imgurl, title, price)}
             style={{ fontSize: "10px" }}
           >
             <i className="fa-solid fa-plus"></i>
@@ -59,11 +60,11 @@ export function Carditem({ id }: CarditemProps) {
         </div>
       </div>
       <div className="text-muted fw-semibold" style={{ fontSize: "0.75rem" }}>
-        {Item.price * quantity} TND
+        {price * quantity} TND
       </div>
       <button
         className="btn btn-outline-dark rounded-circle btn-sm border"
-        onClick={() => removeFromCArt(Item._id)}
+        onClick={() => removeFromCArt(id)}
       >
         <i className="fa-regular fa-trash-can"></i>
       </button>

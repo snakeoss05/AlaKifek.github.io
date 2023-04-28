@@ -23,8 +23,21 @@ export default class ProductsController {
       res.status(500).json({ error: "Server error" });
     }
   }
+  static async getProductByName(req, res) {
+    try {
+      const query = req.params.query;
+      const product = await ProductDAO.getProduct(query);
+
+      res.json(product);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json({ error: "Server error" });
+    }
+  }
   static async createProduct(req, res) {
     const {
+      groupe,
+      promotion,
       category,
       title,
       descreption,
@@ -39,6 +52,8 @@ export default class ProductsController {
 
     try {
       const newProduct = await ProductDAO.addProduct(
+        groupe,
+        promotion,
         category,
         title,
         descreption,
@@ -117,9 +132,9 @@ export default class ProductsController {
         response.updatedValues.title = updatedProduct.title;
       }
 
-      if (description) {
-        response.originalValues.description = product.description;
-        response.updatedValues.description = updatedProduct.description;
+      if (descreption) {
+        response.originalValues.descreption = product.descreption;
+        response.updatedValues.descreption = updatedProduct.descreption;
       }
 
       if (price) {
@@ -136,6 +151,16 @@ export default class ProductsController {
     try {
       const { category } = req.params;
       const products = await ProductDAO.filterProductsByCategory(category);
+      res.json(products);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: error.message });
+    }
+  }
+  static async getProductsByGroupe(req, res) {
+    try {
+      const { groupe } = req.params;
+      const products = await ProductDAO.filterProductsByGroupe(groupe);
       res.json(products);
     } catch (error) {
       console.error(error);

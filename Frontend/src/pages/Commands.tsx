@@ -28,6 +28,17 @@ interface Product {
 function ClientCommands() {
   const [clientCommands, setClientCommands] = useState<ClientCommand[]>([]);
 
+  const [items, setItems] = useState<Product[]>([]);
+  useEffect(() => {
+    async function getItems() {
+      axios
+        .get<Product[]>("http://localhost:5000/api/products/get")
+        .then((response) => {
+          setItems(response.data);
+        });
+    }
+    getItems();
+  }, []);
   useEffect(() => {
     // Make a GET request to your Express backend to retrieve clientCommands data
     axios
@@ -39,16 +50,6 @@ function ClientCommands() {
       })
       .catch((error) => {
         console.error(error);
-      });
-  }, []);
-
-  const [items, setItems] = useState<Product[]>([]);
-
-  useEffect(() => {
-    axios
-      .get<Product[]>("http://localhost:5000/api/products/get")
-      .then((response) => {
-        setItems(response.data);
       });
   }, []);
 

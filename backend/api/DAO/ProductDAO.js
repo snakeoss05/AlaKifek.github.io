@@ -47,7 +47,28 @@ export default class ProductDAO {
       return { error: e };
     }
   }
+  static async getProduct(query) {
+    try {
+      if (query) {
+        const product = await products
+          .find({
+            $or: [
+              { title: { $regex: query, $options: "i" } },
+              { category: { $regex: query, $options: "i" } },
+            ],
+          })
+          .limit(6)
+          .toArray();
+        return product;
+      }
+    } catch (e) {
+      console.error(`Unable to retrieve products with query ${query}: ${e}`);
+      return { error: e };
+    }
+  }
   static async addProduct(
+    groupe,
+    promotion,
     category,
     title,
     descreption,
@@ -64,7 +85,8 @@ export default class ProductDAO {
         title: title,
         descreption: descreption,
         price: price,
-
+        promotion: promotion | 0,
+        groupe: groupe,
         imgurl: {
           mainimg: img1,
           secimg: img2,
@@ -112,7 +134,18 @@ export default class ProductDAO {
   }
   static async filterProductsByCategory(category) {
     try {
-      const productlist = await products.find({ category: category }).toArray();
+      const productlist = await products
+        .find({ $or: [{ category: category }, { groupe: category }] })
+        .toArray();
+      return productlist;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error filtering products by category");
+    }
+  }
+  static async filterProductsByGroupe(groupe) {
+    try {
+      const productlist = await products.find({ groupe: groupe }).toArray();
       return productlist;
     } catch (error) {
       console.error(error);

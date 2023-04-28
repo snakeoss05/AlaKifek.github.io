@@ -1,15 +1,15 @@
 import Card from "../components/storeitem";
+
 import Footer from "../components/footer";
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Pagination } from "../context/pagination";
-import axios from "axios";
 
 interface Product {
-  _id: any;
+  _id: string;
   category: string;
   title: string;
   price: number;
-  quantity: number;
   imgurl: {
     mainimg: string;
     secimg: string;
@@ -19,25 +19,34 @@ interface Product {
   descreption: string;
   stock: boolean;
   mark: string;
+  quantity: number;
 }
-export default function Store() {
+import axios from "axios";
+export default function StoreByCategory() {
+  const { category } = useParams();
   const [items, setItems] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedMark, setSelectedMark] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const [posteperpage, setposteperpage] = useState(12);
+  const [posteperpage, setposteperpage] = useState(8);
   const [filtreditems, setfiltereditems] = useState(items);
   const lastpostindex = currentPage * posteperpage;
   const firstpostindex = lastpostindex - posteperpage;
   const currentposts = filtreditems.slice(firstpostindex, lastpostindex);
 
-  useEffect(() => {
+  const fetchItems = async () => {
     axios
-      .get<Product[]>("http://localhost:5000/api/products/get")
+      .get<Product[]>(
+        `http://localhost:5000/api/products/filter/category/${category}`
+      )
       .then((response) => {
         setItems(response.data);
       });
-  }, []);
+  };
+  useEffect(() => {
+    fetchItems();
+  }, [category]);
+
   useEffect(() => {
     let newFilteredItems = items;
 

@@ -232,7 +232,7 @@ a {
 @media screen and (min-width: 992px) {
   .imgres {
     width: 33% !important;
-    height: 100% !important;
+    height: 90% !important;
   }
   .right-side {
     width: 100%;
@@ -258,4 +258,83 @@ a {
 }
 .item-hover:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.main {
+  width: 750px fit-content;
+  height: 630px !important;
+  padding: 0px 50px;
+  overflow: hidden !important;
+
+  background-position: left;
+  background-blend-mode: soft-light;
+  backdrop-filter: blur(10px);
+  border-radius: 10px !important;
+  box-shadow: 5px 20px 50px #0000000b;
+}
+#chk {
+  display: none !important;
+}
+.signup {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.main label {
+  color: #ffc70e !important;
+  font-size: 2.3em !important;
+  justify-content: center !important;
+  display: flex !important;
+  margin: 60px !important;
+  font-weight: bold !important;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+.main input {
+  width: 50% !important;
+  height: 29px !important;
+  background: #fff !important;
+  justify-content: center !important;
+  display: flex !important;
+  margin: 19px auto !important;
+  padding: 10px !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 5px !important;
+}
+
+.main button:hover {
+  background: #ffc70e !important;
+}
+.login {
+  height: 620px !important;
+  background: #eee !important;
+  border-radius: 60% / 10% !important;
+  transform: translateY(-180px) !important;
+  transition: 0.8s ease-in-out !important;
+}
+.login label {
+  color: #ffc70e !important;
+  transform: scale(0.6) !important;
+}
+
+#chk:checked ~ .login {
+  transform: translateY(-600px) !important;
+}
+#chk:checked ~ .login label {
+  transform: scale(1) !important;
+}
+#chk:checked ~ .signup label {
+  transform: scale(0.6) !important;
+}
+
+.alertfadeup {
+  animation: FadeUp 0.5s ease-in-out !important;
+}
+@keyframes FadeUp {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
 }

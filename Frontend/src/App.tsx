@@ -15,8 +15,10 @@ import Floatbutton from "./components/floatbutton";
 import Singlepage from "./pages/singlepage";
 import Items from "./components/Items";
 import Form from "./pages/Commands";
-
+import StoreByCategory from "./pages/StoreByCategory";
 import "react-toastify/dist/ReactToastify.css";
+
+import UserAccount from "./pages/UserAcoount";
 export default function App() {
   return (
     <ShoppingCartProvider>
@@ -33,6 +35,8 @@ export default function App() {
           <Route path="/items" element={<Items />} />
           <Route path="/Product/:id" element={<Singlepage />} />
           <Route path="/commands" element={<Form />} />
+          <Route path="/profile" element={<UserAccount />} />
+          <Route path="/category/:category" element={<StoreByCategory />} />
         </Routes>
         <Floatbutton />
       </div>

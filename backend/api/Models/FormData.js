@@ -18,6 +18,7 @@ const clientCommandSchema = new Schema({
   CodePostal: {
     type: Number,
   },
+  clientId: { type: String },
   phoneNumber: { type: String },
   cartitems: { type: Array },
 });

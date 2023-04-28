@@ -11,6 +11,7 @@ export default class FormController {
         CodePostal,
         phoneNumber,
         cartitems,
+        clientId,
       } = req.body;
 
       const newFormData = await FormDAO.addForm(
@@ -20,7 +21,9 @@ export default class FormController {
         city,
         CodePostal,
         phoneNumber,
-        cartitems
+
+        cartitems,
+        clientId
       );
       res.status(201).json({ message: "Form data saved successfully" });
     } catch (error) {
@@ -37,11 +40,22 @@ export default class FormController {
       res.status(500).json({ message: "Internal server error" });
     }
   }
+  static async getClientCommandsByEmail(req, res) {
+    try {
+      const { email } = req.params;
+      const clientCommands = await FormDAO.getClientCommandsbyemail(email);
+      res.json({ clientCommands });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
   static async deleteClientCommands(req, res) {
     const { id } = req.params;
     console.log(`Deleting client command with id ${id}`);
     try {
       const deletedClientCommands = await FormDAO.deleteClientCommands(id);
+
       if (deletedClientCommands.error) {
         console.log(
           `Error deleting client command with id ${id}: ${deletedClientCommands.error}`

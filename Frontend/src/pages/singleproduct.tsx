@@ -3,14 +3,32 @@ import React, { useState, useEffect } from "react";
 import { useShoppingCart } from "../context/shopingcartcontext";
 import axios from "axios";
 
+interface Product {
+  _id: string;
+  category: string;
+  title: string;
+  price: number;
+
+  imgurl: {
+    mainimg: string;
+    secimg: string;
+    thirdimg: string;
+    fourimg: string;
+  };
+
+  quantity: number;
+  descreption: string;
+  stock: boolean;
+  mark: string;
+}
 export default function Singleproduct({ id }: any) {
-  const [mainimg, setmainimg] = useState(null);
-  const [item, setProduct] = useState(null);
+  const [mainimg, setmainimg] = useState("");
+  const [item, setProduct] = useState<Product>();
 
   const { increaseItemQuantity } = useShoppingCart();
   useEffect(() => {
     axios
-      .get(`http://192.168.1.6:5000/api/products/get/${id}`)
+      .get<Product>(`http://localhost:5000/api/products/get/${id}`)
       .then((response) => {
         setProduct(response.data);
         setmainimg(response.data?.imgurl.mainimg);
@@ -62,7 +80,7 @@ export default function Singleproduct({ id }: any) {
             </p>
           </div>
           <h2 className="text-warning opacity-50">{item?.price} DT</h2>
-          <p className="w-100 overflow-y-auto">{item?.descreption}</p>
+          <p className="w-100 overflow-y-auto"> {item?.descreption}</p>
           <div className="d-flex flex-row me-auto justify-content-around align-content-center align-items-center w-50 p-2 border-bottom my-3 fs-4">
             <i className="fa-solid fa-truck"></i>
             <i className="fa-solid fa-shield-halved"></i>
@@ -71,8 +89,12 @@ export default function Singleproduct({ id }: any) {
           <div className="mt-lg-2 mt-0 ms-lg-5 ms-1">
             <button
               onClick={() => {
-                if (item?.quantity != 0) increaseItemQuantity(id);
-                else alert("items out of stock");
+                increaseItemQuantity(
+                  id,
+                  item.imgurl.mainimg,
+                  item.title,
+                  item.price
+                );
               }}
               type="button"
               className="btn d-flex  fw-semibold my-2 btn-outline-dark  rounded-4 mt-lg-5 mt-0"
