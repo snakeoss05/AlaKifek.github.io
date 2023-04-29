@@ -47,8 +47,7 @@ export default function Logaccount() {
         clearTimeout(timeoutId);
       };
     } catch (error) {
-      setVerificationMessage(error.response.data);
-      console.log(error.response.data);
+      console.log(error);
       const timeoutId = setTimeout(() => {
         setVerificationMessage("");
       }, 3000);

@@ -1,7 +1,7 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Store from "./pages/Store";
+
 import About from "./pages/About";
 import Navbar from "./components/navbar";
 import Contact from "./pages/contact";
@@ -26,7 +26,7 @@ export default function App() {
       <div className="mb-4 container-fluid">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/store" element={<Store />} />
+
           <Route path="/contact" element={<Contact />} />
           <Route path="/Impression" element={<Impression />} />
           <Route path="/about" element={<About />} />
