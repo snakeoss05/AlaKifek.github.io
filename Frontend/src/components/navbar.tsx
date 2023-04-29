@@ -151,7 +151,7 @@ function Navbar() {
           <div>
             <NavLink to="/" className="navbar-brand mt-2 mt-lg-0">
               <img
-                src="https://lh3.googleusercontent.com/pw/AJFCJaVLpH09oRpkY88RdQijuMr-OsulSvXZRlx92ojhdpyQGmz8Zl5QP-QR3ZtCrPwP6R1PCNVk5INgkLF_1VWThGghqtKMdKj7kriepDHEHcitck99gLhvwe5xdjoC4FH6i564_MRgiCrp2vIK4aWGbuJXsp-8wLAe8oYus8-8AfEmjElatXZTDETBzPKcGiRxHfWHB5VohoPI8lXZtN0EHttcbIDhvG_RXABR-RP-Vkn9ZfZY_kOHrtme0y3zfk4gW8-xM0N6qmKjD9swpk0ZvLEDFUAHpMqJ8Jxm-uREC9BDB4b6VFs8ILWAFxZT8W-0aRurqjs0M8Qcw2w5Yguq2cqS6Oqmbf52CmEyk0WtokWsNjx6iKvVx9qjIWZBJ34rq21j-jonal8BrseoGg4uGXGAxC-R-wpFB12h8qbWQEB4D4XwzK-ZbjmtM0KQZ_b1-hCOFvzpSaFUPCREMlIGbpIadJfh9RWZSCmXkv4BaJx3hbVhOfbDF1Hkw3mIbUArDT2npT6gkX5V-cVH9XIDS-mQiPYt3ngoFMPtJCTgFm8iM7E8Kjpte1cNKT5JPBvf8u2U6NDh4IyxDQ6E-O6r3djQu9qawjyQ1FKVscbM-3f4FuNjIcrOJxpHFfJfvKOIHuSXD6SQaeYtxfZAlS2iauCYw32SACQxCt63JretzJh9vnd8jLzZTqO3dP13ma031JMNfTKLusxjejydEoyDo2tvcl_NuR9FGGeguNu1D4XpkfgHQGmdVDSq0vfhRpXsed_UoOwnPInwh7Ordw5Vvma59wueAfdqPlgVXJulzLKNCJv97V_fmfMnHOQGHqe57AroR_AVwCjKqVEbzb5O-OKXEOrVPDVetKyaa9uW4uvFtKxamKIXpbO7tkdEj2sUm8q17N9dt2K2KfvHGWgLN66fkoLZhkznzAc604C6nmg8VqwiQZo-ATLaTEwb-j9ZSGhcrmITJf6hkaiplyXs4bbQ6TdU1hWvLGI0hp37eG1BTj7JTvWF19Ly1m1Gutolbg=w500-h500-s-no?authuser=0"
+                src="https://lh3.googleusercontent.com/pw/AJFCJaWYY-2DMlupd1_0LwX44XJ9DCYgKpY5NZm_tJZl--qqyr8rwINrPSHJyCbCn43t76nCg98bcUq2F9ZHxGXq4SQ0JPZB6l5CiXKgMkZxpDgn5bbYvUW7Up_2LRkR-vYZLfjhsD6Lfv_dTA7sJAOrXy3-IfMi98Du8fnONk2gcimx7g45rZfOe3Wg_qRY_UQQsXCxsDUjC-aqA8BL0lMrip1S7kkwg1kS9pEf2nF48LCtem_R3xFpN2XUCFWTGEZoMz1WqDNakVmvtGC3ZFPRCN-x-X3iEtyK6CTGfnL0AX0iu8eyb9IJfpppe3uthqUnPnEhplldpeCnBY8sdSuWqQPUN3Bb0AKANCgdwY1BD5s0zNfLiNa7gnGmha2v0TcPefTrxtUgsn1-XX3aofrrpwxkw_SQQ2ZvwrWTx2fAvOnzuKS85eYGh6q5Qg67tr2x2HNlWaqvF3QkTwasauSBTlH6o7DU_3mS99R3lY3S8ll8flG-cQyeAX_56DvxNXeAAA_aenCYBDV-nt3GvUpYJmjjKvMHdDf810WY_yFKP_8Y200w5tYMQgu9FCjkSnxons-imJyOF_BXHZgwyrxQ9FneN86KN_ASURF16Wz2Kbuz6x5rXmI13CTTSYjO68B4MPJ48ZtrZLWJlqUsj1UIiP9Kq0eXECdKNOQslKKMZUaTsnLGLr3zH9qJ3yP4J1_WKjiIf8d8lb_EsdS3H8dgxSas8LR51Ghdqk6WidefN2Ij2RMB_zhOpLE3bK7wMAyRLXllxmORi_HbJ2XjubaGh_cqhhGxqFDKCjLxI2bIZF1iHg_Q-eNjTCABGflDy74f06vX3zHrj69Oy91Ce06ivGHzxaDhnF3yInlDJcO8bG0HMxEX6Bw_DhCFCgSmKvKOVAK9AtXKMUukpkUaoFWwSo8TTTOj_Q8Za8Ev7TCJRPhEvm_LoX_P0j7Ues12vgLW3TpeSonfvUS4WniqQpcccMXSjEng2r9rZ1Bz1bQLxkj2hXocebqkR1fQeu7aUzBycg=w500-h500-s-no?authuser=0"
                 height="120"
               />
             </NavLink>
@@ -169,7 +169,7 @@ function Navbar() {
                 <li className="nav-title">Informatique</li>
                 <ul className="menu2 p-0">
                   <div className="d-flex flex-column flex-md-row shadow-sm justify-content-around bg-white   flex-wrap flex-lg-nowrap">
-                    <li className=" m-2   ps-3 ">
+                    <li className=" m-2   ">
                       <NavLink
                         to={`/Category/Accessoires Pc`}
                         className="groupeList nav-header  "
@@ -209,7 +209,7 @@ function Navbar() {
                         </Link>
                       </ul>
                     </li>
-                    <li className=" m-2   ps-3">
+                    <li className=" m-2  ">
                       <NavLink
                         to={`/Category/Accessoires Téléphones`}
                         className="groupeList"
@@ -249,7 +249,7 @@ function Navbar() {
                         </Link>
                       </ul>
                     </li>
-                    <li className="m-2  ps-3">
+                    <li className="m-2 ">
                       <NavLink
                         to={`/Category/Composants De Pc Bureau`}
                         className="groupeList"
@@ -307,7 +307,7 @@ function Navbar() {
                         </Link>
                       </ul>
                     </li>
-                    <li className="m-2   ps-3">
+                    <li className="m-2  ">
                       <NavLink
                         to={`/Category/Composants De Pc Portable`}
                         className="groupeList"

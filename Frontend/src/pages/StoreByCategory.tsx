@@ -90,7 +90,7 @@ export default function StoreByCategory() {
       <section className="landing">
         <img
           className="hero__image"
-          src="https://lh3.googleusercontent.com/pw/AJFCJaUasG62EicCrBRy_XuqMeyMvMuNGLqhKCXTVD0fvDC1eQWZqWWx9cD60oeGCpK6zWGK6XnoGcHeyf5dC0DXPYc-ERuGU9w-phFE2J3HLLo11AwkwHS-6TOWfASaVWVt53SjKJyMk54NH0oGKXfE7gNLp5-NMe84bj_Oa5Q5qxfj4iGJ7CekMGGN1EKcDfKIgizGKeSwZ8MDnp64FzqT6tUL3fyWaz6jPJn4yFo_hrZUs5XjsIhCQts5D4W2OLaek0oemIdE1uxOP3Z2jFEaynAuOHhvK4ICekAXeXgrU1mgZ3R44W_tadcyLyREwtCb_20WQ9f99puha8IohTFHu5vG_CsEpMc8-c8aL6AuU576fMAnwV3cXYY2hUz0Viq142nv5_h736UwnxEbRbyfayt1GHSBouPZfGQrcjj2M8MNKf-ds651of0SYi91Bm0mPW5feiZkWVIfCrfqLtmbUtNVYjgIeifyChD35qGGs8XUabGMmqJwoGkl5065edUaELeiDiKJxRl64c2dLtgdFOGdE-glYK08IcmABybO5kPTRzcwnGZjULmv0CYEHs7MjxawAgYzZJhC0XNoCsMNN2aedpBOXVrrs-_u7dq_VYfAihFRA29sK3ODSyH6pTwH-OigfnLBLwXkPzqWhwRqKZbGd_iWyK_4ndBoAYH53tJB09OfErySrGehCKxavWlrg7kEcyVLrPGvFKttCDnDwtm7rLQh7uugzi8s4kKeJSAIiqZGIWAsUVbYj_6avat1hjMTp8EKVUq_VrMjsvA54vQXf9V2pt3WCXJr98Zscu0oeYzbs1jJlPSNBh_yUwzAdBQb38x490T0un63ypTcbSyLD17MIwJoUnDxu47_IpcqifOnBXZsTgoJxskUnp0J3MbvhgeTmMQ3okJfH-sRg1uRv3p6uw383zq1Q4onnL8Jb-rSNPGagTcO0_YNi7ZIbV_rfhR4kqFELcQ7OEJ2l8bjeCzp66PrkU1QrotIXZ8eR7GMW7qtPsF6OOovGUH7gA=w1920-h350-s-no?authuser=0"
+          src="https://scontent.ftun4-2.fna.fbcdn.net/v/t39.30808-6/344535083_799096674976333_3863739484278083826_n.png?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=-HC08paZ8ysAX-WbFRN&_nc_ht=scontent.ftun4-2.fna&oh=00_AfDsg_n4WEC0oegOzLAZSiG2wEdBHbWN9yp1ALLIs3KLoQ&oe=6451B7C2"
         />
       </section>
       <section className="container-fluid ">

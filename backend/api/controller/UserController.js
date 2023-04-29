@@ -33,7 +33,6 @@ export default class UserController {
 
       if (result.error) {
         res.status(400).send(result.error);
-        return;
       }
 
       res.status(201).send("User created successfully"); // use 201 status code for successful creation
