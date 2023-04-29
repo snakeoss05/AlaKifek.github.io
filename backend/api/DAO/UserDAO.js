@@ -26,15 +26,35 @@ export default class UserDao {
     }
   }
 
-  static async registerUser(user) {
+  static async registerUser({
+    email,
+    hashedPassword,
+    FirstName,
+    City,
+    LastName,
+    AddressLine,
+    PhoneNumber,
+  }) {
     try {
-      const existingUser = await connection.findOne({ email: user.email });
+      const existingUser = await connection.findOne({ email: email });
       if (existingUser) {
         return { error: "Email already exists." };
       }
-      const newUser = new User(user);
+      const newUser = new User(
+        email,
+        hashedPassword,
+        FirstName,
+        City,
+        LastName,
+        AddressLine,
+        PhoneNumber
+      );
 
-      await connection.insertOne(newUser);
+      const result = await connection.insertOne(newUser);
+      if (result.insertedCount !== 1) {
+        return { error: "Failed to create user." };
+      }
+
       return newUser; // return the newly created user
     } catch (error) {
       console.error(error);

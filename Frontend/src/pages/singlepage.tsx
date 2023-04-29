@@ -38,7 +38,13 @@ export default function Singlepage() {
   const { increaseItemQuantity } = useShoppingCart();
 
   if (!item) {
-    return <div>Loading...</div>;
+    return (
+      <div className="d-flex justify-content-center">
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
   }
 
   return (

@@ -38,6 +38,7 @@ export default function Logaccount() {
         UserData
       );
       setsigninmsg(response.data);
+      console.log(response.data);
       const timeoutId = setTimeout(() => {
         setsigninmsg("");
       }, 3000);
@@ -46,6 +47,8 @@ export default function Logaccount() {
         clearTimeout(timeoutId);
       };
     } catch (error) {
+      setVerificationMessage(error.response.data);
+      console.log(error.response.data);
       const timeoutId = setTimeout(() => {
         setVerificationMessage("");
       }, 3000);
@@ -164,7 +167,14 @@ export default function Logaccount() {
                   placeholder="Location"
                   required={true}
                 />
-
+                {signinmsg && (
+                  <div
+                    className="alert success-danger w-50 mx-auto"
+                    role="alert"
+                  >
+                    {signinmsg}
+                  </div>
+                )}
                 {verificationMessage && (
                   <div className="alert alert-danger w-50 mx-auto" role="alert">
                     {verificationMessage}
@@ -217,7 +227,8 @@ export default function Logaccount() {
                 )}
                 {loginmsg && (
                   <div
-                    className="alert alert-success w-50 mx-auto my-3"
+                    className={`alert alert-success w-50 mx-auto my-3  ${loginmsg &&
+                      "alertfadeup"}`}
                     role="alert"
                   >
                     {loginmsg}

@@ -3,15 +3,6 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 300;
 }
-.dropdown-menu {
-  position: absolute !important;
-  left: -675% !important;
-}
-.dropdown-menu-scroll {
-  max-height: 400px !important;
-  overflow-y: scroll !important;
-  scroll-behavior: smooth !important;
-}
 
 .searchbar form {
   position: relative;
@@ -172,17 +163,66 @@ body {
 .nav-link:hover {
   color: #ffbf00 !important;
 }
+.nav-title {
+  text-decoration: none;
+  font-size: 1.1rem;
+  line-height: 25px;
+  text-decoration: none;
+  color: #2b2b2b;
+  text-transform: capitalize;
+  font-weight: 500;
+}
 .border-nav {
-  background-color: ghostwhite;
+  background-color: white;
 }
-.animated {
-  background-color: ghostwhite !important;
-  z-index: 3 !important;
+.nav-item {
+  margin-bottom: 8px !important;
 }
-@media (min-width: 990px) {
-  .navi {
-    height: 110px !important;
+.menu2 {
+  display: none;
+  position: relative;
+  top: 80%;
+  left: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+  width: 100% !important;
+  background-color: transparent !important;
+
+  border-top: none !important;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.menu2::-webkit-scrollbar {
+  width: 10px;
+  background-color: #ffeec1;
+}
+.menu2::-webkit-scrollbar {
+  width: 5px;
+  background-color: #ffeec1;
+}
+.menu2::-webkit-scrollbar-thumb {
+  background: #ffc830;
+}
+@media (min-width: 985px) {
+  .menu2 {
+    display: none;
+    position: absolute !important;
+    top: 60%;
+
+    left: 0 !important;
+
+    margin: 0 !important;
+    list-style: none !important;
+    width: 100vw !important;
+    background-color: transparent !important;
+    border: 1px solid #ccc !important;
+    border-top: none !important;
+    max-height: fit-content;
+    overflow-y: unset;
+    animation: FadeUp 0.3s ease-in;
   }
+
   #searchBody {
     position: absolute !important;
     padding: 0 1rem !important;
@@ -193,15 +233,32 @@ body {
   .border-nav {
     background-color: transparent;
   }
-  .dropdown-menu-scroll {
-    max-height: fit-content !important;
-    overflow-y: unset !important;
+}
+
+@media (min-width: 576px) {
+  .nav-title {
+    line-height: 80px;
   }
-  .animated {
-    background-color: transparent !important;
-    width: 70vw !important;
+  .menu2 {
+    display: none;
     position: absolute !important;
-    left: -20% !important;
+    top: 80%;
+
+    left: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    width: 100vw !important;
+    background-color: transparent !important;
+
+    border-top: none !important;
+
+    animation: FadeUp 0.3s ease-in;
+  }
+  .border-nav {
+    background-color: transparent;
+  }
+  .nav-item {
+    margin: 0px 10px !important;
   }
 }
 
@@ -222,22 +279,10 @@ body {
   letter-spacing: 0.08em;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block !important;
+.togi:hover .menu2 {
+  display: block;
 }
 
-.dropdown-menu {
-  margin-top: 0 !important;
-  opacity: 0 !important;
-}
-
-.dropdown:hover .dropdown-menu,
-.dropdown:focus .dropdown-menu {
-  opacity: 1 !important;
-}
-.animated {
-  animation: FadeUp 0.5s ease-in-out !important;
-}
 @keyframes FadeUp {
   from {
     opacity: 0%;
@@ -246,9 +291,13 @@ body {
     opacity: 100%;
   }
 }
-.dropdown-menu li span,
-.dropdown-menu li i {
+.menu2 li span,
+.menu2 li i {
   color: #ffbf00 !important;
   margin: 5px;
   font-size: 20px;
+}
+.groupeList {
+  border-bottom: 2px solid #ccc;
+  padding: 3px 3px;
 }

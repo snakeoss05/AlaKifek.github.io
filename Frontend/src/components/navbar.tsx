@@ -160,233 +160,197 @@ function Navbar() {
           <Navi.Collapse>
             <ul className="navbar-nav ms-lg-5 me-auto mb-2 mb-lg-0 ">
               <li className="nav-item">
-                <NavLink
-                  to="/"
-                  className="nav-link text-black fw-semibold text-uppercase"
-                  type="button"
-                >
+                <NavLink to="/" className="nav-title" type="button">
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item dropdown">
+              <li className="togi nav-item">
                 {" "}
-                <NavLink
-                  to="/store"
-                  id="megamneu"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  className="nav-link dropdown-toggle border-0 text-black fw-semibold text-uppercase"
-                >
-                  Store
-                </NavLink>
-                <ul className="dropdown-menu border-0 p-0 dropdown-menu-scroll  ">
-                  <div className="animated pt-lg-4 pt-0  position-absolute start-0">
-                    <div className="d-flex flex-row  col-lg-12 shadow-sm bg-white vw-100 px-5">
-                      <li className=" m-2 col-3 ps-3 ">
-                        <NavLink
-                          to={`/Category/Accessoires Pc`}
-                          className="groupeList nav-header "
+                <li className="nav-title">Informatique</li>
+                <ul className="menu2 p-0">
+                  <div className="d-flex flex-column flex-md-row shadow-sm justify-content-around bg-white   flex-wrap flex-lg-nowrap">
+                    <li className=" m-2   ps-3 ">
+                      <NavLink
+                        to={`/Category/Accessoires Pc`}
+                        className="groupeList nav-header  "
+                      >
+                        <i className="fa-regular fa-keyboard "></i>
+                        <span>Accessoires Pc</span>
+                      </NavLink>
+
+                      <ul className="list-unstyled  ms-2 ps-1 ">
+                        <Link
+                          to={`/Category/Casque & Écouteurs`}
+                          className="nav-link"
                         >
-                          <i className="fa-regular fa-keyboard "></i>
-                          <span>Accessoires Pc</span>
-                        </NavLink>
+                          Casque & Écouteurs
+                        </Link>
+                        <Link to={`/Category/Souris`} className="nav-link">
+                          Souris
+                        </Link>
+                        <Link to={`/Category/Clavier`} className="nav-link">
+                          Clavier
+                        </Link>
 
-                        <ul className="list-unstyled  menu2  ms-2 ps-1 ">
-                          <Link
-                            to={`/Category/Casque & Écouteurs`}
-                            className="nav-link"
-                          >
-                            Casque & Écouteurs
-                          </Link>
-                          <Link to={`/Category/Souris`} className="nav-link">
-                            Souris
-                          </Link>
-                          <Link to={`/Category/Clavier`} className="nav-link">
-                            Clavier
-                          </Link>
-
-                          <Link
-                            to={`/Category/Ensemble Clavier Et Souris`}
-                            className="nav-link"
-                          >
-                            Ensemble Clavier Et Souris
-                          </Link>
-                          <Link
-                            to={`/Category/Tapis De Souris`}
-                            className="nav-link"
-                          >
-                            Tapis De Souris
-                          </Link>
-                          <Link to={`/Category/Webcam`} className="nav-link">
-                            Webcam
-                          </Link>
-                        </ul>
-                      </li>
-                      <li className=" m-2 col-3 ps-3">
-                        <NavLink
-                          to={`/Category/Accessoires Téléphones`}
-                          className="groupeList"
+                        <Link
+                          to={`/Category/Ensemble Clavier Et Souris`}
+                          className="nav-link"
                         >
-                          <i className="fa-solid fa-mobile-screen-button fs-5 ms-1"></i>
-                          <span className="fw-500 ">
-                            {" "}
-                            Accessoires Téléphones
-                          </span>
-                        </NavLink>
-
-                        <ul className="list-unstyled menu2 ms-2 ps-1  ">
-                          <Link
-                            to={`/Category/Etuis et coques`}
-                            className="nav-link"
-                          >
-                            Etuis et coques
-                          </Link>
-
-                          <Link
-                            to={`/Category/Protection Ecran`}
-                            className="nav-link"
-                          >
-                            Protection Ecran
-                          </Link>
-                          <Link
-                            to={`/Category/Power bank`}
-                            className="nav-link"
-                          >
-                            Power bank
-                          </Link>
-                          <Link
-                            to={`/Category/Tige Selfie`}
-                            className="nav-link"
-                          >
-                            Tige Selfie
-                          </Link>
-                          <Link to={`/Category/Chargeur`} className="nav-link">
-                            Chargeur
-                          </Link>
-                          <Link
-                            to={`/Category/Câble Chargeur`}
-                            className="nav-link"
-                          >
-                            Câble Chargeur
-                          </Link>
-                        </ul>
-                      </li>
-                      <li className="m-2 col-3 ps-3">
-                        <NavLink
-                          to={`/Category/Composants De Pc Bureau`}
-                          className="groupeList"
+                          Ensemble Clavier Et Souris
+                        </Link>
+                        <Link
+                          to={`/Category/Tapis De Souris`}
+                          className="nav-link"
                         >
-                          <i className="fa-solid fa-desktop fs-5"></i>
-                          <span className="fw-500 ">
-                            {" "}
-                            Composants De Pc Bureau
-                          </span>
-                        </NavLink>
-                        <ul className="list-unstyled ms-2 ps-1 menu2 ">
-                          <Link
-                            to={`/Category/Disque Dur Interne`}
-                            className="nav-link"
-                          >
-                            Disque Dur Interne
-                          </Link>
+                          Tapis De Souris
+                        </Link>
+                        <Link to={`/Category/Webcam`} className="nav-link">
+                          Webcam
+                        </Link>
+                      </ul>
+                    </li>
+                    <li className=" m-2   ps-3">
+                      <NavLink
+                        to={`/Category/Accessoires Téléphones`}
+                        className="groupeList"
+                      >
+                        <i className="fa-solid fa-mobile-screen-button fs-5 ms-1"></i>
+                        <span className="fw-500 "> Accessoires Téléphones</span>
+                      </NavLink>
 
-                          <Link to={`/Category/Afficheur`} className="nav-link">
-                            Afficheur
-                          </Link>
+                      <ul className="list-unstyled  ms-2 ps-1  ">
+                        <Link
+                          to={`/Category/Etuis et coques`}
+                          className="nav-link"
+                        >
+                          Etuis et coques
+                        </Link>
 
-                          <Link
-                            to={`/Category/Ventilateur & Refroidisseur`}
-                            className="nav-link"
-                          >
+                        <Link
+                          to={`/Category/Protection Ecran`}
+                          className="nav-link"
+                        >
+                          Protection Ecran
+                        </Link>
+                        <Link to={`/Category/Power bank`} className="nav-link">
+                          Power bank
+                        </Link>
+                        <Link to={`/Category/Tige Selfie`} className="nav-link">
+                          Tige Selfie
+                        </Link>
+                        <Link to={`/Category/Chargeur`} className="nav-link">
+                          Chargeur
+                        </Link>
+                        <Link
+                          to={`/Category/Câble Chargeur`}
+                          className="nav-link"
+                        >
+                          Câble Chargeur
+                        </Link>
+                      </ul>
+                    </li>
+                    <li className="m-2  ps-3">
+                      <NavLink
+                        to={`/Category/Composants De Pc Bureau`}
+                        className="groupeList"
+                      >
+                        <i className="fa-solid fa-desktop fs-5"></i>
+                        <span className="fw-500 ">
+                          {" "}
+                          Composants De Pc Bureau
+                        </span>
+                      </NavLink>
+                      <ul className="list-unstyled ms-2 ps-1 ">
+                        <Link
+                          to={`/Category/Disque Dur Interne`}
+                          className="nav-link"
+                        >
+                          Disque Dur Interne
+                        </Link>
+
+                        <Link to={`/Category/Afficheur`} className="nav-link">
+                          Afficheur
+                        </Link>
+
+                        <Link
+                          to={`/Category/Ventilateur & Refroidisseur`}
+                          className="nav-link"
+                        >
+                          Ventilateur & Refroidisseur
+                        </Link>
+                        <Link to={`/Category/Processeur`} className="nav-link">
+                          Processeur
+                        </Link>
+                        <Link
+                          to={`/Category/Barrette Mémoire`}
+                          className="nav-link"
+                        >
+                          Barrette Mémoire
+                        </Link>
+                        <Link to={`/Category/Carte Mère`} className="nav-link">
+                          Carte Mère
+                        </Link>
+                        <Link
+                          to={`/Category/Carte Graphique`}
+                          className="nav-link"
+                        >
+                          Carte Graphique
+                        </Link>
+                        <Link
+                          to={`/Category/Boîte D'alimentation`}
+                          className="nav-link"
+                        >
+                          Boîte D'alimentation
+                        </Link>
+                        <Link to={`/Category/Boitier`} className="nav-link">
+                          Boîtier
+                        </Link>
+                      </ul>
+                    </li>
+                    <li className="m-2   ps-3">
+                      <NavLink
+                        to={`/Category/Composants De Pc Portable`}
+                        className="groupeList"
+                      >
+                        <i className="fa-solid fa-laptop fs-5"></i>
+                        <span className="fw-500 ">
+                          {" "}
+                          Composants De Pc Portable
+                        </span>
+                      </NavLink>
+                      <ul className="list-unstyled  ms-2 ps-1 ">
+                        <li className="nav-item">
+                          <a className="nav-link">Disque Dur Interne</a>
+                        </li>
+
+                        <li className="nav-item">
+                          <a className="nav-link">Afficheur</a>
+                        </li>
+
+                        <li className="nav-item">
+                          <a className="nav-link">
                             Ventilateur & Refroidisseur
-                          </Link>
-                          <Link
-                            to={`/Category/Processeur`}
-                            className="nav-link"
-                          >
-                            Processeur
-                          </Link>
-                          <Link
-                            to={`/Category/Barrette Mémoire`}
-                            className="nav-link"
-                          >
-                            Barrette Mémoire
-                          </Link>
-                          <Link
-                            to={`/Category/Carte Mère`}
-                            className="nav-link"
-                          >
-                            Carte Mère
-                          </Link>
-                          <Link
-                            to={`/Category/Carte Graphique`}
-                            className="nav-link"
-                          >
-                            Carte Graphique
-                          </Link>
-                          <Link
-                            to={`/Category/Boîte D'alimentation`}
-                            className="nav-link"
-                          >
-                            Boîte D'alimentation
-                          </Link>
-                          <Link to={`/Category/Boîtier`} className="nav-link">
-                            Boîtier
-                          </Link>
-                        </ul>
-                      </li>
-                      <li className="m-2 col-3 ps-3">
-                        <NavLink
-                          to={`/Category/Composants De Pc Portable`}
-                          className="groupeList"
-                        >
-                          <i className="fa-solid fa-laptop fs-5"></i>
-                          <span className="fw-500 ">
-                            {" "}
-                            Composants De Pc Portable
-                          </span>
-                        </NavLink>
-                        <ul className="list-unstyled menu2 ms-2 ps-1 ">
-                          <li className="nav-item">
-                            <a className="nav-link">Disque Dur Interne</a>
-                          </li>
+                          </a>
+                        </li>
 
-                          <li className="nav-item">
-                            <a className="nav-link">Afficheur</a>
-                          </li>
+                        <li className="nav-item">
+                          <a className="nav-link">Barrette Mémoire</a>
+                        </li>
 
-                          <li className="nav-item">
-                            <a className="nav-link">
-                              Ventilateur & Refroidisseur
-                            </a>
-                          </li>
-
-                          <li className="nav-item">
-                            <a className="nav-link">Barrette Mémoire</a>
-                          </li>
-
-                          <li className="nav-item">
-                            <a className="nav-link">
-                              Chargeur Pour Pc Portable
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a className="nav-link">
-                              Batterie Pour Pc Portable
-                            </a>
-                          </li>
-                        </ul>
-                      </li>
-                    </div>
+                        <li className="nav-item">
+                          <a className="nav-link">Chargeur Pour Pc Portable</a>
+                        </li>
+                        <li className="nav-item">
+                          <a className="nav-link">Batterie Pour Pc Portable</a>
+                        </li>
+                      </ul>
+                    </li>
                   </div>
                 </ul>
               </li>
 
               <li className="nav-item">
-                <NavLink
-                  className="nav-link fw-semibold text-uppercase"
-                  to="/contact"
-                >
+                <NavLink className="nav-title" to="/contact">
                   Contact
                 </NavLink>
               </li>
@@ -449,44 +413,43 @@ function Navbar() {
                   ))}
               </div>
             </div>
+            <ul className="navbar-nav d-flex flex-row justify-content-start  align-items-center">
+              <li className="nav-item me-3 me-lg-0 ">
+                <i className="fa-regular fa-heart fs-5 me-2 text-black"></i>
+              </li>
+              <li className="nav-item me-3 me-lg-0 mb-1">
+                <NavLink to="/login" className="nav-link">
+                  <i className="fa-solid fa-user text-black"></i>
+                </NavLink>
+              </li>
+              <li className="nav-item me-3 me-lg-0 position-relative">
+                <a className="nav-link">
+                  <button
+                    className="rounded-pill bg-transparent text-black border-0 "
+                    type="button"
+                    onClick={openCart}
+                  >
+                    <i className="fas fa-shopping-cart">
+                      {cartQuantity > 0 && (
+                        <p className="navbar-icon-circle rounded-circle ">
+                          {cartQuantity}
+                        </p>
+                      )}
+                    </i>
+                  </button>
+                </a>
+              </li>
+              <div className="d-flex flex-column mx-2 mt-4">
+                <span className="fw-semibold">TOTAL</span>
+                <p className="text-muted">
+                  {cartItems.reduce((total, Cartitem) => {
+                    return total + (Cartitem.price || 0) * Cartitem.quantity;
+                  }, 0)}
+                  TND
+                </p>
+              </div>
+            </ul>
           </Navi.Collapse>
-
-          <ul className="navbar-nav d-flex flex-row justify-content-center  align-items-center">
-            <li className="nav-item me-3 me-lg-0 ">
-              <i className="fa-regular fa-heart fs-5 me-2 text-black"></i>
-            </li>
-            <li className="nav-item me-3 me-lg-0 mb-1">
-              <NavLink to="/login" className="nav-link">
-                <i className="fa-solid fa-user text-black"></i>
-              </NavLink>
-            </li>
-            <li className="nav-item me-3 me-lg-0 position-relative">
-              <a className="nav-link">
-                <button
-                  className="rounded-pill bg-transparent text-black border-0 "
-                  type="button"
-                  onClick={openCart}
-                >
-                  <i className="fas fa-shopping-cart">
-                    {cartQuantity > 0 && (
-                      <p className="navbar-icon-circle rounded-circle ">
-                        {cartQuantity}
-                      </p>
-                    )}
-                  </i>
-                </button>
-              </a>
-            </li>
-            <div className="d-flex flex-column mx-2 mt-4">
-              <span className="fw-semibold">TOTAL</span>
-              <p className="text-muted">
-                {cartItems.reduce((total, Cartitem) => {
-                  return total + (Cartitem.price || 0) * Cartitem.quantity;
-                }, 0)}
-                TND
-              </p>
-            </div>
-          </ul>
         </div>
       </Navi>
     </>

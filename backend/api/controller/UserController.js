@@ -21,21 +21,22 @@ export default class UserController {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     try {
-      const newUser = await UserDao.registerUser({
+      const result = await UserDao.registerUser({
         email,
-        password: hashedPassword,
+        hashedPassword,
         FirstName,
         City,
         LastName,
         AddressLine,
         PhoneNumber,
       });
-      if (newUser.error) {
-        // check if there was an error creating the user
-        res.status(400).send(newUser.error);
-      } else {
-        res.status(201).send("User created successfully"); // use 201 status code for successful creation
+
+      if (result.error) {
+        res.status(400).send(result.error);
+        return;
       }
+
+      res.status(201).send("User created successfully"); // use 201 status code for successful creation
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal server error.");
