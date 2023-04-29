@@ -6,11 +6,9 @@ const userSchema = new mongoose.Schema({
   City: { type: String },
   FirstName: {
     type: String,
-    required: true,
   },
   LastName: {
     type: String,
-    required: true,
   },
   AddressLine: {
     type: String,

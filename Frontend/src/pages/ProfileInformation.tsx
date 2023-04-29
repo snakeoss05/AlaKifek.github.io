@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import "./profile.css";
+
 import { ObjectId } from "bson";
-import { Params } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 interface ServerData {
   FirstName: string;
   LastName: string;
@@ -53,7 +54,7 @@ export default function ProfileInformation() {
       isEditing: false,
     },
   });
-
+  const navigate = useNavigate();
   const handleIconClick = (property: ProfileProperty) => {
     setProfile((prevProduct) => ({
       ...prevProduct,
@@ -110,7 +111,7 @@ export default function ProfileInformation() {
   }
   function Logout() {
     Cookies.remove("token");
-    window.location.replace("/login");
+    navigate("/login");
     localStorage.clear();
   }
 
