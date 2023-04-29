@@ -72,7 +72,10 @@ function Tabse() {
     console.log(formDataproduct);
 
     axios
-      .post("http://localhost:5000/api/products/add", formDataproduct)
+      .post(
+        "https://alakifekbackend.onrender.com/api/products/add",
+        formDataproduct
+      )
       .then((response) => {
         console.log(response.data);
       })
@@ -82,7 +85,7 @@ function Tabse() {
   };
   const searchitems = async () => {
     axios
-      .get(`http://localhost:5000/api/products/get/${id}`)
+      .get(`https://alakifekbackend.onrender.com/api/products/get/${id}`)
       .then((response) => {
         setItems(response.data);
       });
@@ -91,7 +94,7 @@ function Tabse() {
   const handleSubmite = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/products/delete/${id}`
+        `https://alakifekbackend.onrender.com/api/products/delete/${id}`
       );
       setItems((prevestate) => (prevestate = null));
       console.log(response.data.message);
@@ -109,7 +112,7 @@ function Tabse() {
     };
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/products/update/${id}`,
+        `https://alakifekbackend.onrender.com/api/products/update/${id}`,
         updateproduct
       );
       console.log(response.data); // do something with the response data

@@ -7,7 +7,9 @@ function ClientCommands() {
   useEffect(() => {
     // Make a GET request to your Express backend to retrieve clientCommands data
     axios
-      .get("http://localhost:5000/api/submit-form/clientCommands")
+      .get(
+        "https://alakifekbackend.onrender.com/api/submit-form/clientCommands"
+      )
       .then((res) => {
         setClientCommands(res.data.clientCommands);
       })
@@ -19,7 +21,7 @@ function ClientCommands() {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/submit-form/delete/${id}`
+        `https://alakifekbackend.onrender.com/api/submit-form/delete/${id}`
       );
       // Update the clientCommands state to remove the deleted item
       setClientCommands((prevState) =>

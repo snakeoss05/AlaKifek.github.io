@@ -48,6 +48,7 @@ export default function Logaccount() {
       };
     } catch (error) {
       console.log(error);
+      setVerificationMessage("Email already exists.");
       const timeoutId = setTimeout(() => {
         setVerificationMessage("");
       }, 3000);
@@ -74,8 +75,7 @@ export default function Logaccount() {
 
       window.location.replace("/profile");
     } catch (error) {
-      console.error(error);
-
+      setVerificationMessagett("Email OR Password Not Correct");
       const timeoutId = setTimeout(() => {
         setVerificationMessagett("");
       }, 3000);
