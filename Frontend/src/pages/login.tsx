@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import jwt from "jsonwebtoken";
@@ -21,7 +21,7 @@ export default function Logaccount() {
   const [loginmsg, setloginmsg] = useState("");
   const [verificationMessage, setVerificationMessage] = useState("");
   const [verificationMessaget, setVerificationMessagett] = useState("");
-
+  const navigate = useNavigate();
   function HandleChange(event: any) {
     const { name, value } = event.target;
     setUserData((prevFormdata) => ({
@@ -29,9 +29,10 @@ export default function Logaccount() {
       [name]: value,
     }));
   }
-  console.log(UserData);
+
   async function registerform(e: any) {
     e.preventDefault();
+
     try {
       const response: AxiosResponse = await axios.post(
         "https://alakifekbackend.onrender.com/api/ath/register",
@@ -61,19 +62,21 @@ export default function Logaccount() {
 
   const loginform = async (e: any) => {
     e.preventDefault();
+    const loginform = {
+      email: UserData.email,
+      password: UserData.password,
+    };
     try {
       const response = await axios.post(
         "https://alakifekbackend.onrender.com/api/ath/login",
-
-        UserData
+        loginform
       );
-
+      Cookies.set("token", response.data.token);
       if (response.status == 200) {
         setloginmsg("Welcome Back");
       }
-      Cookies.set("token", response.data.token);
 
-      window.location.replace("/profile");
+      navigate("/profile");
     } catch (error) {
       setVerificationMessagett("Email OR Password Not Correct");
       const timeoutId = setTimeout(() => {
