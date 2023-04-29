@@ -50,7 +50,7 @@ export default function Checkout() {
   const sendform = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/submit-form/post",
+        "https://alakifekbackend.onrender.com/api/submit-form/post",
 
         user ? formDataone : formData
       );
@@ -79,11 +79,14 @@ export default function Checkout() {
     const getUserById = async () => {
       var token = Cookies.get("token");
       try {
-        const response = await axios.get(`http://localhost:5000/api/ath/user`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `https://alakifekbackend.onrender.com/api/ath/user`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         setuser(response.data);
       } catch (error) {

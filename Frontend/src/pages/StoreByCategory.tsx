@@ -37,7 +37,7 @@ export default function StoreByCategory() {
   const fetchItems = async () => {
     axios
       .get<Product[]>(
-        `http://localhost:5000/api/products/filter/category/${category}`
+        `https://alakifekbackend.onrender.com/api/products/filter/category/${category}`
       )
       .then((response) => {
         setItems(response.data);
@@ -76,6 +76,15 @@ export default function StoreByCategory() {
 
   const catagorybt = [...new Set(items.map((item) => item.category))];
   const marks = [...new Set(items.map((item) => item.mark))];
+  if (!items) {
+    return (
+      <div className="d-flex justify-content-center align-items-center flex-column h-100vh">
+        <div className="position-absolute start-50 top-50" role="status">
+          <i className="fa-solid fa-fan fa-spin fs-1 text-warning"></i>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="bg-body-secondry">
       <section className="landing">

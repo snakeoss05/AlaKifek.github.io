@@ -28,7 +28,9 @@ export default function Singleproduct({ id }: any) {
   const { increaseItemQuantity } = useShoppingCart();
   useEffect(() => {
     axios
-      .get<Product>(`http://localhost:5000/api/products/get/${id}`)
+      .get<Product>(
+        `https://alakifekbackend.onrender.com/api/products/get/${id}`
+      )
       .then((response) => {
         setProduct(response.data);
         setmainimg(response.data?.imgurl.mainimg);
@@ -37,10 +39,8 @@ export default function Singleproduct({ id }: any) {
 
   if (!item) {
     return (
-      <div className="d-flex justify-content-center">
-        <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
+      <div className="position-absolute top-50 start-50">
+        <i className="fa-solid fa-fan fa-spin fs-1 text-warning "></i>
       </div>
     );
   }

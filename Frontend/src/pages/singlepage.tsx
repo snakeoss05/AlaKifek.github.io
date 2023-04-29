@@ -28,7 +28,9 @@ export default function Singlepage() {
 
   useEffect(() => {
     axios
-      .get<Product>(`http://localhost:5000/api/products/get/${id}`)
+      .get<Product>(
+        `https://alakifekbackend.onrender.com/api/products/get/${id}`
+      )
       .then((response) => {
         setProduct(response.data);
         setmainimg(response.data?.imgurl.mainimg);
@@ -39,9 +41,9 @@ export default function Singlepage() {
 
   if (!item) {
     return (
-      <div className="d-flex justify-content-center">
-        <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
+      <div className="d-flex justify-content-center align-items-center flex-column h-100vh">
+        <div className="position-absolute start-50 top-50" role="status">
+          <i className="fa-solid fa-fan fa-spin fs-1 text-warning"></i>
         </div>
       </div>
     );

@@ -32,7 +32,7 @@ function ClientCommands() {
   useEffect(() => {
     async function getItems() {
       axios
-        .get<Product[]>("http://localhost:5000/api/products/get")
+        .get<Product[]>("https://alakifekbackend.onrender.com/api/products/get")
         .then((response) => {
           setItems(response.data);
         });
@@ -43,7 +43,7 @@ function ClientCommands() {
     // Make a GET request to your Express backend to retrieve clientCommands data
     axios
       .get<{ clientCommands: ClientCommand[] }>(
-        "http://localhost:5000/api/submit-form/clientCommands"
+        "https://alakifekbackend.onrender.com/api/submit-form/clientCommands"
       )
       .then((res) => {
         setClientCommands(res.data.clientCommands);

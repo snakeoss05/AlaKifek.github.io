@@ -80,7 +80,7 @@ export default function ProfileInformation() {
     var token = Cookies.get("token");
     try {
       const response = await axios.get<ServerData>(
-        `http://localhost:5000/api/ath/user`,
+        `https://alakifekbackend.onrender.com/api/ath/user`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -127,11 +127,15 @@ export default function ProfileInformation() {
     };
     try {
       await axios
-        .put(`http://localhost:5000/api/ath/user/profile/${id}`, formValues, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .put(
+          `https://alakifekbackend.onrender.com/api/ath/user/profile/${id}`,
+          formValues,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((response) => {
           setProfile({
             email: {

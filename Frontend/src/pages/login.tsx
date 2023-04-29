@@ -34,7 +34,7 @@ export default function Logaccount() {
     e.preventDefault();
     try {
       const response: AxiosResponse = await axios.post(
-        "http://localhost:5000/api/ath/register",
+        "https://alakifekbackend.onrender.com/api/ath/register",
         UserData
       );
       setsigninmsg(response.data);
@@ -62,7 +62,7 @@ export default function Logaccount() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/ath/login",
+        "https://alakifekbackend.onrender.com/api/ath/login",
 
         UserData
       );

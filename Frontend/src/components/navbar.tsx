@@ -44,7 +44,7 @@ function Navbar() {
     console.log(`Query: ${query}`);
     try {
       const response = await axios.get<results[]>(
-        `http://localhost:5000/api/products/get/Search/${query}`
+        `https://alakifekbackend.onrender.com/api/products/get/Search/${query}`
       );
       if (query) {
         setResults(response.data);
