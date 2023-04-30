@@ -71,12 +71,12 @@ export default function Logaccount() {
         "https://alakifekbackend.onrender.com/api/ath/login",
         loginform
       );
-      Cookies.set("token", response.data.token);
+
       if (response.status == 200) {
         setloginmsg("Welcome Back");
       }
-
-      navigate("/profile");
+      console.log(response);
+      // navigate("/profile");
     } catch (error) {
       setVerificationMessagett("Email OR Password Not Correct");
       const timeoutId = setTimeout(() => {

@@ -5,25 +5,23 @@ import mongoose from "mongoose";
 
 import UserDao from "../DAO/UserDAO.js";
 dotenv.config();
-const saltRounds = 10;
 
 export default class UserController {
   static async registerUser(req, res) {
-    const { email, password, username } = req.body;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const { email, username, password } = req.body;
 
     try {
-      const result = await UserDao.registerUser({
+      const saltRounds = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      const result = await UserDao.registerUser(
         email,
-        hashedPassword,
         username,
-      });
-
+        hashedPassword
+      );
       if (result.error) {
-        res.status(400).send(result.error);
+        return res.status(400).send(result.error); // use 400 status code for bad request
       }
-
-      res.status(201).send("User created successfully"); // use 201 status code for successful creation
+      res.status(201).send(result.user);
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal server error.");
@@ -33,10 +31,8 @@ export default class UserController {
   static async loginUser(req, res) {
     const { email, password } = req.body;
     const secretOrPrivateKey = process.env.ACCESS_TOKEN_SECRET;
-
+    const user = await UserDao.loginUser(email);
     try {
-      const user = await UserDao.loginUser(email);
-
       if (!user) {
         return res.status(404).send("Email not registered.");
       }
@@ -47,8 +43,10 @@ export default class UserController {
         return res.status(401).send("Wrong password.");
       }
 
-      const token = jwt.sign(user, secretOrPrivateKey);
-      res.json({ token });
+      const token = jwt.sign({ userId: user._id }, secretOrPrivateKey);
+
+      // Return a JSON response with a message and a status code
+      res.status(200).json({ token });
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal server error.");

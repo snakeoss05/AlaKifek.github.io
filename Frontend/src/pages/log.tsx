@@ -36,13 +36,14 @@ export default function Log() {
     }));
   }
 
-  async function registerform() {
+  async function registerform(e: any) {
+    e.preventDefault();
     try {
       const response: AxiosResponse = await axios.post(
         "https://alakifekbackend.onrender.com/api/ath/register",
         register
       );
-      setsigninmsg(response.data);
+
       console.log(response.data);
       const timeoutId = setTimeout(() => {
         setsigninmsg("");
@@ -52,8 +53,7 @@ export default function Log() {
         clearTimeout(timeoutId);
       };
     } catch (error) {
-      console.log(error);
-      setVerificationMessage("Email already exists.");
+      setVerificationMessage("Email Or Paswword already exists.");
       const timeoutId = setTimeout(() => {
         setVerificationMessage("");
       }, 3000);
@@ -64,16 +64,15 @@ export default function Log() {
     }
   }
 
-  const loginform = async () => {
+  const loginform = async (e: any) => {
+    e.preventDefault();
     try {
       const response = await axios.post(
         "https://alakifekbackend.onrender.com/api/ath/login",
         logform
       );
+
       Cookies.set("token", response.data.token);
-      if (response.status == 200) {
-        setloginmsg("Welcome Back");
-      }
 
       navigate("/profile");
     } catch (error) {
@@ -110,7 +109,7 @@ export default function Log() {
           id="container"
         >
           <div className="form-container sign-up-container">
-            <form action="#">
+            <form action="#" onSubmit={registerform}>
               <h1>Create Account</h1>
               <div className="social-container">
                 <a href="#" className="social">
@@ -145,11 +144,29 @@ export default function Log() {
                 onChange={HandleChange}
                 value={register.password}
               />
-              <button onClick={registerform}>Sign Up</button>
+              {signinmsg && (
+                <div
+                  className="alert success-danger mx-auto"
+                  style={{ fontSize: "14px" }}
+                  role="alert"
+                >
+                  {signinmsg}
+                </div>
+              )}
+              {verificationMessage && (
+                <div
+                  className="alert alert-danger  mx-auto"
+                  style={{ fontSize: "14px" }}
+                  role="alert"
+                >
+                  {verificationMessage}
+                </div>
+              )}
+              <button type="submit">Sign Up</button>
             </form>
           </div>
           <div className="form-container sign-in-container">
-            <form action="#">
+            <form onSubmit={loginform}>
               <h1>Sign in</h1>
               <div className="social-container">
                 <a href="#" className="social">
@@ -178,7 +195,18 @@ export default function Log() {
                 value={logform.password}
               />
               <a href="#">Forgot your password?</a>
-              <button onClick={loginform}>Sign In</button>
+              {verificationMessaget && (
+                <div
+                  className={`alert alert-danger  mx-auto  alert-verification ${verificationMessaget &&
+                    "alertfadeup"}`}
+                  style={{ fontSize: "14px" }}
+                  role="alert"
+                >
+                  {verificationMessaget}
+                </div>
+              )}
+
+              <button>Sign In</button>
             </form>
           </div>
           <div className="overlay-container">

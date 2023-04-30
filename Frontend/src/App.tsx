@@ -27,11 +27,11 @@ export default function App() {
       <div className="mb-4 container-fluid">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/log" element={<Log />} />
+
           <Route path="/contact" element={<Contact />} />
           <Route path="/Impression" element={<Impression />} />
           <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Logaccount />} />
+          <Route path="/login" element={<Log />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/items" element={<Items />} />
           <Route path="/Product/:id" element={<Singlepage />} />

@@ -4,9 +4,11 @@ import cors from "cors";
 import submitform from "./api/Routes/submit-form.route.js";
 import productRouter from "./api/Routes/Products.js";
 import authentification from "./api/Routes/authentification.js";
+import cookieParser from "cookie-parser";
 // Create Express app
 const app = express();
 app.use(cors());
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use("/api/submit-form", submitform);
 app.use("/api/products", productRouter);

@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import mongodb from "mongodb";
 import mongoose from "mongoose";
 import User from "../Models/Userschema.js";
+import bcrypt from "bcrypt";
+
 const ObjectId = mongodb.ObjectId;
 dotenv.config();
 let connection;
@@ -26,23 +28,25 @@ export default class UserDao {
     }
   }
 
-  static async registerUser({ email, hashedPassword, username }) {
+  static async registerUser(email, username, hashedPassword) {
     try {
       const existingUser = await connection.findOne({ email: email });
       if (existingUser) {
-        return { error: "Email already exists." };
-      }
-      const newUser = new User(email, hashedPassword, username);
-
-      const result = await connection.insertOne(newUser);
-      if (result.insertedCount !== 1) {
-        return { error: "Failed to create user." };
+        return { error: "Email or username already exists" };
       }
 
-      return newUser; // return the newly created user
+      const newUser = new User({
+        email: email,
+        username: username,
+        password: hashedPassword,
+      });
+
+      const savedUser = await connection.insertOne(newUser);
+
+      return { user: savedUser };
     } catch (error) {
-      console.error(error);
-      throw error;
+      console.log(error);
+      return { error: "Server error" };
     }
   }
 
