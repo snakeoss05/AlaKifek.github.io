@@ -143,7 +143,7 @@ function Navbar() {
         style={{ backgroundColor: navbarColor, height: "100px" }}
         sticky="top"
         expand="sm"
-        className="p-0"
+        className="p-0 shadow-sm"
       >
         <div className="container border-nav">
           <Navi.Toggle aria-controls="basic-navbar-nav" />

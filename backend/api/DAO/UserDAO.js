@@ -26,29 +26,13 @@ export default class UserDao {
     }
   }
 
-  static async registerUser({
-    email,
-    hashedPassword,
-    FirstName,
-    City,
-    LastName,
-    AddressLine,
-    PhoneNumber,
-  }) {
+  static async registerUser({ email, hashedPassword, username }) {
     try {
       const existingUser = await connection.findOne({ email: email });
       if (existingUser) {
         return { error: "Email already exists." };
       }
-      const newUser = new User(
-        email,
-        hashedPassword,
-        FirstName,
-        City,
-        LastName,
-        AddressLine,
-        PhoneNumber
-      );
+      const newUser = new User(email, hashedPassword, username);
 
       const result = await connection.insertOne(newUser);
       if (result.insertedCount !== 1) {
@@ -64,7 +48,7 @@ export default class UserDao {
 
   static async loginUser(email) {
     try {
-      const user = await connection.findOne({ email });
+      const user = await connection.findOne({ email: email });
       return user;
     } catch (error) {
       console.error(error);

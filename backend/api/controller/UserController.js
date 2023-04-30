@@ -9,26 +9,14 @@ const saltRounds = 10;
 
 export default class UserController {
   static async registerUser(req, res) {
-    const {
-      email,
-      password,
-      FirstName,
-      City,
-      LastName,
-      AddressLine,
-      PhoneNumber,
-    } = req.body;
+    const { email, password, username } = req.body;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     try {
       const result = await UserDao.registerUser({
         email,
         hashedPassword,
-        FirstName,
-        City,
-        LastName,
-        AddressLine,
-        PhoneNumber,
+        username,
       });
 
       if (result.error) {
