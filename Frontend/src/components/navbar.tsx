@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { Navbar as Navi } from "react-bootstrap";
 import axios from "axios";
 import "./navbar.css";
+
 import { useShoppingCart } from "../context/shopingcartcontext";
 import { debounce } from "lodash";
 interface results {
@@ -149,10 +150,14 @@ function Navbar() {
           <Navi.Toggle aria-controls="basic-navbar-nav" />
 
           <div>
-            <NavLink to="/" className="navbar-brand mt-2 mt-lg-0">
+            <NavLink
+              to="/"
+              className="navbar-brand mt-2 mt-lg-0 overflow-auto h-100"
+            >
               <img
-                src="https://lh3.googleusercontent.com/pw/AJFCJaWYY-2DMlupd1_0LwX44XJ9DCYgKpY5NZm_tJZl--qqyr8rwINrPSHJyCbCn43t76nCg98bcUq2F9ZHxGXq4SQ0JPZB6l5CiXKgMkZxpDgn5bbYvUW7Up_2LRkR-vYZLfjhsD6Lfv_dTA7sJAOrXy3-IfMi98Du8fnONk2gcimx7g45rZfOe3Wg_qRY_UQQsXCxsDUjC-aqA8BL0lMrip1S7kkwg1kS9pEf2nF48LCtem_R3xFpN2XUCFWTGEZoMz1WqDNakVmvtGC3ZFPRCN-x-X3iEtyK6CTGfnL0AX0iu8eyb9IJfpppe3uthqUnPnEhplldpeCnBY8sdSuWqQPUN3Bb0AKANCgdwY1BD5s0zNfLiNa7gnGmha2v0TcPefTrxtUgsn1-XX3aofrrpwxkw_SQQ2ZvwrWTx2fAvOnzuKS85eYGh6q5Qg67tr2x2HNlWaqvF3QkTwasauSBTlH6o7DU_3mS99R3lY3S8ll8flG-cQyeAX_56DvxNXeAAA_aenCYBDV-nt3GvUpYJmjjKvMHdDf810WY_yFKP_8Y200w5tYMQgu9FCjkSnxons-imJyOF_BXHZgwyrxQ9FneN86KN_ASURF16Wz2Kbuz6x5rXmI13CTTSYjO68B4MPJ48ZtrZLWJlqUsj1UIiP9Kq0eXECdKNOQslKKMZUaTsnLGLr3zH9qJ3yP4J1_WKjiIf8d8lb_EsdS3H8dgxSas8LR51Ghdqk6WidefN2Ij2RMB_zhOpLE3bK7wMAyRLXllxmORi_HbJ2XjubaGh_cqhhGxqFDKCjLxI2bIZF1iHg_Q-eNjTCABGflDy74f06vX3zHrj69Oy91Ce06ivGHzxaDhnF3yInlDJcO8bG0HMxEX6Bw_DhCFCgSmKvKOVAK9AtXKMUukpkUaoFWwSo8TTTOj_Q8Za8Ev7TCJRPhEvm_LoX_P0j7Ues12vgLW3TpeSonfvUS4WniqQpcccMXSjEng2r9rZ1Bz1bQLxkj2hXocebqkR1fQeu7aUzBycg=w500-h500-s-no?authuser=0"
-                height="120"
+                src="https://scontent.ftun4-2.fna.fbcdn.net/v/t39.30808-6/343961794_780214266760865_7512067717752570543_n.png?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=4jjmuXg37z0AX_BkHhb&_nc_ht=scontent.ftun4-2.fna&oh=00_AfBzv60u1a_rCBXzGMqhLFF8T1MZ-QJ-Fm2TGzm383L2PA&oe=64537BB3"
+                height="100"
+                className="object-fit-content"
               />
             </NavLink>
           </div>
