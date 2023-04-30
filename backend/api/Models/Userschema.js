@@ -8,7 +8,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  FirstName: { type: String },
+  LastName: { type: String },
+  City: { type: String },
 
+  AddressLine: { type: String },
+  PhoneNumber: { type: String },
   role: { type: String, enum: ["user", "admin"], default: "user" },
 });
 

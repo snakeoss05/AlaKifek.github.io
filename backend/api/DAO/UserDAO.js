@@ -62,12 +62,12 @@ export default class UserDao {
 
   static async updateUserProfile(id, updates) {
     try {
-      const updatedProfile = await connection.findOneAndUpdate(
-        { _id: new ObjectId(id) },
+      const updatedUser = await connection.findOneAndUpdate(
+        { _id: new mongoose.Types.ObjectId(id) },
         updates,
         { new: true }
       );
-      return updatedProfile;
+      return updatedUser;
     } catch (error) {
       console.error(error);
       throw error;

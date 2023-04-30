@@ -43,7 +43,7 @@ export default class UserController {
         return res.status(401).send("Wrong password.");
       }
 
-      const token = jwt.sign({ userId: user._id }, secretOrPrivateKey);
+      const token = jwt.sign({ _id: user._id }, secretOrPrivateKey);
 
       // Return a JSON response with a message and a status code
       res.status(200).json({ token });
@@ -54,26 +54,38 @@ export default class UserController {
   }
 
   static async updateUser(req, res) {
+    const { FirstName, LastName, City, email, AddressLine, PhoneNumber } =
+      req.body;
+
+    const { id } = req.params;
+    const updates = {
+      $set: {},
+    };
+    if (FirstName) {
+      updates.$set.FirstName = FirstName;
+    }
+    if (LastName) {
+      updates.$set.LastName = LastName;
+    }
+    if (City) {
+      updates.$set.City = City;
+    }
+    if (email) {
+      updates.$set.email = email;
+    }
+    if (AddressLine) {
+      updates.$set.AddressLine = AddressLine;
+    }
+    if (PhoneNumber) {
+      updates.$set.PhoneNumber = PhoneNumber;
+    }
+
     try {
-      const { id } = req.params;
-      const { FirstName, LastName, City, email, AddressLine, PhoneNumber } =
-        req.body;
-      const updates = {
-        $set: {},
-      };
-      if (FirstName) updates.$set.FirstName = FirstName;
-      if (LastName) updates.$set.LastName = LastName;
-      if (email) updates.$set.email = email;
-      if (City) updates.$set.City = City;
-      if (AddressLine) updates.$set.AddressLine = AddressLine;
-      if (PhoneNumber) updates.$set.PhoneNumber = PhoneNumber;
-      const updatedProfile = await UserDao.updateUserProfile(id, updates);
-      if (!updatedProfile)
-        return res.status(404).json({ message: "User profile not found" });
-      res.json(updatedProfile);
+      const updatedUser = await UserDao.updateUserProfile(id, updates);
+      res.status(200).json(updatedUser);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Server error" });
+      res.status(500).send("Internal server error.");
     }
   }
 

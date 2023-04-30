@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import "./profile.css";
-
+import jwt from "jsonwebtoken";
 import { ObjectId } from "bson";
 import { useNavigate } from "react-router-dom";
 interface ServerData {
@@ -26,7 +26,7 @@ type ProfileProperty =
 export default function ProfileInformation() {
   const [userProfile, setUserProfile] = useState<ServerData>();
   const [imageUrl, setImageUrl] = useState<string | null>();
-  const [id, setid] = useState<ServerData>();
+
   const [Profile, setProfile] = useState({
     email: {
       value: "",
@@ -79,6 +79,7 @@ export default function ProfileInformation() {
   };
   const getUserById = async () => {
     var token = Cookies.get("token");
+
     try {
       const response = await axios.get<ServerData>(
         `https://alakifekbackend.onrender.com/api/ath/user`,
@@ -88,9 +89,7 @@ export default function ProfileInformation() {
           },
         }
       );
-
       setUserProfile(response.data);
-      setid(response.data._id);
     } catch (error) {
       console.error(error);
     }
@@ -117,7 +116,7 @@ export default function ProfileInformation() {
 
   const UpdateProfile = async () => {
     var token = Cookies.get("token");
-
+    let id = userProfile?._id;
     const formValues = {
       email: Profile.email.value,
       AddressLine: Profile.AddressLine.value,
@@ -197,6 +196,7 @@ export default function ProfileInformation() {
       console.error(error);
     }
   };
+
   useEffect(() => {
     localStorage.setItem("userProfile", JSON.stringify(userProfile));
   }, [userProfile]);
