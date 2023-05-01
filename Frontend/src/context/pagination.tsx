@@ -27,7 +27,7 @@ export const Pagination = ({
   };
   return (
     <div>
-      <nav className="d-flex align-items-center justify-content-center my-5 ">
+      <nav className="d-flex align-items-center justify-content-center mt-5 ">
         <ul className="pagination">
           <li className="page-item ">
             <a className="page-link text-black" onClick={handlePrevClick}>

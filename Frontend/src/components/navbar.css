@@ -170,7 +170,7 @@ body {
   text-decoration: none;
   color: #2b2b2b;
   text-transform: capitalize;
-  font-weight: 500;
+  font-weight: 600;
 }
 .border-nav {
   background-color: white;
@@ -296,6 +296,9 @@ body {
   color: #ffbf00 !important;
   margin: 5px;
   font-size: 20px;
+}
+.menu2 li span {
+  font-weight: 600 !important;
 }
 .groupeList {
   border-bottom: 2px solid #ccc;

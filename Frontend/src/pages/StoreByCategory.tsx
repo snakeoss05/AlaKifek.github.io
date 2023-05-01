@@ -162,21 +162,41 @@ export default function StoreByCategory() {
               })}
             </div>
           </div>
-          <div className="col-xl-8 col-xxl-9 mx-auto col-md-6  mx-auto my-4">
-            <div className="d-flex align-content-center justify-content-center flex-wrap mx-atuo gap-4 my-3">
-              {currentposts.map((item) => {
-                return (
-                  <Card
-                    key={item._id}
-                    id={item._id}
-                    imgurl={item.imgurl.mainimg}
-                    title={item.title}
-                    price={item.price}
-                    quantity={item.quantity}
-                  />
-                );
-              })}
-            </div>
+          <div className="col-xl-8 col-xxl-9 mx-auto col-md-6  mx-auto my-5 ">
+            {currentposts.length !== 0 ? (
+              <div className="d-flex align-content-center justify-content-center flex-wrap mx-atuo gap-4 my-3">
+                {currentposts.map((item) => {
+                  return (
+                    <Card
+                      key={item._id}
+                      id={item._id}
+                      imgurl={item.imgurl.mainimg}
+                      title={item.title}
+                      price={item.price}
+                      quantity={item.quantity}
+                    />
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="page-404 mt-5">
+                <div className="outer">
+                  <div className="middle">
+                    <div className="inner">
+                      {/*BEGIN CONTENT*/}
+                      <div className="inner-circle">
+                        <i className="fa fa-home" />
+                        <span>404</span>
+                      </div>
+                      <span className="inner-status">Oops! You're lost</span>
+                      <span className="inner-detail">
+                        We can not find the page you're looking for.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <Pagination
               totalposts={items.length}

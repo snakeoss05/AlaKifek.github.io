@@ -220,7 +220,7 @@ function Navbar() {
                         className="groupeList"
                       >
                         <i className="fa-solid fa-mobile-screen-button fs-5 ms-1"></i>
-                        <span className="fw-500 "> Accessoires Téléphones</span>
+                        <span> Accessoires Téléphones</span>
                       </NavLink>
 
                       <ul className="list-unstyled  ms-2 ps-1  ">
@@ -260,10 +260,7 @@ function Navbar() {
                         className="groupeList"
                       >
                         <i className="fa-solid fa-desktop fs-5"></i>
-                        <span className="fw-500 ">
-                          {" "}
-                          Composants De Pc Bureau
-                        </span>
+                        <span> Composants De Pc Bureau</span>
                       </NavLink>
                       <ul className="list-unstyled ms-2 ps-1 ">
                         <Link
@@ -318,10 +315,7 @@ function Navbar() {
                         className="groupeList"
                       >
                         <i className="fa-solid fa-laptop fs-5"></i>
-                        <span className="fw-500 ">
-                          {" "}
-                          Composants De Pc Portable
-                        </span>
+                        <span> Composants De Pc Portable</span>
                       </NavLink>
                       <ul className="list-unstyled  ms-2 ps-1 ">
                         <li className="nav-item">
