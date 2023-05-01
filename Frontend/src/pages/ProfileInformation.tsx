@@ -278,7 +278,19 @@ export default function ProfileInformation() {
                             }
                           />
                         ) : (
-                          <h5>{userProfile?.FirstName}</h5>
+                          <>
+                            {userProfile && (
+                              <div>
+                                {userProfile?.FirstName ? (
+                                  <h5>{userProfile?.FirstName}</h5>
+                                ) : (
+                                  <h5 className="bg-secondary-subtle text-black rounded-4 p-2">
+                                    Add FirstName
+                                  </h5>
+                                )}
+                              </div>
+                            )}
+                          </>
                         )}
                         <button
                           className="btn btn-outline-dark rounded-4 ms-2 btn-sm "

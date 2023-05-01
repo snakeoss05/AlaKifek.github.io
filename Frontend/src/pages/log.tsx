@@ -43,7 +43,7 @@ export default function Log() {
         "https://alakifekbackend.onrender.com/api/ath/register",
         register
       );
-
+      setsigninmsg(response.data);
       console.log(response.data);
       const timeoutId = setTimeout(() => {
         setsigninmsg("");
@@ -53,7 +53,7 @@ export default function Log() {
         clearTimeout(timeoutId);
       };
     } catch (error) {
-      setVerificationMessage("Email Or Paswword already exists.");
+      setVerificationMessage("Email Or Username already exists.");
       const timeoutId = setTimeout(() => {
         setVerificationMessage("");
       }, 3000);

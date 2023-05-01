@@ -66,7 +66,7 @@ export default function UserHistorique() {
   }, [myemail]);
 
   return (
-    <div className="container py-3">
+    <div className="container py-3 table-responsive">
       <table className="table text-capitalize ">
         <thead>
           <tr className="bg-warning border text-white text-center ">

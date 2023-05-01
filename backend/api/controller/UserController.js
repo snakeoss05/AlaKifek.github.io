@@ -21,7 +21,7 @@ export default class UserController {
       if (result.error) {
         return res.status(400).send(result.error); // use 400 status code for bad request
       }
-      res.status(201).send(result.user);
+      res.status(201).send("Register Success");
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal server error.");

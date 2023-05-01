@@ -6,7 +6,7 @@ import About from "./pages/About";
 import Navbar from "./components/navbar";
 import Contact from "./pages/contact";
 import Impression from "./pages/Impression";
-import Logaccount from "./pages/login";
+
 import $ from "jquery";
 import { ShoppingCartProvider } from "./context/shopingcartcontext";
 import Checkout from "./pages/checkout";
