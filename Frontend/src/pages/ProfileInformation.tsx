@@ -26,7 +26,7 @@ type ProfileProperty =
 export default function ProfileInformation() {
   const [userProfile, setUserProfile] = useState<ServerData>();
   const [imageUrl, setImageUrl] = useState<string | null>();
-
+  const [toggler, settoggler] = useState(false);
   const [Profile, setProfile] = useState({
     email: {
       value: "",
@@ -108,11 +108,6 @@ export default function ProfileInformation() {
       setImageUrl(reader.result as string);
     };
   }
-  function Logout() {
-    Cookies.remove("token");
-    navigate("/login");
-    localStorage.clear();
-  }
 
   const UpdateProfile = async () => {
     var token = Cookies.get("token");
@@ -148,7 +143,7 @@ export default function ProfileInformation() {
               isEditing: false,
             },
             City: {
-              value: "ahmed",
+              value: "",
               isEditing: false,
             },
             LastName: {
@@ -196,10 +191,16 @@ export default function ProfileInformation() {
       console.error(error);
     }
   };
-
+  
   useEffect(() => {
     localStorage.setItem("userProfile", JSON.stringify(userProfile));
   }, [userProfile]);
+  function Logout() {
+    navigate("/login");
+    Cookies.remove("token");
+
+    localStorage.clear();
+  }
 
   return (
     <div className="container">
@@ -256,205 +257,312 @@ export default function ProfileInformation() {
           <div className="col-xl-8">
             {/* Account details card*/}
             <div className="card mb-4 text-capitalize">
-              <div className="card-header">Account Details</div>
+              <button
+                className="btn btn-outline-dark my-3 mx-auto"
+                onClick={() => settoggler(!toggler)}
+              >
+                ADD ACCOUNT DETAILS
+              </button>
 
               <div className="card-body">
-                <div>
-                  {/* Form Group (username)*/}
-                  <div className="row gx-3 ">
-                    <div className="col-md-6 ">
-                      <label className="small mb-1" htmlFor="inputUsername">
-                        FirstName
-                      </label>
-                      <div className="mb-3 d-flex flex-row ">
-                        {Profile.FirstName.isEditing ? (
-                          <input
-                            type="text"
-                            name="FirstName"
-                            className="form-control  w-25 "
-                            placeholder="New FirstName"
-                            onChange={(event) =>
-                              handleValueChange(event, "FirstName")
-                            }
-                          />
-                        ) : (
-                          <>
-                            {userProfile && (
-                              <div>
-                                {userProfile?.FirstName ? (
-                                  <h5>{userProfile?.FirstName}</h5>
-                                ) : (
-                                  <h5 className="bg-secondary-subtle text-black rounded-4 p-2">
-                                    Add FirstName
-                                  </h5>
-                                )}
-                              </div>
-                            )}
-                          </>
-                        )}
-                        <button
-                          className="btn btn-outline-dark rounded-4 ms-2 btn-sm "
-                          onClick={() => handleIconClick("FirstName")}
+                {toggler ? (
+                  <></>
+                ) : (
+                  <div>
+                    <div className="row gx-3 ">
+                      <div className="col-md-6 ">
+                        <label className="small mb-1" htmlFor="inputUsername">
+                          FirstName
+                        </label>
+                        <div className="mb-3 d-flex flex-row ">
+                          {Profile.FirstName.isEditing ? (
+                            <input
+                              type="text"
+                              name="FirstName"
+                              className="form-control  w-100 "
+                              placeholder="New FirstName"
+                              onChange={(event) =>
+                                handleValueChange(event, "FirstName")
+                              }
+                            />
+                          ) : (
+                            <>
+                              {userProfile && (
+                                <div>
+                                  {userProfile?.FirstName ? (
+                                    <h5>{userProfile?.FirstName}</h5>
+                                  ) : (
+                                    <input
+                                      type="text"
+                                      name="FirstName"
+                                      className="form-control  w-100 "
+                                      placeholder="New FirstName"
+                                      onChange={(event) =>
+                                        handleValueChange(event, "FirstName")
+                                      }
+                                    />
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          )}
+                          <button
+                            className="btn btn-outline-dark rounded-4 ms-2 btn-sm "
+                            onClick={() => handleIconClick("FirstName")}
+                          >
+                            {" "}
+                            <i className="fa-solid fa-pen "></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div className="col-md-6 ">
+                        <label
+                          className="small mb-1"
+                          htmlFor="inputEmailAddress"
                         >
-                          {" "}
-                          <i className="fa-solid fa-pen "></i>
-                        </button>
+                          Email address
+                        </label>
+                        <div className=" d-flex flex-row ">
+                          {Profile.email.isEditing ? (
+                            <input
+                              type="email"
+                              name="email"
+                              className="form-control  w-75 "
+                              placeholder="New email"
+                              onChange={(event) =>
+                                handleValueChange(event, "email")
+                              }
+                            />
+                          ) : (
+                            <>
+                              {userProfile && (
+                                <div>
+                                  {userProfile?.email ? (
+                                    <h5>{userProfile?.email}</h5>
+                                  ) : (
+                                    <input
+                                      type="text"
+                                      name="email"
+                                      className="form-control  w-100 "
+                                      placeholder="New email"
+                                      onChange={(event) =>
+                                        handleValueChange(event, "email")
+                                      }
+                                    />
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          )}
+                          <button
+                            className="btn btn-outline-dark rounded-4 ms-2 btn-sm"
+                            onClick={() => handleIconClick("email")}
+                          >
+                            {" "}
+                            <i className="fa-solid fa-pen "></i>
+                          </button>
+                        </div>
                       </div>
                     </div>
-                    <div className="col-md-6 ">
-                      <label className="small mb-1" htmlFor="inputEmailAddress">
-                        Email address
-                      </label>
-                      <div className=" d-flex flex-row ">
-                        {Profile.email.isEditing ? (
-                          <input
-                            type="email"
-                            name="email"
-                            className="form-control  w-75 "
-                            placeholder="New email"
-                            onChange={(event) =>
-                              handleValueChange(event, "email")
-                            }
-                          />
-                        ) : (
-                          <h5>{userProfile?.email}</h5>
-                        )}
+                    {/* Form Row*/}
+                    <div className="row gx-3">
+                      {/* Form Group (first name)*/}
+                      <div className="col-md-6">
+                        <label className="small mb-1" htmlFor="inputFirstName">
+                          LastName
+                        </label>
+                        <div className="d-flex flex-row">
+                          {Profile.LastName.isEditing ? (
+                            <input
+                              type="text"
+                              name="LastName"
+                              className="form-control  w-50"
+                              placeholder="LastName"
+                              onChange={(event) =>
+                                handleValueChange(event, "LastName")
+                              }
+                            />
+                          ) : (
+                            <>
+                              {userProfile && (
+                                <div>
+                                  {userProfile?.LastName ? (
+                                    <h5>{userProfile?.LastName}</h5>
+                                  ) : (
+                                    <input
+                                      type="text"
+                                      name="LastName"
+                                      className="form-control  w-100 "
+                                      placeholder="New LastName"
+                                      onChange={(event) =>
+                                        handleValueChange(event, "LastName")
+                                      }
+                                    />
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          )}
+                          <button
+                            className="btn btn-outline-dark rounded-4 ms-2 btn-sm"
+                            onClick={() => handleIconClick("LastName")}
+                          >
+                            {" "}
+                            <i className="fa-solid fa-pen "></i>
+                          </button>
+                        </div>
+                      </div>
+                      {/* Form Group (last name)*/}
+                      <div className="col-md-6">
+                        <label className="small mb-1" htmlFor="inputLastName">
+                          PhoneNumber
+                        </label>
+                        <div className="mb-3 d-flex flex-row">
+                          {Profile.PhoneNumber.isEditing ? (
+                            <input
+                              type="number"
+                              name="PhoneNumber"
+                              className="form-control  w-50"
+                              placeholder="PhoneNumber"
+                              onChange={(event) =>
+                                handleValueChange(event, "PhoneNumber")
+                              }
+                            />
+                          ) : (
+                            <>
+                              {userProfile && (
+                                <div>
+                                  {userProfile?.PhoneNumber ? (
+                                    <h5>{userProfile?.PhoneNumber}</h5>
+                                  ) : (
+                                    <input
+                                      type="text"
+                                      name="PhoneNumber"
+                                      className="form-control  w-100 "
+                                      placeholder="New PhoneNumber"
+                                      onChange={(event) =>
+                                        handleValueChange(event, "PhoneNumber")
+                                      }
+                                    />
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          )}
+                          <button
+                            className="btn btn-outline-dark rounded-4 ms-2 btn-sm"
+                            onClick={() => handleIconClick("PhoneNumber")}
+                          >
+                            {" "}
+                            <i className="fa-solid fa-pen "></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row gx-3 mb-3">
+                      <div className="col-md-6">
+                        <label className="small mb-1" htmlFor="inputLocation">
+                          City
+                        </label>
+                        <div className=" d-flex flex-row">
+                          {Profile.City.isEditing ? (
+                            <input
+                              type="text"
+                              name="City"
+                              className="form-control  w-75"
+                              placeholder="New City"
+                              onChange={(event) =>
+                                handleValueChange(event, "City")
+                              }
+                            />
+                          ) : (
+                            <>
+                              {userProfile && (
+                                <div>
+                                  {userProfile?.City ? (
+                                    <h5>{userProfile?.City}</h5>
+                                  ) : (
+                                    <input
+                                      type="text"
+                                      name="City"
+                                      className="form-control  w-100 "
+                                      placeholder="City"
+                                      onChange={(event) =>
+                                        handleValueChange(event, "City")
+                                      }
+                                    />
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          )}
+                          <button
+                            className="btn btn-outline-dark rounded-4 ms-2 btn-sm"
+                            onClick={() => handleIconClick("City")}
+                          >
+                            {" "}
+                            <i className="fa-solid fa-pen "></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row gx-3 mb-3">
+                      <div className="col-md-6">
+                        <label className="small mb-1" htmlFor="inputLocation">
+                          Location
+                        </label>
+                        <div className=" d-flex flex-row">
+                          {Profile.AddressLine.isEditing ? (
+                            <input
+                              type="text"
+                              name="AddressLine"
+                              className="form-control  w-75"
+                              placeholder="New Location"
+                              onChange={(event) =>
+                                handleValueChange(event, "AddressLine")
+                              }
+                            />
+                          ) : (
+                            <>
+                              {userProfile && (
+                                <div>
+                                  {userProfile?.AddressLine ? (
+                                    <h5>{userProfile?.AddressLine}</h5>
+                                  ) : (
+                                    <input
+                                      type="text"
+                                      name="AddressLine"
+                                      className="form-control  w-100 "
+                                      placeholder="AddressLine"
+                                      onChange={(event) =>
+                                        handleValueChange(event, "AddressLine")
+                                      }
+                                    />
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          )}
+                          <button
+                            className="btn btn-outline-dark rounded-4 ms-2 btn-sm"
+                            onClick={() => handleIconClick("AddressLine")}
+                          >
+                            {" "}
+                            <i className="fa-solid fa-pen "></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div className="col-6 mt-3 d-flex">
                         <button
-                          className="btn btn-outline-dark rounded-4 ms-2 btn-sm"
-                          onClick={() => handleIconClick("email")}
+                          className="btn btn-outline-success ms-auto me-2 fw-semibold"
+                          onClick={UpdateProfile}
                         >
-                          {" "}
-                          <i className="fa-solid fa-pen "></i>
+                          Update
                         </button>
                       </div>
                     </div>
                   </div>
-                  {/* Form Row*/}
-                  <div className="row gx-3">
-                    {/* Form Group (first name)*/}
-                    <div className="col-md-6">
-                      <label className="small mb-1" htmlFor="inputFirstName">
-                        LastName
-                      </label>
-                      <div className="d-flex flex-row">
-                        {Profile.LastName.isEditing ? (
-                          <input
-                            type="text"
-                            name="LastName"
-                            className="form-control  w-50"
-                            placeholder="LastName"
-                            onChange={(event) =>
-                              handleValueChange(event, "LastName")
-                            }
-                          />
-                        ) : (
-                          <h5>{userProfile?.LastName}</h5>
-                        )}
-                        <button
-                          className="btn btn-outline-dark rounded-4 ms-2 btn-sm"
-                          onClick={() => handleIconClick("LastName")}
-                        >
-                          {" "}
-                          <i className="fa-solid fa-pen "></i>
-                        </button>
-                      </div>
-                    </div>
-                    {/* Form Group (last name)*/}
-                    <div className="col-md-6">
-                      <label className="small mb-1" htmlFor="inputLastName">
-                        PhoneNumber
-                      </label>
-                      <div className="mb-3 d-flex flex-row">
-                        {Profile.PhoneNumber.isEditing ? (
-                          <input
-                            type="number"
-                            name="PhoneNumber"
-                            className="form-control  w-50"
-                            placeholder="PhoneNumber"
-                            onChange={(event) =>
-                              handleValueChange(event, "PhoneNumber")
-                            }
-                          />
-                        ) : (
-                          <h5>{userProfile?.PhoneNumber}</h5>
-                        )}
-                        <button
-                          className="btn btn-outline-dark rounded-4 ms-2 btn-sm"
-                          onClick={() => handleIconClick("PhoneNumber")}
-                        >
-                          {" "}
-                          <i className="fa-solid fa-pen "></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row gx-3 mb-3">
-                    <div className="col-md-6">
-                      <label className="small mb-1" htmlFor="inputLocation">
-                        City
-                      </label>
-                      <div className=" d-flex flex-row">
-                        {Profile.City.isEditing ? (
-                          <input
-                            type="text"
-                            name="City"
-                            className="form-control  w-75"
-                            placeholder="New City"
-                            onChange={(event) =>
-                              handleValueChange(event, "City")
-                            }
-                          />
-                        ) : (
-                          <h5>{userProfile?.City}</h5>
-                        )}
-                        <button
-                          className="btn btn-outline-dark rounded-4 ms-2 btn-sm"
-                          onClick={() => handleIconClick("City")}
-                        >
-                          {" "}
-                          <i className="fa-solid fa-pen "></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row gx-3 mb-3">
-                    <div className="col-md-6">
-                      <label className="small mb-1" htmlFor="inputLocation">
-                        Location
-                      </label>
-                      <div className=" d-flex flex-row">
-                        {Profile.AddressLine.isEditing ? (
-                          <input
-                            type="text"
-                            name="AddressLine"
-                            className="form-control  w-75"
-                            placeholder="New Location"
-                            onChange={(event) =>
-                              handleValueChange(event, "AddressLine")
-                            }
-                          />
-                        ) : (
-                          <h5>{userProfile?.AddressLine}</h5>
-                        )}
-                        <button
-                          className="btn btn-outline-dark rounded-4 ms-2 btn-sm"
-                          onClick={() => handleIconClick("AddressLine")}
-                        >
-                          {" "}
-                          <i className="fa-solid fa-pen "></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div className="col-6 mt-3 d-flex">
-                      <button
-                        className="btn btn-outline-success ms-auto me-2 fw-semibold"
-                        onClick={UpdateProfile}
-                      >
-                        Update
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

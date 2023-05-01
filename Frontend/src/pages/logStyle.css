@@ -238,3 +238,14 @@
   color: #3c97bf;
   text-decoration: none;
 }
+.alertfadeup {
+  animation: FadeUp 0.3s ease-in-out;
+}
+@keyframes FadeUp {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}

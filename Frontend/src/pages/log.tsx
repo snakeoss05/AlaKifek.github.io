@@ -150,7 +150,7 @@ export default function Log() {
                   />
                   {signinmsg && (
                     <div
-                      className="alert success-danger mx-auto"
+                      className="alert alert-success mx-auto"
                       style={{ fontSize: "14px" }}
                       role="alert"
                     >
