@@ -1,7 +1,7 @@
 import Footer from "../components/footer";
 import Carouselle from "../components/carousele";
 import Items from "../components/Items";
-import TrendingProducts from "../components/TrendingProducts";
+
 export default function Home() {
   return (
     <div>
@@ -37,7 +37,7 @@ export default function Home() {
               <img src="https://www.tunisianet.com.tn/modules/ps_imagegrid/images/272642f422fad80b83b630e385d1d83dfe79c38b_Sans-titre-1.jpg" />
             </li>
           </ul>
-          <TrendingProducts />
+
           <div className="container text-center mx-auto mt-5 p-2 bg-transparent border rounded-lg-pill shadow-sm">
             <div className="row">
               <div className="col">

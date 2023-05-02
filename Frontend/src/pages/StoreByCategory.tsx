@@ -190,7 +190,7 @@ export default function StoreByCategory() {
                       </div>
                       <span className="inner-status">Oops! You're lost</span>
                       <span className="inner-detail">
-                        We can not find the page you're looking for.
+                        We can not find the Items you're looking for.
                       </span>
                     </div>
                   </div>

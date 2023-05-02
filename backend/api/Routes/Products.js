@@ -15,4 +15,5 @@ router
 router
   .route("/filter/groupe/:groupe")
   .get(ProductController.getProductsByGroupe);
+router.get("/getpromo", ProductController.getProductsByinPromo);
 export default router;

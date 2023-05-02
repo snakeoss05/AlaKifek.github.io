@@ -166,7 +166,9 @@ export default function Log() {
                       {verificationMessage}
                     </div>
                   )}
-                  <button type="submit">Sign Up</button>
+                  <button type="submit" onClick={Changestyle}>
+                    Sign Up
+                  </button>
                 </form>
               </div>
               <div className="form-container sign-in-container">

@@ -191,7 +191,7 @@ export default function ProfileInformation() {
       console.error(error);
     }
   };
-  
+
   useEffect(() => {
     localStorage.setItem("userProfile", JSON.stringify(userProfile));
   }, [userProfile]);
@@ -242,11 +242,11 @@ export default function ProfileInformation() {
                 </div>
                 {/* Profile picture upload button*/}
                 {!imageUrl && (
-                  <button className="btn btn-primary" type="button">
+                  <button className="btn btn-primary " type="button">
                     Upload new image
                     <input
                       type="file"
-                      className="btn"
+                      className="form-control"
                       onChange={handleFileInputChange}
                     ></input>
                   </button>
@@ -290,7 +290,7 @@ export default function ProfileInformation() {
                               {userProfile && (
                                 <div>
                                   {userProfile?.FirstName ? (
-                                    <h5>{userProfile?.FirstName}</h5>
+                                    <h6>{userProfile?.FirstName}</h6>
                                   ) : (
                                     <input
                                       type="text"
@@ -327,7 +327,7 @@ export default function ProfileInformation() {
                             <input
                               type="email"
                               name="email"
-                              className="form-control  w-75 "
+                              className="form-control "
                               placeholder="New email"
                               onChange={(event) =>
                                 handleValueChange(event, "email")
@@ -338,7 +338,7 @@ export default function ProfileInformation() {
                               {userProfile && (
                                 <div>
                                   {userProfile?.email ? (
-                                    <h5>{userProfile?.email}</h5>
+                                    <h6 className="">{userProfile?.email}</h6>
                                   ) : (
                                     <input
                                       type="text"
@@ -387,7 +387,7 @@ export default function ProfileInformation() {
                               {userProfile && (
                                 <div>
                                   {userProfile?.LastName ? (
-                                    <h5>{userProfile?.LastName}</h5>
+                                    <h6>{userProfile?.LastName}</h6>
                                   ) : (
                                     <input
                                       type="text"
@@ -433,7 +433,7 @@ export default function ProfileInformation() {
                               {userProfile && (
                                 <div>
                                   {userProfile?.PhoneNumber ? (
-                                    <h5>{userProfile?.PhoneNumber}</h5>
+                                    <h6>{userProfile?.PhoneNumber}</h6>
                                   ) : (
                                     <input
                                       type="text"
@@ -480,7 +480,7 @@ export default function ProfileInformation() {
                               {userProfile && (
                                 <div>
                                   {userProfile?.City ? (
-                                    <h5>{userProfile?.City}</h5>
+                                    <h6>{userProfile?.City}</h6>
                                   ) : (
                                     <input
                                       type="text"
@@ -527,7 +527,7 @@ export default function ProfileInformation() {
                               {userProfile && (
                                 <div>
                                   {userProfile?.AddressLine ? (
-                                    <h5>{userProfile?.AddressLine}</h5>
+                                    <h6>{userProfile?.AddressLine}</h6>
                                   ) : (
                                     <input
                                       type="text"
@@ -552,17 +552,16 @@ export default function ProfileInformation() {
                           </button>
                         </div>
                       </div>
-                      <div className="col-6 mt-3 d-flex">
-                        <button
-                          className="btn btn-outline-success ms-auto me-2 fw-semibold"
-                          onClick={UpdateProfile}
-                        >
-                          Update
-                        </button>
-                      </div>
                     </div>
                   </div>
                 )}
+
+                <button
+                  className="btn btn-outline-success d-block ms-auto me-2 fw-semibold"
+                  onClick={UpdateProfile}
+                >
+                  Update
+                </button>
               </div>
             </div>
           </div>

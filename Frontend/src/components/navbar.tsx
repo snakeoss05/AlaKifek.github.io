@@ -100,39 +100,19 @@ function Navbar() {
               APPELEZ NOUS : 27-768-325{" "}
             </div>
             <div className="col-3" style={{ textAlign: "end", width: "25%" }}>
-              <a
-                href="https://www.facebook.com/GoMegaPC"
-                target="_blank"
-                style={{ color: "gray", margin: " 0 10px" }}
-              >
+              <a target="_blank" style={{ color: "gray", margin: " 0 10px" }}>
                 <i className="fa-brands fa-facebook"></i>
               </a>
-              <a
-                href="https://www.instagram.com/megapc_official"
-                target="_blank"
-                style={{ color: "gray", margin: " 0 10px" }}
-              >
+              <a target="_blank" style={{ color: "gray", margin: " 0 10px" }}>
                 <i className="fa-brands fa-instagram"></i>
               </a>
-              <a
-                href="https://www.youtube.com/channel/UCP2cS4C5THD4KyrsqS24PAw"
-                target="_blank"
-                style={{ color: "gray", margin: " 0 10px" }}
-              >
+              <a target="_blank" style={{ color: "gray", margin: " 0 10px" }}>
                 <i className="fa-brands fa-youtube"></i>
               </a>
-              <a
-                href="https://www.linkedin.com/company/mega-pc"
-                target="_blank"
-                style={{ color: "gray", margin: " 0 10px" }}
-              >
+              <a target="_blank" style={{ color: "gray", margin: " 0 10px" }}>
                 <i className="fa-brands fa-linkedin"></i>
               </a>
-              <a
-                href="https://twitter.com/MegaPcNet"
-                target="_blank"
-                style={{ color: "gray", margin: " 0 10px" }}
-              >
+              <a target="_blank" style={{ color: "gray", margin: " 0 10px" }}>
                 <i className="fa-brands fa-twitter"></i>
               </a>
             </div>
@@ -412,43 +392,44 @@ function Navbar() {
                   ))}
               </div>
             </div>
-            <ul className="navbar-nav d-flex flex-row justify-content-start  align-items-center">
-              <li className="nav-item me-3 me-lg-0 ">
-                <i className="fa-regular fa-heart fs-5 me-2 text-black"></i>
-              </li>
-              <li className="nav-item me-3 me-lg-0 mb-1">
-                <NavLink to="/login" className="nav-link">
-                  <i className="fa-solid fa-user text-black"></i>
-                </NavLink>
-              </li>
-              <li className="nav-item me-3 me-lg-0 position-relative">
-                <a className="nav-link">
-                  <button
-                    className="rounded-pill bg-transparent text-black border-0 "
-                    type="button"
-                    onClick={openCart}
-                  >
-                    <i className="fas fa-shopping-cart">
-                      {cartQuantity > 0 && (
-                        <p className="navbar-icon-circle rounded-circle ">
-                          {cartQuantity}
-                        </p>
-                      )}
-                    </i>
-                  </button>
-                </a>
-              </li>
-              <div className="d-flex flex-column mx-2 mt-4">
-                <span className="fw-semibold">TOTAL</span>
-                <p className="text-muted">
-                  {cartItems.reduce((total, Cartitem) => {
-                    return total + (Cartitem.price || 0) * Cartitem.quantity;
-                  }, 0)}
-                  TND
-                </p>
-              </div>
-            </ul>
           </Navi.Collapse>
+
+          <ul className="navbar-nav d-flex flex-row justify-content-start  align-items-center">
+            <li className="nav-item me-3 me-lg-0 ">
+              <i className="fa-regular fa-heart fs-5 me-2 text-black"></i>
+            </li>
+            <li className="nav-item me-3 me-lg-0 ">
+              <NavLink to="/login" className="nav-link">
+                <i className="fa-solid fa-user text-black"></i>
+              </NavLink>
+            </li>
+            <li className="nav-item me-3 me-lg-0 position-relative">
+              <a className="nav-link">
+                <button
+                  className="rounded-pill bg-transparent text-black border-0 "
+                  type="button"
+                  onClick={openCart}
+                >
+                  <i className="fas fa-shopping-cart">
+                    {cartQuantity > 0 && (
+                      <p className="navbar-icon-circle rounded-circle ">
+                        {cartQuantity}
+                      </p>
+                    )}
+                  </i>
+                </button>
+              </a>
+            </li>
+            <div className="d-flex flex-column mx-2 mt-4">
+              <span className="fw-semibold">TOTAL</span>
+              <p className="text-muted">
+                {cartItems.reduce((total, Cartitem) => {
+                  return total + (Cartitem.price || 0) * Cartitem.quantity;
+                }, 0)}
+                TND
+              </p>
+            </div>
+          </ul>
         </div>
       </Navi>
     </>

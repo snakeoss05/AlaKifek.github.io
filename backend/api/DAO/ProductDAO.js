@@ -152,4 +152,15 @@ export default class ProductDAO {
       throw new Error("Error filtering products by category");
     }
   }
+  static async filterProductsInPromo() {
+    try {
+      const productlist = await products
+        .find({ promotion: { $exists: true, $ne: "0" } })
+        .toArray();
+      return productlist;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error filtering products by promotion");
+    }
+  }
 }

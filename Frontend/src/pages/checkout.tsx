@@ -356,41 +356,39 @@ export default function Checkout() {
                             className="row  justify-content-between"
                             key={item.id}
                           >
-                            <div className="col-auto col-md-7">
+                            <div>
                               <div className="d-flex my-1 flex-row flex-sm-row">
+                                <div className="my-auto">
+                                  <span className="border mx-2  rounded-circle p-2">
+                                    {quantity}
+                                  </span>
+                                </div>
                                 <img
                                   className=" img-fluid"
                                   src={item.imgurl}
                                   width={62}
                                   height={62}
                                 />
-                                <div className="d-flex align-items-center align-content-center mx-5 my-auto">
-                                  <div className="row">
-                                    <div className="col-auto">
-                                      <p className="mb-1 text-uppercase">
-                                        <b>{item.title}</b>
-                                      </p>
-                                      <small className="text-muted">
-                                        Réference:
-                                        {item.id}
-                                      </small>
-                                    </div>
+                                <div className="d-flex  flex-row align-items-center align-content-center  my-auto  ms-lg-3 ms-1 ">
+                                  <div>
+                                    <p className="mb-1 text-uppercase">
+                                      <b>{item.title}</b>
+                                    </p>
+
+                                    <small className="text-muted">
+                                      Réference:
+                                      {item.id}
+                                    </small>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div className=" pl-0 flex-sm-col col-auto  my-auto">
-                              {" "}
-                              <p className="boxed-1">{quantity}</p>
-                            </div>
-                            <div className=" pl-0 flex-sm-col col-auto  my-auto ">
-                              <p>
-                                <b>
-                                  {(item.price || 0) * quantity || 0}
-                                  <span className="text-warning"> TND</span>
-                                </b>
-                              </p>
-                            </div>
+
+                            <div className="ms-auto my-auto"> </div>
+
+                            <p>
+                              <b></b>
+                            </p>
                           </div>
                         );
                       })}

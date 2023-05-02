@@ -167,4 +167,13 @@ export default class ProductsController {
       res.status(500).json({ message: error.message });
     }
   }
+  static async getProductsByinPromo(req, res) {
+    try {
+      const products = await ProductDAO.filterProductsInPromo();
+      res.json(products);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: error.message });
+    }
+  }
 }

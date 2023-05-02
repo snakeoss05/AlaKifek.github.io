@@ -304,3 +304,18 @@ body {
   border-bottom: 2px solid #ccc;
   padding: 3px 3px;
 }
+.navbar-toggler {
+  outline: none !important;
+  border: none !important;
+  transition: all 0.3s ease-in !important;
+}
+.navbar-toggler:focus {
+  text-decoration: none !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  transform: rotate(90deg) !important;
+}
+
+.collapsed:focus {
+  transform: rotate(0deg) !important;
+}

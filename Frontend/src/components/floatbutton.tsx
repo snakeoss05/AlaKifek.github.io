@@ -19,7 +19,7 @@ export default function Floatbutton() {
     </Popover>
   );
   return (
-    <div className="position-fixed end-0 bottom-0">
+    <div className="position-fixed end-0 bottom-0 z-3">
       <div className="floating-container">
         <div className="floating-button">+</div>
         <div className="element-container">
