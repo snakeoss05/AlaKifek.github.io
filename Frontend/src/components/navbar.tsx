@@ -23,7 +23,14 @@ function Navbar() {
   const [selectedCategory, setSelectedCategory] = useState();
   const [category, setLinkValue] = useState("");
   const elementRef = useRef<HTMLInputElement>(null);
+  const [expanded, setExpanded] = useState(false);
 
+  const handleSelect = () => {
+    setExpanded(false);
+  };
+  const openNav = () => {
+    setExpanded(!expanded);
+  };
   useEffect(() => {
     // add event listener to document
     document.addEventListener("click", handleClick);
@@ -124,10 +131,11 @@ function Navbar() {
         style={{ backgroundColor: navbarColor, height: "100px" }}
         sticky="top"
         expand="sm"
+        expanded={expanded}
         className="p-0 shadow-sm"
       >
         <div className="container border-nav">
-          <Navi.Toggle aria-controls="basic-navbar-nav" />
+          <Navi.Toggle aria-controls="basic-navbar-nav" onClick={openNav} />
 
           <div>
             <NavLink
@@ -143,7 +151,7 @@ function Navbar() {
           </div>
 
           <Navi.Collapse>
-            <ul className="navbar-nav ms-lg-5 me-auto mb-2 mb-lg-0 ">
+            <ul className="navbar-nav ms-1 ms-lg-5 me-auto mb-2 mb-lg-0 ">
               <li className="nav-item">
                 <NavLink to="/" className="nav-title" type="button">
                   Home
@@ -158,6 +166,7 @@ function Navbar() {
                       <NavLink
                         to={`/Category/Accessoires Pc`}
                         className="groupeList nav-header  "
+                        onClick={handleSelect}
                       >
                         <i className="fa-regular fa-keyboard "></i>
                         <span>Accessoires Pc</span>
@@ -167,29 +176,44 @@ function Navbar() {
                         <Link
                           to={`/Category/Casque & Écouteurs`}
                           className="nav-link"
+                          onClick={handleSelect}
                         >
                           Casque & Écouteurs
                         </Link>
-                        <Link to={`/Category/Souris`} className="nav-link">
+                        <Link
+                          to={`/Category/Souris`}
+                          className="nav-link"
+                          onClick={handleSelect}
+                        >
                           Souris
                         </Link>
-                        <Link to={`/Category/Clavier`} className="nav-link">
+                        <Link
+                          to={`/Category/Clavier`}
+                          className="nav-link"
+                          onClick={handleSelect}
+                        >
                           Clavier
                         </Link>
 
                         <Link
                           to={`/Category/Ensemble Clavier Et Souris`}
                           className="nav-link"
+                          onClick={handleSelect}
                         >
                           Ensemble Clavier Et Souris
                         </Link>
                         <Link
                           to={`/Category/Tapis De Souris`}
                           className="nav-link"
+                          onClick={handleSelect}
                         >
                           Tapis De Souris
                         </Link>
-                        <Link to={`/Category/Webcam`} className="nav-link">
+                        <Link
+                          to={`/Category/Webcam`}
+                          className="nav-link"
+                          onClick={handleSelect}
+                        >
                           Webcam
                         </Link>
                       </ul>
@@ -198,6 +222,7 @@ function Navbar() {
                       <NavLink
                         to={`/Category/Accessoires Téléphones`}
                         className="groupeList"
+                        onClick={handleSelect}
                       >
                         <i className="fa-solid fa-mobile-screen-button fs-5 ms-1"></i>
                         <span> Accessoires Téléphones</span>
@@ -207,6 +232,7 @@ function Navbar() {
                         <Link
                           to={`/Category/Etuis et coques`}
                           className="nav-link"
+                          onClick={handleSelect}
                         >
                           Etuis et coques
                         </Link>
@@ -214,21 +240,35 @@ function Navbar() {
                         <Link
                           to={`/Category/Protection Ecran`}
                           className="nav-link"
+                          onClick={handleSelect}
                         >
                           Protection Ecran
                         </Link>
-                        <Link to={`/Category/Power bank`} className="nav-link">
+                        <Link
+                          to={`/Category/Power bank`}
+                          onClick={handleSelect}
+                          className="nav-link"
+                        >
                           Power bank
                         </Link>
-                        <Link to={`/Category/Tige Selfie`} className="nav-link">
+                        <Link
+                          to={`/Category/Tige Selfie`}
+                          onClick={handleSelect}
+                          className="nav-link"
+                        >
                           Tige Selfie
                         </Link>
-                        <Link to={`/Category/Chargeur`} className="nav-link">
+                        <Link
+                          to={`/Category/Chargeur`}
+                          onClick={handleSelect}
+                          className="nav-link"
+                        >
                           Chargeur
                         </Link>
                         <Link
                           to={`/Category/Câble Chargeur`}
                           className="nav-link"
+                          onClick={handleSelect}
                         >
                           Câble Chargeur
                         </Link>
@@ -334,7 +374,7 @@ function Navbar() {
                 </NavLink>
               </li>
             </ul>
-            <div className="searchbar mt-4 me-4 ">
+            <div className="searchbar mt-4 me-lg-4 me-0">
               <form action="#">
                 <input
                   type="text"
@@ -395,18 +435,18 @@ function Navbar() {
           </Navi.Collapse>
 
           <ul className="navbar-nav d-flex flex-row justify-content-start  align-items-center">
-            <li className="nav-item me-3 me-lg-0 ">
+            <li className="nav-item me-1 me-lg-0 ">
               <i className="fa-regular fa-heart fs-5 me-2 text-black"></i>
             </li>
-            <li className="nav-item me-3 me-lg-0 ">
+            <li className="nav-item me-1 me-lg-0 ">
               <NavLink to="/login" className="nav-link">
                 <i className="fa-solid fa-user text-black"></i>
               </NavLink>
             </li>
-            <li className="nav-item me-3 me-lg-0 position-relative">
+            <li className="nav-item me-1 me-lg-0 position-relative">
               <a className="nav-link">
                 <button
-                  className="rounded-pill bg-transparent text-black border-0 "
+                  className="rounded-pill bg-transparent text-black border-0 ms-lg-0 ms-1 "
                   type="button"
                   onClick={openCart}
                 >
@@ -420,7 +460,7 @@ function Navbar() {
                 </button>
               </a>
             </li>
-            <div className="d-flex flex-column mx-2 mt-4">
+            <div className="d-flex flex-column mx-2 mt-lg-4 mt-1 ">
               <span className="fw-semibold">TOTAL</span>
               <p className="text-muted">
                 {cartItems.reduce((total, Cartitem) => {

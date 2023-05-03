@@ -103,7 +103,7 @@ export default function Log() {
         <UserAccount />
       ) : (
         <div
-          className="d-flex justify-content-center align-items-center flex-column familyMon h-100vh py-5"
+          className="d-flex justify-content-center align-items-center flex-column familyMon  py-5"
           id="logform"
           style={{ backgroundColor: "#f6f5f7" }}
         >
@@ -115,7 +115,7 @@ export default function Log() {
               <div className="form-container sign-up-container">
                 <form action="#" onSubmit={registerform}>
                   <h1>Create Account</h1>
-                  <div className="social-container">
+                  <div className=" d-flex flex-row">
                     <a href="#" className="social">
                       <i className="fab fa-facebook-f" />
                     </a>

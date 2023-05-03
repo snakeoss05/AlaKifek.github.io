@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useShoppingCart } from "../context/shopingcartcontext";
-
+import "./CardProduct.css";
 import Modal from "react-bootstrap/Modal";
 import Singleproduct from "../pages/singleproduct";
 import { Link } from "react-router-dom";
@@ -11,6 +11,8 @@ type storeitemprops = {
   price: number;
   imgurl: string;
   quantity: number;
+  imgurl2: string;
+  descreption: string;
 };
 export default function Card({
   id,
@@ -18,6 +20,7 @@ export default function Card({
   price,
   imgurl,
   quantity,
+  imgurl2,
 }: storeitemprops) {
   const { increaseItemQuantity } = useShoppingCart();
 
@@ -30,40 +33,17 @@ export default function Card({
   };
 
   return (
-    <div key={id}>
-      <div
-        className="px-2  py-3 d-flex align-content-center flex-column rounded-5 border position-relative bg-white item-hover"
-        style={{
-          height: "460px",
-          width: "300px",
-          backgroundColor: "rgb(218 218 218)",
-        }}
-      >
-        <div className="mx-auto">
-          <button
-            onClick={handleViewFullDescription}
-            className="position-absolute start-0 top-0 m-4 rounded-5 p-2 fw-bolder  btn btn-outline-dark border border-2"
-          >
-            <i className="fa-regular fa-eye"></i>
-          </button>
-          <Link to={`/Product/${id}`}>
-            <img
-              src={imgurl}
-              className="rounded-5  bg-white object-fit-contain"
-              width="260px"
-              height="300px"
-              style={{ objectFit: "fill" }}
-            />
-          </Link>
-        </div>
-        <h1
-          className="mx-auto fs-6 text-capitalize"
-          style={{ maxHeight: "40px" }}
-        >
-          {title}
-        </h1>
+    <div id="CardProduct" key={id}>
+      <div className="CardBody">
+        <Link to={`/Product/${id}`}>
+          <div className="img-container">
+            <img className="img1" src={imgurl} />
+            <img className="img2" src={imgurl2} />
+          </div>
+        </Link>
+        <span className="Producttitle">{title}</span>
 
-        <div className="d-flex flex-row align-items-center justify-content-around align-content-center position-absolute bottom-0 my-2 py-2 pe-2 w-100">
+        <div className="details">
           {quantity != 0 ? (
             <span className="text-muted">
               Disponibilté:{" "}
@@ -81,16 +61,41 @@ export default function Card({
               ></i>
             </span>
           )}
-          <h4 className=" text-muted  fs-5">{price} DT</h4>
+        </div>
+        <div className="price">
+          <span className="text-muted me-auto" style={{ fontSize: "15px" }}>
+            {price} DT
+          </span>
+          <ul
+            className="d-flex flex-row  ms-auto my-auto"
+            style={{ fontSize: "15px" }}
+          >
+            <i className="fa-solid fa-star" style={{ color: "gold" }}></i>
+            <i className="fa-solid fa-star" style={{ color: "gold" }}></i>
+            <i className="fa-solid fa-star" style={{ color: "gold" }}></i>
+            <i className="fa-solid fa-star" style={{ color: "gold" }}></i>
+            <i className="fa-solid fa-star" style={{ color: "gold" }}></i>
+            <span className="ms-1">4.9</span>
+          </ul>
+        </div>
+        <div className="addcart">
           <button
-            type="button"
-            className="btn fw-semibold btn-outline-dark p-2 rounded-pill"
+            className="btn btn-outline-dark col-8 me-2"
+            onClick={handleViewFullDescription}
+          >
+            More detaills
+          </button>
+          <button
+            className="btn btn-dark col-2"
             onClick={() => {
               if (quantity != 0) increaseItemQuantity(id, imgurl, title, price);
               else alert("items out of stock");
             }}
           >
-            <i className="fa-solid fa-cart-plus fs-5"></i>
+            <i
+              className="fa-solid fa-cart-shopping text-white "
+              style={{ fontSize: "16px" }}
+            ></i>
           </button>
         </div>
       </div>

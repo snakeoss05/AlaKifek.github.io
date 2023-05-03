@@ -56,97 +56,95 @@ export default function Items() {
           {isArray(items) &&
             items.map((item) => {
               return (
-                <div className="col-md-3 col-sm-6" key={item._id}>
-                  <div className="product-grid4">
-                    <div className="product-image4">
-                      <a>
-                        <img className="pic-1" src={item.imgurl.mainimg} />
-                        <img className="pic-2" src={item.imgurl.secimg} />
-                      </a>
-                      <ul className="social">
-                        <li>
-                          <a
-                            data-tip="Quick View"
-                            onClick={handleViewFullDescription}
-                          >
-                            <i className="fa fa-eye" />
-                            {showFullDescription && (
-                              <Modal
-                                show={lgShow}
-                                onHide={handleClose}
-                                size="xl"
-                              >
-                                <Singleproduct id={item._id} />
-                              </Modal>
-                            )}
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            data-tip="Add to Wishlist"
-                            onClick={() => {
-                              if (item.quantity != 0)
-                                increaseItemQuantity(
-                                  item._id,
-                                  item.imgurl.mainimg,
-                                  item.title,
-                                  item.price
-                                );
-                              else alert("items out of stock");
-                            }}
-                          >
-                            <i className="fa fa-shopping-bag" />
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            data-tip="Add to Cart"
-                            onClick={() => {
-                              if (item.quantity != 0)
-                                increaseItemQuantity(
-                                  item._id,
-                                  item.imgurl.mainimg,
-                                  item.title,
-                                  item.price
-                                );
-                              else alert("items out of stock");
-                            }}
-                          >
-                            <i className="fa fa-shopping-cart" />
-                          </a>
-                        </li>
-                      </ul>
-                      <span className="product-new-label">New</span>
-                      <span className="product-discount-label">
-                        -{item.promotion}
-                      </span>
-                    </div>
-                    <div className="product-content">
-                      <h3 className="title">
-                        <a>Women's Black Top</a>
-                      </h3>
-                      <div className="price">
-                        {calculateDiscountedPrice(item.price, item.promotion)}
-                        <span>${item.price}</span>
+                <>
+                  <div className="col-md-3 col-sm-6" key={item._id}>
+                    <div className="product-grid4">
+                      <div className="product-image4">
+                        <a>
+                          <img className="pic-1" src={item.imgurl.mainimg} />
+                          <img className="pic-2" src={item.imgurl.secimg} />
+                        </a>
+                        <ul className="social">
+                          <li>
+                            <a
+                              data-tip="Quick View"
+                              onClick={handleViewFullDescription}
+                            >
+                              <i className="fa fa-eye" />
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              data-tip="Add to Wishlist"
+                              onClick={() => {
+                                if (item.quantity != 0)
+                                  increaseItemQuantity(
+                                    item._id,
+                                    item.imgurl.mainimg,
+                                    item.title,
+                                    item.price
+                                  );
+                                else alert("items out of stock");
+                              }}
+                            >
+                              <i className="fa fa-shopping-bag" />
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              data-tip="Add to Cart"
+                              onClick={() => {
+                                if (item.quantity != 0)
+                                  increaseItemQuantity(
+                                    item._id,
+                                    item.imgurl.mainimg,
+                                    item.title,
+                                    item.price
+                                  );
+                                else alert("items out of stock");
+                              }}
+                            >
+                              <i className="fa fa-shopping-cart" />
+                            </a>
+                          </li>
+                        </ul>
+                        <span className="product-new-label">New</span>
+                        <span className="product-discount-label">
+                          -{item.promotion}
+                        </span>
                       </div>
-                      <a
-                        className="add-to-cart"
-                        onClick={() => {
-                          if (item.quantity != 0)
-                            increaseItemQuantity(
-                              item._id,
-                              item.imgurl.mainimg,
-                              item.title,
-                              item.price
-                            );
-                          else alert("items out of stock");
-                        }}
-                      >
-                        ADD TO CART
-                      </a>
+                      <div className="product-content">
+                        <h3 className="title">
+                          <a>Women's Black Top</a>
+                        </h3>
+                        <div className="price">
+                          {calculateDiscountedPrice(item.price, item.promotion)}
+                          <span>${item.price}</span>
+                        </div>
+                        <a
+                          className="add-to-cart"
+                          onClick={() => {
+                            if (item.quantity != 0)
+                              increaseItemQuantity(
+                                item._id,
+                                item.imgurl.mainimg,
+                                item.title,
+                                item.price
+                              );
+                            else alert("items out of stock");
+                          }}
+                        >
+                          ADD TO CART
+                        </a>
+                      </div>
                     </div>
+                    {showFullDescription && (
+                      <Modal show={lgShow} onHide={handleClose} size="xl">
+                        <Singleproduct id={item._id} />
+                      </Modal>
+                    )}
                   </div>
-                </div>
+                </>
               );
             })}
         </div>

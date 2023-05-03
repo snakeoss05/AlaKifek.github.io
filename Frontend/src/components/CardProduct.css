@@ -1,0 +1,65 @@
+#CardProduct {
+  width: 312px;
+  height: 418px;
+  padding: 16px 16px;
+  background-color: white;
+  border-radius: 25px;
+}
+#CardProduct img {
+  height: 210px;
+  width: 280px;
+  margin-bottom: 12px;
+  object-fit: contain;
+}
+.img1 {
+  opacity: 1;
+  transition: all 0.5s ease-out 0s;
+}
+.img2 {
+  opacity: 0;
+  z-index: 3;
+  display: none;
+  transition: all 0.5s ease-out 0s;
+}
+#CardProduct .img-container:hover .img2 {
+  opacity: 1;
+  display: flex;
+}
+#CardProduct .img-container:hover .img1 {
+  opacity: 0;
+  display: none;
+}
+#CardProduct .Producttitle {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: black;
+  height: 24px;
+  overflow: hidden;
+}
+#CardProduct .details {
+  display: block;
+  font-size: 14px;
+  height: 32px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+#CardProduct .price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+  margin-bottom: 16px;
+}
+#CardProduct .addcart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 40px;
+  margin-bottom: 16px;
+}
+#CardProduct:hover {
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}

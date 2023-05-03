@@ -171,9 +171,11 @@ export default function StoreByCategory() {
                       key={item._id}
                       id={item._id}
                       imgurl={item.imgurl.mainimg}
+                      imgurl2={item.imgurl.secimg}
                       title={item.title}
                       price={item.price}
                       quantity={item.quantity}
+                      descreption={item.descreption}
                     />
                   );
                 })}
@@ -188,7 +190,9 @@ export default function StoreByCategory() {
                         <i className="fa fa-home" />
                         <span>404</span>
                       </div>
-                      <span className="inner-status">Oops! You're lost</span>
+                      <span className="inner-status">
+                        Oops! Not Items Available Right Now
+                      </span>
                       <span className="inner-detail">
                         We can not find the Items you're looking for.
                       </span>

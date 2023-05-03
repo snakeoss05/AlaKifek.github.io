@@ -40,7 +40,10 @@ export default function Shopingcart({ isOpen }: Shopingcartprops) {
               </span>
             </div>
             <div className="button">
-              <button className="checkout-cta rounded-5 fw-bolder fs-5 text-capitalize ">
+              <button
+                className="checkout-cta rounded-5 fw-bolder fs-5 text-capitalize "
+                onClick={CloseCart}
+              >
                 <NavLink to="/checkout" className="nav-link text-center">
                   Checkout
                 </NavLink>

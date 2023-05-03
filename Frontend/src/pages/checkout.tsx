@@ -47,7 +47,8 @@ export default function Checkout() {
   }
 
   // Post Order Form
-  const sendform = async () => {
+  const sendform = async (e: any) => {
+    e.preventDefault();
     try {
       const response = await axios.post(
         "https://alakifekbackend.onrender.com/api/submit-form/post",
@@ -136,7 +137,7 @@ export default function Checkout() {
                       <li className="breadcrumb-item font-weight-bold ">
                         <NavLink
                           className="black-text text-uppercase links"
-                          to="/store"
+                          to={`/Category/Accessoires Pc`}
                         >
                           <span className="mr-md-3 mr-1 ">BACK TO SHOP</span>
                         </NavLink>
@@ -179,7 +180,7 @@ export default function Checkout() {
                       <hr className="my-0" />
                     </div>
                     <div className="card-body">
-                      <form className="text-capitalize">
+                      <form className="text-capitalize" onSubmit={sendform}>
                         {user != null ? (
                           <>
                             <div className="form-group">
@@ -226,7 +227,7 @@ export default function Checkout() {
                                 onChange={HandleChange}
                                 value={formData.firstname}
                                 placeholder="Example: Ahmed"
-                                required
+                                required={true}
                               />
                             </div>
                             <div className="form-group">
@@ -240,7 +241,7 @@ export default function Checkout() {
                                 onChange={HandleChange}
                                 value={formData.lastname}
                                 placeholder="Example: Ben Torkia"
-                                required
+                                required={true}
                               />
                               <label className="small text-muted mb-1">
                                 Adresse
@@ -252,7 +253,7 @@ export default function Checkout() {
                                 onChange={HandleChange}
                                 value={formData.adresse}
                                 placeholder="Example: 48 Rue zouhour"
-                                required
+                                required={true}
                               />
                             </div>
                             <div className="row no-gutters">
@@ -271,7 +272,7 @@ export default function Checkout() {
                                     onChange={HandleChange}
                                     value={formData.city}
                                     placeholder="Tunis"
-                                    required
+                                    required={true}
                                   />
                                 </div>
                               </div>
@@ -290,7 +291,7 @@ export default function Checkout() {
                                     onChange={HandleChange}
                                     value={formData.CodePostal}
                                     placeholder={"Example: 2042"}
-                                    required
+                                    required={true}
                                   />
                                 </div>
                               </div>
@@ -323,11 +324,7 @@ export default function Checkout() {
                         )}
                         <div className="row mb-md-5 my-3">
                           <div className="d-grid my-3">
-                            <button
-                              type="button"
-                              className="btn btn-lg  "
-                              onClick={sendform}
-                            >
+                            <button type="submit" className="btn btn-lg  ">
                               PURCHASE
                             </button>
                             <ToastContainer />
@@ -353,41 +350,30 @@ export default function Checkout() {
                         const quantity = getItemQuantity(item.id);
                         return (
                           <div
-                            className="row  justify-content-between"
+                            className="d-flex  justify-content-between"
                             key={item.id}
                           >
                             <div>
-                              <div className="d-flex my-1 flex-row flex-sm-row">
-                                <div className="my-auto">
-                                  <span className="border mx-2  rounded-circle p-2">
-                                    {quantity}
-                                  </span>
-                                </div>
+                              <div className="d-flex my-1 flex-column flex-sm-row justify-content-between">
                                 <img
-                                  className=" img-fluid"
+                                  className=" img-fluid mx-auto me-lg-3"
                                   src={item.imgurl}
                                   width={62}
                                   height={62}
                                 />
-                                <div className="d-flex  flex-row align-items-center align-content-center  my-auto  ms-lg-3 ms-1 ">
-                                  <div>
-                                    <p className="mb-1 text-uppercase">
-                                      <b>{item.title}</b>
-                                    </p>
 
-                                    <small className="text-muted">
-                                      Réference:
-                                      {item.id}
-                                    </small>
-                                  </div>
-                                </div>
+                                <p className="mb-2 text-uppercase ">
+                                  <b>{item.title}</b>
+                                  <br />
+                                  <small className="text-muted ">
+                                    Réference:
+                                    {item.id}{" "}
+                                  </small>
+                                </p>
                               </div>
                             </div>
-
-                            <div className="ms-auto my-auto"> </div>
-
-                            <p>
-                              <b></b>
+                            <p className="border p-1 ms-auto h-50">
+                              {quantity}
                             </p>
                           </div>
                         );

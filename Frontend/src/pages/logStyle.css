@@ -63,7 +63,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 50px;
+  padding: 0 20px;
   height: 100%;
   text-align: center;
 }
@@ -84,7 +84,7 @@
   overflow: hidden;
   width: 768px;
   max-width: 100%;
-  min-height: 480px;
+  min-height: 600px;
 }
 
 #logform .form-container {
@@ -209,35 +209,12 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row !important;
   margin: 0 5px;
   height: 40px;
   width: 40px;
 }
 
-#logform footer {
-  background-color: #222;
-  color: #fff;
-  font-size: 14px;
-  bottom: 0;
-  position: fixed;
-  left: 0;
-  right: 0;
-  text-align: center;
-  z-index: 999;
-}
-
-#logform footer p {
-  margin: 10px 0;
-}
-
-#logform footer i {
-  color: red;
-}
-
-#logform footer a {
-  color: #3c97bf;
-  text-decoration: none;
-}
 .alertfadeup {
   animation: FadeUp 0.3s ease-in-out;
 }
