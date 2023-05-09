@@ -3,7 +3,8 @@ import { NavLink, Link } from "react-router-dom";
 import { Navbar as Navi } from "react-bootstrap";
 import axios from "axios";
 import "./navbar.css";
-
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import { useShoppingCart } from "../context/shopingcartcontext";
 import { debounce } from "lodash";
 interface results {
@@ -15,6 +16,7 @@ interface results {
 }
 
 function Navbar() {
+  const navigate = useNavigate();
   const { cartQuantity } = useShoppingCart();
   const { cartItems } = useShoppingCart();
   const [navbarColor, setNavbarColor] = useState("white");
@@ -24,7 +26,7 @@ function Navbar() {
   const [category, setLinkValue] = useState("");
   const elementRef = useRef<HTMLInputElement>(null);
   const [expanded, setExpanded] = useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleSelect = () => {
     setExpanded(false);
   };
@@ -40,6 +42,23 @@ function Navbar() {
       document.removeEventListener("click", handleClick);
     };
   }, []);
+  function Logout(e: any) {
+    navigate("/login");
+    Cookies.remove("token");
+    localStorage.clear();
+  }
+  const ChangLogoutIcon = () => {
+    const token = Cookies.get("token");
+    if (token) {
+      return (
+        <button className="btn  ms-auto" onClick={Logout}>
+          <i className="fa-solid fa-right-from-bracket"></i>
+        </button>
+      );
+    } else {
+      <></>;
+    }
+  };
 
   const handleClick = (e: any) => {
     // check if click occurred outside of element
@@ -85,11 +104,7 @@ function Navbar() {
       setNavbarColor("white");
     }
   };
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
   return (
     <>
       <nav className="navbar col-logo nav1 bg-black d-none d-lg-flex ">
@@ -143,7 +158,7 @@ function Navbar() {
               className="navbar-brand mt-2 mt-lg-0 overflow-auto h-100"
             >
               <img
-                src="https://scontent.ftun4-2.fna.fbcdn.net/v/t39.30808-6/343961794_780214266760865_7512067717752570543_n.png?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=4jjmuXg37z0AX_BkHhb&_nc_ht=scontent.ftun4-2.fna&oh=00_AfBzv60u1a_rCBXzGMqhLFF8T1MZ-QJ-Fm2TGzm383L2PA&oe=64537BB3"
+                src="https://scontent.ftun2-2.fna.fbcdn.net/v/t39.30808-6/344737817_761779549014226_3919548965889801483_n.png?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=94z0M-vxGX8AX8B8qKV&_nc_ht=scontent.ftun2-2.fna&oh=00_AfDZbSQBASiefwhegMSVBhpsHzJcmCezwtMgQMd3atlxHw&oe=645FBA8C"
                 height="100"
                 className="object-fit-content"
               />
@@ -161,210 +176,206 @@ function Navbar() {
                 {" "}
                 <li className="nav-title">Informatique</li>
                 <ul className="menu2 p-0">
-                  <div className="d-flex flex-column flex-md-row shadow-sm justify-content-around bg-white   flex-wrap flex-lg-nowrap">
-                    <li className=" m-2   ">
-                      <NavLink
-                        to={`/Category/Accessoires Pc`}
-                        className="groupeList nav-header  "
+                  <li className=" m-2   ">
+                    <NavLink
+                      to={`/Category/Accessoires Pc`}
+                      className="groupeList nav-header  "
+                      onClick={handleSelect}
+                    >
+                      <i className="fa-regular fa-keyboard "></i>
+                      <span>Accessoires Pc</span>
+                    </NavLink>
+
+                    <ul className="list-unstyled  ms-2 ps-1 ">
+                      <Link
+                        to={`/Category/Casque & Écouteurs`}
+                        className="nav-link"
                         onClick={handleSelect}
                       >
-                        <i className="fa-regular fa-keyboard "></i>
-                        <span>Accessoires Pc</span>
-                      </NavLink>
-
-                      <ul className="list-unstyled  ms-2 ps-1 ">
-                        <Link
-                          to={`/Category/Casque & Écouteurs`}
-                          className="nav-link"
-                          onClick={handleSelect}
-                        >
-                          Casque & Écouteurs
-                        </Link>
-                        <Link
-                          to={`/Category/Souris`}
-                          className="nav-link"
-                          onClick={handleSelect}
-                        >
-                          Souris
-                        </Link>
-                        <Link
-                          to={`/Category/Clavier`}
-                          className="nav-link"
-                          onClick={handleSelect}
-                        >
-                          Clavier
-                        </Link>
-
-                        <Link
-                          to={`/Category/Ensemble Clavier Et Souris`}
-                          className="nav-link"
-                          onClick={handleSelect}
-                        >
-                          Ensemble Clavier Et Souris
-                        </Link>
-                        <Link
-                          to={`/Category/Tapis De Souris`}
-                          className="nav-link"
-                          onClick={handleSelect}
-                        >
-                          Tapis De Souris
-                        </Link>
-                        <Link
-                          to={`/Category/Webcam`}
-                          className="nav-link"
-                          onClick={handleSelect}
-                        >
-                          Webcam
-                        </Link>
-                      </ul>
-                    </li>
-                    <li className=" m-2  ">
-                      <NavLink
-                        to={`/Category/Accessoires Téléphones`}
-                        className="groupeList"
+                        Casque & Écouteurs
+                      </Link>
+                      <Link
+                        to={`/Category/Souris`}
+                        className="nav-link"
                         onClick={handleSelect}
                       >
-                        <i className="fa-solid fa-mobile-screen-button fs-5 ms-1"></i>
-                        <span> Accessoires Téléphones</span>
-                      </NavLink>
-
-                      <ul className="list-unstyled  ms-2 ps-1  ">
-                        <Link
-                          to={`/Category/Etuis et coques`}
-                          className="nav-link"
-                          onClick={handleSelect}
-                        >
-                          Etuis et coques
-                        </Link>
-
-                        <Link
-                          to={`/Category/Protection Ecran`}
-                          className="nav-link"
-                          onClick={handleSelect}
-                        >
-                          Protection Ecran
-                        </Link>
-                        <Link
-                          to={`/Category/Power bank`}
-                          onClick={handleSelect}
-                          className="nav-link"
-                        >
-                          Power bank
-                        </Link>
-                        <Link
-                          to={`/Category/Tige Selfie`}
-                          onClick={handleSelect}
-                          className="nav-link"
-                        >
-                          Tige Selfie
-                        </Link>
-                        <Link
-                          to={`/Category/Chargeur`}
-                          onClick={handleSelect}
-                          className="nav-link"
-                        >
-                          Chargeur
-                        </Link>
-                        <Link
-                          to={`/Category/Câble Chargeur`}
-                          className="nav-link"
-                          onClick={handleSelect}
-                        >
-                          Câble Chargeur
-                        </Link>
-                      </ul>
-                    </li>
-                    <li className="m-2 ">
-                      <NavLink
-                        to={`/Category/Composants De Pc Bureau`}
-                        className="groupeList"
+                        Souris
+                      </Link>
+                      <Link
+                        to={`/Category/Clavier`}
+                        className="nav-link"
+                        onClick={handleSelect}
                       >
-                        <i className="fa-solid fa-desktop fs-5"></i>
-                        <span> Composants De Pc Bureau</span>
-                      </NavLink>
-                      <ul className="list-unstyled ms-2 ps-1 ">
-                        <Link
-                          to={`/Category/Disque Dur Interne`}
-                          className="nav-link"
-                        >
-                          Disque Dur Interne
-                        </Link>
+                        Clavier
+                      </Link>
 
-                        <Link to={`/Category/Afficheur`} className="nav-link">
-                          Afficheur
-                        </Link>
-
-                        <Link
-                          to={`/Category/Ventilateur & Refroidisseur`}
-                          className="nav-link"
-                        >
-                          Ventilateur & Refroidisseur
-                        </Link>
-                        <Link to={`/Category/Processeur`} className="nav-link">
-                          Processeur
-                        </Link>
-                        <Link
-                          to={`/Category/Barrette Mémoire`}
-                          className="nav-link"
-                        >
-                          Barrette Mémoire
-                        </Link>
-                        <Link to={`/Category/Carte Mère`} className="nav-link">
-                          Carte Mère
-                        </Link>
-                        <Link
-                          to={`/Category/Carte Graphique`}
-                          className="nav-link"
-                        >
-                          Carte Graphique
-                        </Link>
-                        <Link
-                          to={`/Category/Boîte D'alimentation`}
-                          className="nav-link"
-                        >
-                          Boîte D'alimentation
-                        </Link>
-                        <Link to={`/Category/Boitier`} className="nav-link">
-                          Boîtier
-                        </Link>
-                      </ul>
-                    </li>
-                    <li className="m-2  ">
-                      <NavLink
-                        to={`/Category/Composants De Pc Portable`}
-                        className="groupeList"
+                      <Link
+                        to={`/Category/Ensemble Clavier Et Souris`}
+                        className="nav-link"
+                        onClick={handleSelect}
                       >
-                        <i className="fa-solid fa-laptop fs-5"></i>
-                        <span> Composants De Pc Portable</span>
-                      </NavLink>
-                      <ul className="list-unstyled  ms-2 ps-1 ">
-                        <li className="nav-item">
-                          <a className="nav-link">Disque Dur Interne</a>
-                        </li>
+                        Ensemble Clavier Et Souris
+                      </Link>
+                      <Link
+                        to={`/Category/Tapis De Souris`}
+                        className="nav-link"
+                        onClick={handleSelect}
+                      >
+                        Tapis De Souris
+                      </Link>
+                      <Link
+                        to={`/Category/Webcam`}
+                        className="nav-link"
+                        onClick={handleSelect}
+                      >
+                        Webcam
+                      </Link>
+                    </ul>
+                  </li>
+                  <li className=" m-2  ">
+                    <NavLink
+                      to={`/Category/Accessoires Téléphones`}
+                      className="groupeList"
+                      onClick={handleSelect}
+                    >
+                      <i className="fa-solid fa-mobile-screen-button fs-5 ms-1"></i>
+                      <span> Accessoires Téléphones</span>
+                    </NavLink>
 
-                        <li className="nav-item">
-                          <a className="nav-link">Afficheur</a>
-                        </li>
+                    <ul className="list-unstyled  ms-2 ps-1  ">
+                      <Link
+                        to={`/Category/Etuis et coques`}
+                        className="nav-link"
+                        onClick={handleSelect}
+                      >
+                        Etuis et coques
+                      </Link>
 
-                        <li className="nav-item">
-                          <a className="nav-link">
-                            Ventilateur & Refroidisseur
-                          </a>
-                        </li>
+                      <Link
+                        to={`/Category/Protection Ecran`}
+                        className="nav-link"
+                        onClick={handleSelect}
+                      >
+                        Protection Ecran
+                      </Link>
+                      <Link
+                        to={`/Category/Power bank`}
+                        onClick={handleSelect}
+                        className="nav-link"
+                      >
+                        Power bank
+                      </Link>
+                      <Link
+                        to={`/Category/Tige Selfie`}
+                        onClick={handleSelect}
+                        className="nav-link"
+                      >
+                        Tige Selfie
+                      </Link>
+                      <Link
+                        to={`/Category/Chargeur`}
+                        onClick={handleSelect}
+                        className="nav-link"
+                      >
+                        Chargeur
+                      </Link>
+                      <Link
+                        to={`/Category/Câble Chargeur`}
+                        className="nav-link"
+                        onClick={handleSelect}
+                      >
+                        Câble Chargeur
+                      </Link>
+                    </ul>
+                  </li>
+                  <li className="m-2 ">
+                    <NavLink
+                      to={`/Category/Composants De Pc Bureau`}
+                      className="groupeList"
+                    >
+                      <i className="fa-solid fa-desktop fs-5"></i>
+                      <span> Composants De Pc Bureau</span>
+                    </NavLink>
+                    <ul className="list-unstyled ms-2 ps-1 ">
+                      <Link
+                        to={`/Category/Disque Dur Interne`}
+                        className="nav-link"
+                      >
+                        Disque Dur Interne
+                      </Link>
 
-                        <li className="nav-item">
-                          <a className="nav-link">Barrette Mémoire</a>
-                        </li>
+                      <Link to={`/Category/Afficheur`} className="nav-link">
+                        Afficheur
+                      </Link>
 
-                        <li className="nav-item">
-                          <a className="nav-link">Chargeur Pour Pc Portable</a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link">Batterie Pour Pc Portable</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </div>
+                      <Link
+                        to={`/Category/Ventilateur & Refroidisseur`}
+                        className="nav-link"
+                      >
+                        Ventilateur & Refroidisseur
+                      </Link>
+                      <Link to={`/Category/Processeur`} className="nav-link">
+                        Processeur
+                      </Link>
+                      <Link
+                        to={`/Category/Barrette Mémoire`}
+                        className="nav-link"
+                      >
+                        Barrette Mémoire
+                      </Link>
+                      <Link to={`/Category/Carte Mère`} className="nav-link">
+                        Carte Mère
+                      </Link>
+                      <Link
+                        to={`/Category/Carte Graphique`}
+                        className="nav-link"
+                      >
+                        Carte Graphique
+                      </Link>
+                      <Link
+                        to={`/Category/Boîte D'alimentation`}
+                        className="nav-link"
+                      >
+                        Boîte D'alimentation
+                      </Link>
+                      <Link to={`/Category/Boitier`} className="nav-link">
+                        Boîtier
+                      </Link>
+                    </ul>
+                  </li>
+                  <li className="m-2  ">
+                    <NavLink
+                      to={`/Category/Composants De Pc Portable`}
+                      className="groupeList"
+                    >
+                      <i className="fa-solid fa-laptop fs-5"></i>
+                      <span> Composants De Pc Portable</span>
+                    </NavLink>
+                    <ul className="list-unstyled  ms-2 ps-1 ">
+                      <li className="nav-item">
+                        <a className="nav-link">Disque Dur Interne</a>
+                      </li>
+
+                      <li className="nav-item">
+                        <a className="nav-link">Afficheur</a>
+                      </li>
+
+                      <li className="nav-item">
+                        <a className="nav-link">Ventilateur & Refroidisseur</a>
+                      </li>
+
+                      <li className="nav-item">
+                        <a className="nav-link">Barrette Mémoire</a>
+                      </li>
+
+                      <li className="nav-item">
+                        <a className="nav-link">Chargeur Pour Pc Portable</a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link">Batterie Pour Pc Portable</a>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
 
@@ -387,7 +398,7 @@ function Navbar() {
               <div id="searchBody" ref={elementRef}>
                 {query &&
                   results?.map((product) => (
-                    <Link to={`/Product/${product._id}`}>
+                    <Link to={`/Product/${product._id}`} key={product._id}>
                       <li
                         key={product._id}
                         className="row d-flex align-items-center border-bottom overflow-hidden text-black"
@@ -443,6 +454,9 @@ function Navbar() {
                 <i className="fa-solid fa-user text-black"></i>
               </NavLink>
             </li>
+
+            <li className="nav-item me-1 me-lg-0 ">{ChangLogoutIcon()}</li>
+
             <li className="nav-item me-1 me-lg-0 position-relative">
               <a className="nav-link">
                 <button

@@ -2,26 +2,10 @@ import { useState } from "react";
 import { useShoppingCart } from "../context/shopingcartcontext";
 import "./CardProduct.css";
 import Modal from "react-bootstrap/Modal";
-import Singleproduct from "../pages/singleproduct";
-import { Link } from "react-router-dom";
 
-type storeitemprops = {
-  id: any;
-  title: string;
-  price: number;
-  imgurl: string;
-  quantity: number;
-  imgurl2: string;
-  descreption: string;
-};
-export default function Card({
-  id,
-  title,
-  price,
-  imgurl,
-  quantity,
-  imgurl2,
-}: storeitemprops) {
+import { Link } from "react-router-dom";
+import SingleProductHome from "../pages/SingleProductHome";
+export default function Card(props: any) {
   const { increaseItemQuantity } = useShoppingCart();
 
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -33,18 +17,18 @@ export default function Card({
   };
 
   return (
-    <div id="CardProduct" key={id}>
+    <div id="CardProduct" key={props.item.id}>
       <div className="CardBody">
-        <Link to={`/Product/${id}`}>
+        <Link to={`/Product/${props.item.id}`}>
           <div className="img-container">
-            <img className="img1" src={imgurl} />
-            <img className="img2" src={imgurl2} />
+            <img className="img1" src={props.item.imgurl.mainimg} />
+            <img className="img2" src={props.item.imgurl.secimg} />
           </div>
         </Link>
-        <span className="Producttitle">{title}</span>
+        <span className="Producttitle">{props.item.title}</span>
 
         <div className="details">
-          {quantity != 0 ? (
+          {props.item.quantity != 0 ? (
             <span className="text-muted">
               Disponibilté:{" "}
               <i
@@ -64,7 +48,7 @@ export default function Card({
         </div>
         <div className="price">
           <span className="text-muted me-auto" style={{ fontSize: "15px" }}>
-            {price} DT
+            {props.item.price} DT
           </span>
           <ul
             className="d-flex flex-row  ms-auto my-auto"
@@ -88,7 +72,13 @@ export default function Card({
           <button
             className="btn btn-dark col-2"
             onClick={() => {
-              if (quantity != 0) increaseItemQuantity(id, imgurl, title, price);
+              if (props.item.quantity != 0)
+                increaseItemQuantity(
+                  props.item.id,
+                  props.item.imgurl.mainimg,
+                  props.item.title,
+                  props.item.price
+                );
               else alert("items out of stock");
             }}
           >
@@ -101,7 +91,7 @@ export default function Card({
       </div>
       {showFullDescription && (
         <Modal show={lgShow} onHide={handleClose} size="xl">
-          <Singleproduct id={id} />
+          <SingleProductHome item={props.item} />
         </Modal>
       )}
     </div>

@@ -28,7 +28,7 @@ export default function StoreByCategory() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedMark, setSelectedMark] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const [posteperpage, setposteperpage] = useState(8);
+  const [posteperpage, setposteperpage] = useState(12);
   const [filtreditems, setfiltereditems] = useState(items);
   const lastpostindex = currentPage * posteperpage;
   const firstpostindex = lastpostindex - posteperpage;
@@ -56,12 +56,6 @@ export default function StoreByCategory() {
       );
     }
 
-    if (selectedMark !== "All") {
-      newFilteredItems = newFilteredItems.filter(
-        (item) => item.mark === selectedMark
-      );
-    }
-
     setfiltereditems(newFilteredItems);
   }, [selectedCategory, selectedMark, items]);
 
@@ -76,21 +70,13 @@ export default function StoreByCategory() {
 
   const catagorybt = [...new Set(items.map((item) => item.category))];
   const marks = [...new Set(items.map((item) => item.mark))];
-  if (!items) {
-    return (
-      <div className="d-flex justify-content-center align-items-center flex-column h-100vh">
-        <div className="position-absolute start-50 top-50" role="status">
-          <i className="fa-solid fa-fan fa-spin fs-1 text-warning"></i>
-        </div>
-      </div>
-    );
-  }
+
   return (
     <div className="bg-body-secondry">
       <section className="landing">
         <img
           className="hero__image"
-          src="https://scontent.ftun4-2.fna.fbcdn.net/v/t39.30808-6/344535083_799096674976333_3863739484278083826_n.png?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=-HC08paZ8ysAX-WbFRN&_nc_ht=scontent.ftun4-2.fna&oh=00_AfDsg_n4WEC0oegOzLAZSiG2wEdBHbWN9yp1ALLIs3KLoQ&oe=6451B7C2"
+          src="https://scontent.ftun2-2.fna.fbcdn.net/v/t39.30808-6/344535083_799096674976333_3863739484278083826_n.png?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=tnVPqwdmUSYAX-iiyue&_nc_ht=scontent.ftun2-2.fna&oh=00_AfAQeRMfL249OYwua2AwAF9VnP5qu61VrHnVqIsNoDD23A&oe=645F8F82"
         />
       </section>
       <section className="container-fluid ">
@@ -162,22 +148,11 @@ export default function StoreByCategory() {
               })}
             </div>
           </div>
-          <div className="col-xl-8 col-xxl-9 mx-auto col-md-6  mx-auto my-5 ">
+          <div className="col-xl-8 col-xxl-9 mx-auto col-md-6  mx-auto my-4 ">
             {currentposts.length !== 0 ? (
-              <div className="d-flex align-content-center justify-content-center flex-wrap mx-atuo gap-4 my-3">
+              <div className="d-flex align-content-center justify-content-center justify-content-lg-start flex-wrap mx-atuo gap-4 mb-3">
                 {currentposts.map((item) => {
-                  return (
-                    <Card
-                      key={item._id}
-                      id={item._id}
-                      imgurl={item.imgurl.mainimg}
-                      imgurl2={item.imgurl.secimg}
-                      title={item.title}
-                      price={item.price}
-                      quantity={item.quantity}
-                      descreption={item.descreption}
-                    />
-                  );
+                  return <Card key={item._id} item={item} />;
                 })}
               </div>
             ) : (
@@ -201,13 +176,14 @@ export default function StoreByCategory() {
                 </div>
               </div>
             )}
-
-            <Pagination
-              totalposts={items.length}
-              postperpage={posteperpage}
-              setcurrentpage={setCurrentPage}
-              currentpage={currentPage}
-            />
+            <div className=" position-relative">
+              <Pagination
+                totalposts={items.length}
+                postperpage={posteperpage}
+                setcurrentpage={setCurrentPage}
+                currentpage={currentPage}
+              />
+            </div>
           </div>
         </div>
       </section>

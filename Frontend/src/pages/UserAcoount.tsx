@@ -3,6 +3,7 @@ import Tabs from "react-bootstrap/Tabs";
 
 import ProfileInformation from "./ProfileInformation";
 import UserHistorique from "./UserHistorique";
+import UserContact from "./UserContact";
 function UserAccount() {
   return (
     <Tabs
@@ -18,7 +19,9 @@ function UserAccount() {
       <Tab eventKey="Historique" title="Historique">
         <UserHistorique />
       </Tab>
-      <Tab eventKey="contact" title="Contact" disabled></Tab>
+      <Tab eventKey="contact" title="Contact">
+        <UserContact />
+      </Tab>
     </Tabs>
   );
 }

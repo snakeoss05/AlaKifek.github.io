@@ -178,19 +178,31 @@ body {
 .nav-item {
   margin-bottom: 8px !important;
 }
+@keyframes FadeUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .menu2 {
   display: none;
   position: relative;
-  top: 80%;
+
   left: 0 !important;
   margin: 0 !important;
   list-style: none !important;
   width: 100% !important;
-  background-color: transparent !important;
-
+  background-color: transparent;
+  transition: all 500ms ease 0s;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
   border-top: none !important;
   max-height: 400px;
   overflow-y: auto;
+  animation: FadeUp 0.5s ease-in;
 }
 
 .menu2::-webkit-scrollbar {
@@ -206,21 +218,23 @@ body {
 }
 @media (min-width: 985px) {
   .menu2 {
-    display: none;
     position: absolute !important;
-    top: 60%;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
+    top: 90%;
+    animation: FadeUp 0.5s ease-in;
 
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    background-color: white !important;
     left: 0 !important;
-
     margin: 0 !important;
     list-style: none !important;
-    width: 100vw !important;
-    background-color: transparent !important;
-    border: 1px solid #ccc !important;
-    border-top: none !important;
     max-height: fit-content;
-    overflow-y: unset;
-    animation: FadeUp 0.3s ease-in;
+    transition: all 500ms ease 0s;
+    width: 100vw !important;
+
+    border-top: none !important;
   }
 
   #searchBody {
@@ -242,17 +256,19 @@ body {
   .menu2 {
     display: none;
     position: absolute !important;
-    top: 80%;
-
+    top: 90%;
+    animation: FadeUp 0.3s ease-in;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: white !important;
     left: 0 !important;
     margin: 0 !important;
+
     list-style: none !important;
     width: 100vw !important;
-    background-color: transparent !important;
 
     border-top: none !important;
-
-    animation: FadeUp 0.3s ease-in;
   }
   .border-nav {
     background-color: transparent;
@@ -279,18 +295,11 @@ body {
   letter-spacing: 0.08em;
 }
 
-.togi:hover .menu2 {
-  display: block;
+.togi:hover > .menu2,
+.nav-title:hover > .menu2 {
+  display: flex;
 }
 
-@keyframes FadeUp {
-  from {
-    opacity: 0%;
-  }
-  to {
-    opacity: 100%;
-  }
-}
 .menu2 li span,
 .menu2 li i {
   color: #ffbf00 !important;

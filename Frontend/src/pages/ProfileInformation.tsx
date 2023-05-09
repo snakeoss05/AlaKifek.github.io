@@ -195,23 +195,9 @@ export default function ProfileInformation() {
   useEffect(() => {
     localStorage.setItem("userProfile", JSON.stringify(userProfile));
   }, [userProfile]);
-  function Logout() {
-    navigate("/login");
-    Cookies.remove("token");
-
-    localStorage.clear();
-  }
 
   return (
     <div className="container">
-      <div className="d-flex ">
-        <div className="ms-auto">
-          <span className="text-muted  me-1">Signout :</span>{" "}
-          <button className="btn btn-dark  ms-auto" onClick={Logout}>
-            <i className="fa-solid fa-right-from-bracket"></i>
-          </button>
-        </div>
-      </div>
       <div className=" px-4 mt-4 profile">
         {/* Account page navigation*/}
 

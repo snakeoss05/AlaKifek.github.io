@@ -115,7 +115,7 @@ export default function Log() {
               <div className="form-container sign-up-container">
                 <form action="#" onSubmit={registerform}>
                   <h1>Create Account</h1>
-                  <div className=" d-flex flex-row">
+                  <div className="social-container ">
                     <a href="#" className="social">
                       <i className="fab fa-facebook-f" />
                     </a>
@@ -228,7 +228,7 @@ export default function Log() {
                     </button>
                   </div>
                   <div className="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
+                    <h1>Hello, Friend</h1>
                     <p>Enter your personal details and start journey with us</p>
                     <button className="ghost" id="signUp" onClick={Changestyle}>
                       Sign Up
