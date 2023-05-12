@@ -28,6 +28,10 @@ export default function SingleProductHome(props: any) {
 
   return (
     <div>
+      <button
+        className="btn btn-close m-3 d-flex d-md-none ms-auto"
+        onClick={props.handleClose}
+      ></button>
       <section className="container  bg-white my-4 d-flex flex-column flex-lg-row ">
         <div className="d-flex flex-wrap  flex-lg-row left-side">
           <img

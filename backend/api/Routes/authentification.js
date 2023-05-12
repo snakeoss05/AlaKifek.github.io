@@ -9,4 +9,5 @@ router.post("/login", UserController.loginUser);
 router.put("/user/profile/:id", UserController.updateUser);
 router.get("/profile", UserController.authenticateToken);
 router.get("/user", UserController.getUserProfile);
+router.post("/sendmsg", UserController.userSendMsg);
 export default router;

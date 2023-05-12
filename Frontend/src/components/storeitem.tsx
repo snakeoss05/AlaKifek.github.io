@@ -17,9 +17,9 @@ export default function Card(props: any) {
   };
 
   return (
-    <div id="CardProduct" key={props.item.id}>
+    <div id="CardProduct" key={props.item._id}>
       <div className="CardBody">
-        <Link to={`/Product/${props.item.id}`}>
+        <Link to={`/Product/${props.item._id}`}>
           <div className="img-container">
             <img className="img1" src={props.item.imgurl.mainimg} />
             <img className="img2" src={props.item.imgurl.secimg} />

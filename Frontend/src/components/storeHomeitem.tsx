@@ -101,7 +101,7 @@ export default function StoreHomeitem(props: any) {
       </div>
       {showFullDescription && (
         <Modal show={lgShow} onHide={handleClose} size="xl">
-          <SingleProductHome item={props.item} />
+          <SingleProductHome item={props.item} handleClose={handleClose} />
         </Modal>
       )}
     </div>

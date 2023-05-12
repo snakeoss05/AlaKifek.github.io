@@ -51,9 +51,11 @@ function Navbar() {
     const token = Cookies.get("token");
     if (token) {
       return (
-        <button className="btn  ms-auto" onClick={Logout}>
-          <i className="fa-solid fa-right-from-bracket"></i>
-        </button>
+        <li className="nav-item me-1 me-lg-0 ">
+          <button className="btn  ms-auto" onClick={Logout}>
+            <i className="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </li>
       );
     } else {
       <></>;
@@ -455,7 +457,7 @@ function Navbar() {
               </NavLink>
             </li>
 
-            <li className="nav-item me-1 me-lg-0 ">{ChangLogoutIcon()}</li>
+            {ChangLogoutIcon()}
 
             <li className="nav-item me-1 me-lg-0 position-relative">
               <a className="nav-link">

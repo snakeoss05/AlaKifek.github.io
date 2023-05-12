@@ -28,7 +28,10 @@
 .chat-avatar {
   float: right;
 }
-
+.panel-body {
+  max-height: 366px;
+  overflow-y: auto;
+}
 .chat-avatar .avatar {
   width: 30px;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2),

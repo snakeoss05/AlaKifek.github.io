@@ -5,7 +5,7 @@ const Footer = () => {
     <div>
       <footer
         className="text-center text-lg-start text-current border  "
-        style={{ backgroundColor: "#f2e5dcba" }}
+        style={{ backgroundColor: "#f3f5f8" }}
       >
         <section className="d-flex justify-content-center  p-4 border-bottom">
           <div className="me-5 d-none d-lg-block ">
@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="text-bg-light ms shadow-sm text-black text-center flex-column p-4 d-flex flex-lg-row rounded-pill me-5">
+          <div className="text-bg-light ms shadow-sm text-black text-center flex-column p-4 d-flex flex-lg-row rounded-pill me-3">
             <div className="d-flex align-items-center ms-2 flex-column flex-lg-row ">
               <i className="fa-solid fa-truck me-2 text-black my-2"></i>
               <p className="text-uppercase mb-2 mb-lg-0 fw-bold ">

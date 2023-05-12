@@ -118,4 +118,14 @@ export default class UserController {
       res.status(500).json({ message: "Server error" });
     }
   }
+  static async userSendMsg(req, res) {
+    const { id, msg, date } = req.body;
+    try {
+      const userMsg = await UserDao.UserSend(id, msg, date);
+      res.status(200).json(userMsg);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server error" });
+    }
+  }
 }

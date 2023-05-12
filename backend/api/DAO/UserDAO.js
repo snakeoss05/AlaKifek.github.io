@@ -4,10 +4,11 @@ import mongodb from "mongodb";
 import mongoose from "mongoose";
 import User from "../Models/Userschema.js";
 import bcrypt from "bcrypt";
-
+import Chat from "../Models/Chat.js";
 const ObjectId = mongodb.ObjectId;
 dotenv.config();
 let connection;
+let ChatMsg;
 export default class UserDao {
   static async injectDB() {
     if (connection) {
@@ -21,6 +22,7 @@ export default class UserDao {
       });
 
       connection = client.db("Productlist").collection("User");
+      ChatMsg = client.db("Productlist").collection("Usermsg");
 
       console.log("Connected to MongoDB!");
     } catch (error) {
@@ -81,6 +83,20 @@ export default class UserDao {
       );
 
       return user;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+  static async UserSend(id, msg, date) {
+    try {
+      const newmsg = new Chat({
+        id: id,
+        msg: msg,
+        date: date,
+      });
+
+      return await ChatMsg.insertOne(newmsg);
     } catch (error) {
       console.error(error);
       throw error;

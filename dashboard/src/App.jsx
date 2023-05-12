@@ -7,6 +7,7 @@ import Settings from "./pages/settings";
 import Dashboard from "./pages/dashboard";
 import ClientCommands from "./pages/ClientCommands";
 import User from "./pages/user";
+import AdminContact from "./pages/AdminContact";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
 
         <Routes>
           <Route path="/settings" element={<Settings />} />
-
+          <Route path="/Contact" element={<AdminContact />} />
           <Route path="/user" element={<User />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/" element={<Login />} />
