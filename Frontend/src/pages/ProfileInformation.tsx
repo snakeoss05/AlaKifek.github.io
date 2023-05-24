@@ -27,6 +27,7 @@ export default function ProfileInformation() {
   const [userProfile, setUserProfile] = useState<ServerData>();
   const [imageUrl, setImageUrl] = useState<string | null>();
   const [toggler, settoggler] = useState(false);
+  const [file, setFile] = useState(null);
   const [Profile, setProfile] = useState({
     email: {
       value: "",
@@ -82,7 +83,7 @@ export default function ProfileInformation() {
 
     try {
       const response = await axios.get<ServerData>(
-        `https://alakifekbackend.onrender.com/api/ath/user`,
+        `http://localhost:5000/api/ath/user`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -100,7 +101,7 @@ export default function ProfileInformation() {
 
   function handleFileInputChange(event: any) {
     const file = event.target.files[0];
-
+    setFile(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
@@ -111,6 +112,7 @@ export default function ProfileInformation() {
 
   const UpdateProfile = async () => {
     var token = Cookies.get("token");
+
     let id = userProfile?._id;
     const formValues = {
       email: Profile.email.value,
@@ -122,15 +124,11 @@ export default function ProfileInformation() {
     };
     try {
       await axios
-        .put(
-          `https://alakifekbackend.onrender.com/api/ath/user/profile/${id}`,
-          formValues,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .put(`http://localhost:5000/api/ath/user/profile/${id}`, formValues, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           setProfile({
             email: {
@@ -233,6 +231,8 @@ export default function ProfileInformation() {
                     <input
                       type="file"
                       className="form-control"
+                      name="profileImage"
+                      accept="image/*"
                       onChange={handleFileInputChange}
                     ></input>
                   </button>

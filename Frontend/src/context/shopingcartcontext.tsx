@@ -1,13 +1,18 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import Shopingcart from "../components/shopingcart";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+
 type Shoppingcartproviderprops = {
   children: ReactNode;
 };
 type ShoppingCartContext = {
   openCart: () => void;
   CloseCart: () => void;
+  UserLog: boolean;
   cartQuantity: number;
+  userState: (state: boolean) => void;
   cartItems: CartItem[];
   getItemQuantity: (id: any) => number;
   increaseItemQuantity: (
@@ -32,7 +37,9 @@ export function useShoppingCart() {
   return useContext(ShoppingCartContext);
 }
 export function ShoppingCartProvider({ children }: Shoppingcartproviderprops) {
+  const navigate = useNavigate();
   const [isOpen, setisOpen] = useState(false);
+  const [UserLog, setUserLog] = useState(false);
   const [cartItems, setCArtItems] = useLocalStorage<CartItem[]>(
     "Shopping-cart",
     []
@@ -89,6 +96,18 @@ export function ShoppingCartProvider({ children }: Shoppingcartproviderprops) {
       return currItems.filter((item) => item.id !== id);
     });
   }
+
+  function userState(state: boolean) {
+    if (state == true) {
+      navigate("/profile");
+      setUserLog(true);
+    } else {
+      localStorage.clear();
+      Cookies.remove("token");
+      navigate("/login");
+      setUserLog(false);
+    }
+  }
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -98,8 +117,10 @@ export function ShoppingCartProvider({ children }: Shoppingcartproviderprops) {
         removeFromCArt,
         openCart,
         CloseCart,
+        userState,
         cartItems,
         cartQuantity,
+        UserLog,
       }}
     >
       {children}

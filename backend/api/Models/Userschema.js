@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
 
   AddressLine: { type: String },
   PhoneNumber: { type: String },
+  ProfileImage: { type: String },
   role: { type: String, enum: ["user", "admin"], default: "user" },
 });
 

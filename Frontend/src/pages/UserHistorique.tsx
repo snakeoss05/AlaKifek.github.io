@@ -35,14 +35,11 @@ export default function UserHistorique() {
     const getUserById = async () => {
       var token = Cookies.get("token");
       try {
-        const response = await axios.get(
-          `https://alakifekbackend.onrender.com/api/ath/user`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`http://localhost:5000/api/ath/user`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setuser(response.data);
         setmyemail(response.data.email);
@@ -54,9 +51,7 @@ export default function UserHistorique() {
   }, []);
   useEffect(() => {
     axios
-      .get(
-        `https://alakifekbackend.onrender.com/api/submit-form/clientCommandst/${myemail}`
-      )
+      .get(`http://localhost:5000/api/submit-form/clientCommandst/${myemail}`)
       .then((rep) => {
         setmyOrder(rep.data.clientCommands);
       })

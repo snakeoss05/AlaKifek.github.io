@@ -78,8 +78,8 @@ export default function StoreHomeitem(props: any) {
               <a>Women's Black Top</a>
             </h3>
             <div className="price">
-              {calculateDiscountedPrice(props.item.price, props.item.promotion)}
-              <span>${props.item.price}</span>
+              {calculateDiscountedPrice(props.item.price, props.item.promotion)}{" "}
+              <span>{props.item.price}DT</span>
             </div>
             <a
               className="add-to-cart"

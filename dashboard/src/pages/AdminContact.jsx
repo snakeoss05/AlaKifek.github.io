@@ -1,228 +1,52 @@
-import "../css/chat.css";
 import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
+import {io} from "socket.io-client";
+const socket = io("http://localhost:3000");
 
-export default function AdminContact() {
-  const socket = io("http://localhost:5000");
-
-  const [message, setMessage] = useState("");
-  const [receivedMessages, setReceivedMessages] = useState([]);
+function AdminContact() {
+  socket.emit("new-client","new user")
+  const [messages, setMessages] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  socket.on("connect", () => {
+    console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+  });
+  socket.emit("hello", "world");
+  console.log(socket)
+ /*  const datas = localStorage.getItem("userProfile");
+  const userName = JSON.parse(datas);
 
   useEffect(() => {
-    socket.on("adminMessage", (message) => {
-      setReceivedMessages((prevMessages) => [...prevMessages, message]);
-    });
-
-    socket.on("userMessage", (message) => {
-      setReceivedMessages((prevMessages) => [...prevMessages, message.message]);
+   socket.on("userMessage", ({ message }) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
     });
 
     return () => {
-      socket.disconnect();
+      socket.off("userMessage");
+      socket.off("addUser");
     };
   }, []);
 
-  const handleSendMessage = () => {
-    const newMessage = {
-      userId: "644e61d07e6cb4fe51167a4c",
-      message: message,
-    };
-    socket.emit("adminMessage", newMessage);
-    setMessage("");
+  const sendMessage = () => {
+    if (inputValue) {
+      const data = {
+        message: inputValue,
+        date: new Date().toLocaleTimeString,
+      };
+      socket.emit("userMessage", data);
+      setMessages((prevMessages) => [...prevMessages, inputValue]);
+      setInputValue("");
+    }
   };
+*/
+
   return (
-    <div>
-      <div className="container">
-        <div className="row clearfix">
-          <div className="col-lg-12">
-            <div className="card chat-app">
-              <div id="plist" className="people-list">
-                <div className="input-group">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="fa fa-search" />
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search..."
-                  />
-                </div>
-                <ul className="list-unstyled chat-list mt-2 mb-0">
-                  <li className="clearfix">
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                      alt="avatar"
-                    />
-                    <div className="about">
-                      <div className="name">Vincent Porter</div>
-                      <div className="status">
-                        {" "}
-                        <i className="fa fa-circle offline" /> left 7 mins ago{" "}
-                      </div>
-                    </div>
-                  </li>
-                  <li className="clearfix active">
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                      alt="avatar"
-                    />
-                    <div className="about">
-                      <div className="name">Aiden Chavez</div>
-                      <div className="status">
-                        {" "}
-                        <i className="fa fa-circle online" /> online{" "}
-                      </div>
-                    </div>
-                  </li>
-                  <li className="clearfix">
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                      alt="avatar"
-                    />
-                    <div className="about">
-                      <div className="name">Mike Thomas</div>
-                      <div className="status">
-                        {" "}
-                        <i className="fa fa-circle online" /> online{" "}
-                      </div>
-                    </div>
-                  </li>
-                  <li className="clearfix">
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                      alt="avatar"
-                    />
-                    <div className="about">
-                      <div className="name">Christian Kelly</div>
-                      <div className="status">
-                        {" "}
-                        <i className="fa fa-circle offline" /> left 10 hours ago{" "}
-                      </div>
-                    </div>
-                  </li>
-                  <li className="clearfix">
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar8.png"
-                      alt="avatar"
-                    />
-                    <div className="about">
-                      <div className="name">Monica Ward</div>
-                      <div className="status">
-                        {" "}
-                        <i className="fa fa-circle online" /> online{" "}
-                      </div>
-                    </div>
-                  </li>
-                  <li className="clearfix">
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                      alt="avatar"
-                    />
-                    <div className="about">
-                      <div className="name">Dean Henry</div>
-                      <div className="status">
-                        {" "}
-                        <i className="fa fa-circle offline" /> offline since Oct
-                        28{" "}
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="chat">
-                <div className="chat-header clearfix">
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <a
-                        href="javascript:void(0);"
-                        data-toggle="modal"
-                        data-target="#view_info">
-                        <img
-                          src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                          alt="avatar"
-                        />
-                      </a>
-                      <div className="chat-about">
-                        <h6 className="m-b-0">Aiden Chavez</h6>
-                        <small>Last seen: 2 hours ago</small>
-                      </div>
-                    </div>
-                    <div className="col-lg-6 hidden-sm text-right">
-                      <a
-                        href="javascript:void(0);"
-                        className="btn btn-outline-secondary">
-                        <i className="fa fa-camera" />
-                      </a>
-                      <a
-                        href="javascript:void(0);"
-                        className="btn btn-outline-primary">
-                        <i className="fa fa-image" />
-                      </a>
-                      <a
-                        href="javascript:void(0);"
-                        className="btn btn-outline-info">
-                        <i className="fa fa-cogs" />
-                      </a>
-                      <a
-                        href="javascript:void(0);"
-                        className="btn btn-outline-warning">
-                        <i className="fa fa-question" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="chat-history">
-                  <ul className="m-b-0">
-                    <li className="clearfix">
-                      <div className="message-data text-right">
-                        <span className="message-data-time">
-                          10:10 AM, Today
-                        </span>
-                        <img
-                          src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                          alt="avatar"
-                        />
-                      </div>
-                      <div className="message other-message float-right">
-                        {" "}
-                        Hi Aiden, how are you? How is the project coming along?{" "}
-                      </div>
-                    </li>
-                    {receivedMessages.map((message, index) => (
-                      <li className="clearfix" key={index}>
-                        <div className="message-data">
-                          <span className="message-data-time">
-                            10:12 AM, Today
-                          </span>
-                        </div>
-                        <div className="message my-message">{message}</div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="chat-message clearfix">
-                  <div className="input-group mb-0">
-                    <div className="input-group-prepend">
-                      <button
-                        className="btn btn-outline-primary input-group-text"
-                        onClick={handleSendMessage}>
-                        <i className="fa-regular fa-paper-plane"></i>
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter text here..."
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="position-absolute start-50">
+      <h2>Admin Chat</h2>
+      <div>
+     
       </div>
+
     </div>
   );
 }
+
+export default AdminContact;

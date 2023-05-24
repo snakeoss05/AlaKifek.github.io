@@ -37,7 +37,7 @@ export default function StoreByCategory() {
   const fetchItems = async () => {
     axios
       .get<Product[]>(
-        `https://alakifekbackend.onrender.com/api/products/filter/category/${category}`
+        `http://localhost:5000/api/products/filter/category/${category}`
       )
       .then((response) => {
         setItems(response.data);

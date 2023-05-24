@@ -20,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import UserAccount from "./pages/UserAcoount";
 import Log from "./pages/log";
+
 export default function App() {
   return (
     <ShoppingCartProvider>

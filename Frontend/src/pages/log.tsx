@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./logStyle.css";
 
 import { useNavigate } from "react-router-dom";
-
+import { useShoppingCart } from "../context/shopingcartcontext";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import jwt from "jsonwebtoken";
+
 import Cookies from "js-cookie";
 import UserAccount from "./UserAcoount";
 export default function Log() {
+  const { userState, UserLog } = useShoppingCart();
   const [login, setlogin] = useState(false);
   const [register, setregister] = useState({
     username: "",
@@ -40,7 +41,7 @@ export default function Log() {
     e.preventDefault();
     try {
       const response: AxiosResponse = await axios.post(
-        "https://alakifekbackend.onrender.com/api/ath/register",
+        "http://localhost:5000/api/ath/register",
         register
       );
       setsigninmsg(response.data);
@@ -68,13 +69,13 @@ export default function Log() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://alakifekbackend.onrender.com/api/ath/login",
+        "http://localhost:5000/api/ath/login",
         logform
       );
 
       Cookies.set("token", response.data.token);
 
-      navigate("/profile");
+      userState(true);
     } catch (error) {
       setVerificationMessagett("Email OR Password Not Correct");
       const timeoutId = setTimeout(() => {
@@ -86,20 +87,13 @@ export default function Log() {
       };
     }
   };
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [isLoggedIn]);
+
   function Changestyle() {
     setlogin(!login);
   }
   return (
     <>
-      {isLoggedIn ? (
+      {UserLog ? (
         <UserAccount />
       ) : (
         <div

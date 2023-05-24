@@ -186,14 +186,14 @@ a {
 .landing {
   height: fit-content;
   margin-bottom: 3px;
+  width: 100vh;
 }
 .hero__image {
   height: auto;
-  width: 100%;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
   object-fit: fill;
-  background-size: contain;
-
-  font-family: "object-fit: cover";
 }
 .header-area .main-nav .nav li a {
   display: block;
@@ -228,7 +228,8 @@ a {
 }
 .hero__image {
   height: 17vh !important;
-  margin-top: 20px !important;
+  margin-top: 20px;
+  width: 100vw;
 }
 @media screen and (min-width: 992px) {
   .imgres {

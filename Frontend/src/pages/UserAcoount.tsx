@@ -4,6 +4,7 @@ import Tabs from "react-bootstrap/Tabs";
 import ProfileInformation from "./ProfileInformation";
 import UserHistorique from "./UserHistorique";
 import UserContact from "./UserContact";
+
 function UserAccount() {
   return (
     <Tabs

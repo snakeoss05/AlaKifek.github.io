@@ -28,9 +28,7 @@ export default function Singlepage() {
 
   useEffect(() => {
     axios
-      .get<Product>(
-        `https://alakifekbackend.onrender.com/api/products/get/${id}`
-      )
+      .get<Product>(`http://localhost:5000/api/products/get/${id}`)
       .then((response) => {
         setProduct(response.data);
         setmainimg(response.data?.imgurl.mainimg);

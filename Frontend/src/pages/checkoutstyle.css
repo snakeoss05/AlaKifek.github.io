@@ -84,7 +84,7 @@ a:active {
   border-bottom: 0px solid #aaaa !important;
 }
 
-p {
+.card-header p {
   font-size: 13px;
 }
 

@@ -19,6 +19,7 @@ function Navbar() {
   const navigate = useNavigate();
   const { cartQuantity } = useShoppingCart();
   const { cartItems } = useShoppingCart();
+  const { userState, UserLog } = useShoppingCart();
   const [navbarColor, setNavbarColor] = useState("white");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<results[]>([]);
@@ -26,7 +27,7 @@ function Navbar() {
   const [category, setLinkValue] = useState("");
   const elementRef = useRef<HTMLInputElement>(null);
   const [expanded, setExpanded] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const handleSelect = () => {
     setExpanded(false);
   };
@@ -42,19 +43,15 @@ function Navbar() {
       document.removeEventListener("click", handleClick);
     };
   }, []);
-  function Logout(e: any) {
-    navigate("/login");
-    Cookies.remove("token");
-    localStorage.clear();
-  }
+
   const ChangLogoutIcon = () => {
-    const token = Cookies.get("token");
-    if (token) {
+    if (UserLog) {
       return (
-        <li className="nav-item me-1 me-lg-0 ">
-          <button className="btn  ms-auto" onClick={Logout}>
-            <i className="fa-solid fa-right-from-bracket"></i>
-          </button>
+        <li className="nav-item mx-2 me-lg-0 ">
+          <i
+            className="fa-solid fa-right-from-bracket"
+            onClick={() => userState(false)}
+          ></i>
         </li>
       );
     } else {
@@ -73,7 +70,7 @@ function Navbar() {
     console.log(`Query: ${query}`);
     try {
       const response = await axios.get<results[]>(
-        `https://alakifekbackend.onrender.com/api/products/get/Search/${query}`
+        `http://localhost:5000/api/products/get/Search/${query}`
       );
       if (query) {
         setResults(response.data);
@@ -448,8 +445,8 @@ function Navbar() {
           </Navi.Collapse>
 
           <ul className="navbar-nav d-flex flex-row justify-content-start  align-items-center">
-            <li className="nav-item me-1 me-lg-0 ">
-              <i className="fa-regular fa-heart fs-5 me-2 text-black"></i>
+            <li className="nav-item mx-2 me-lg-0 ">
+              <i className="fa-regular fa-heart text-black"></i>
             </li>
             <li className="nav-item me-1 me-lg-0 ">
               <NavLink to="/login" className="nav-link">
