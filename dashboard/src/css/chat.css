@@ -91,7 +91,9 @@
 }
 
 .chat .chat-history {
+  height: 358px;
   padding: 20px;
+  overflow-y: auto;
 }
 
 .chat .chat-history ul {
@@ -122,7 +124,7 @@
 }
 
 .chat .chat-history .message {
-  color: #444;
+  color: #ffffff;
   padding: 18px 20px;
   line-height: 26px;
   font-size: 16px;
@@ -131,36 +133,8 @@
   position: relative;
 }
 
-.chat .chat-history .message:after {
-  bottom: 100%;
-  left: 7%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-bottom-color: #fff;
-  border-width: 10px;
-  margin-left: -10px;
-}
-
 .chat .chat-history .my-message {
   background: #efefef;
-}
-
-.chat .chat-history .my-message:after {
-  bottom: 100%;
-  left: 30px;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-bottom-color: #efefef;
-  border-width: 10px;
-  margin-left: -10px;
 }
 
 .chat .chat-history .other-message {
@@ -194,7 +168,7 @@
 }
 
 .me {
-  color: #1d8ecd;
+  background-color: #48b0f7 !important;
 }
 
 .float-right {
@@ -202,7 +176,7 @@
 }
 .chat .chat-message {
   border-top: 2px solid #fff;
-  position: absolute !important;
+  position: relative !important;
   bottom: 0 !important;
   width: 100%;
 }

@@ -21,14 +21,17 @@ import "react-toastify/dist/ReactToastify.css";
 import UserAccount from "./pages/UserAcoount";
 import Log from "./pages/log";
 
+
 export default function App() {
   return (
     <ShoppingCartProvider>
+     
       <Navbar />
       <div className="mb-4 container-fluid">
         <Routes>
           <Route path="/" element={<Home />} />
-
+          
+          
           <Route path="/contact" element={<Contact />} />
           <Route path="/Impression" element={<Impression />} />
           <Route path="/about" element={<About />} />

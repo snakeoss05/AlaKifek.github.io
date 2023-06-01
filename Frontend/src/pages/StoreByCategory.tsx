@@ -76,7 +76,7 @@ export default function StoreByCategory() {
       <section className="landing">
         <img
           className="hero__image"
-          src="https://scontent.ftun2-2.fna.fbcdn.net/v/t39.30808-6/344535083_799096674976333_3863739484278083826_n.png?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=tnVPqwdmUSYAX-iiyue&_nc_ht=scontent.ftun2-2.fna&oh=00_AfAQeRMfL249OYwua2AwAF9VnP5qu61VrHnVqIsNoDD23A&oe=645F8F82"
+          src="https://i.imgur.com/XFbYF0g.png"
         />
       </section>
       <section className="container-fluid ">

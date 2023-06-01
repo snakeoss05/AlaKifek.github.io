@@ -86,8 +86,9 @@ h4.card-title {
 .ps-container {
   -ms-touch-action: auto;
   touch-action: auto;
-  overflow: hidden !important;
+  overflow: auto !important;
   -ms-overflow-style: none;
+  height: 400px;
 }
 
 .media-chat {
@@ -131,11 +132,12 @@ h4.card-title {
 .media-chat .media-body p {
   position: relative;
   padding: 6px 8px;
+  display: inherit;
   margin: 4px 0;
   background-color: #f5f6f7;
   border-radius: 3px;
   font-weight: 100;
-  color: #9b9b9b;
+  color: #686767;
 }
 
 .media > * {

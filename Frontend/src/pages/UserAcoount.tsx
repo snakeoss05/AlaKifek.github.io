@@ -4,7 +4,7 @@ import Tabs from "react-bootstrap/Tabs";
 import ProfileInformation from "./ProfileInformation";
 import UserHistorique from "./UserHistorique";
 import UserContact from "./UserContact";
-
+import SocketComponent from "../components/SocketComponent"
 function UserAccount() {
   return (
     <Tabs
@@ -20,8 +20,8 @@ function UserAccount() {
       <Tab eventKey="Historique" title="Historique">
         <UserHistorique />
       </Tab>
-      <Tab eventKey="contact" title="Contact">
-        <UserContact />
+      <Tab eventKey="contact" title="Contact" >
+        <SocketComponent />
       </Tab>
     </Tabs>
   );

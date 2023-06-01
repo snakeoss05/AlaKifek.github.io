@@ -157,7 +157,7 @@ function Navbar() {
               className="navbar-brand mt-2 mt-lg-0 overflow-auto h-100"
             >
               <img
-                src="https://scontent.ftun2-2.fna.fbcdn.net/v/t39.30808-6/344737817_761779549014226_3919548965889801483_n.png?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=94z0M-vxGX8AX8B8qKV&_nc_ht=scontent.ftun2-2.fna&oh=00_AfDZbSQBASiefwhegMSVBhpsHzJcmCezwtMgQMd3atlxHw&oe=645FBA8C"
+                src="https://i.imgur.com/YzaiAsz.png"
                 height="100"
                 className="object-fit-content"
               />

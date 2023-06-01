@@ -58,7 +58,7 @@ export default class UserController {
       req.body;
 
     const { id } = req.params;
-    console.log(ProfileImage);
+
     const updates = {
       $set: {},
     };

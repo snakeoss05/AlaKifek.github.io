@@ -3,48 +3,45 @@ import mongodb from "mongodb";
 import dotenv from "dotenv";
 import FormDAO from "./api/DAO/FormDAO.js";
 import ProductDAO from "./api/DAO/ProductDAO.js";
-import UserController from "./api/controller/UserController.js";
+
 import UserDao from "./api/DAO/UserDAO.js";
-import http from "http";
-import jwt from "jsonwebtoken";
-import { Server } from "socket.io";
-import { time } from "console";
+import { createServer } from "http";
+import { Server as httpserver } from "socket.io";
+
 dotenv.config();
 
 const MongoClient = mongodb.MongoClient;
 const port = process.env.PORT || 8000;
-const httpserver = http.createServer(app);
-const io = new Server(httpserver, {
+const server = createServer(app);
+const io = new httpserver(server, {
   cors: {
-    origin: ["http://localhost:3001","http://localhost:3000"],
-    methods: ["GET", "POST"]
-  }
+    origin: ["http://localhost:5001", "http://localhost:3000"],
+  },
 });
-io.on("connection", (socket) => {
-  socket.on("hello", (arg) => {
-    console.log(arg); // world
-  });
-});
-/*
-const users = [];
+let users = [];
 
-const adduser = (userId, sockeId) => {
-  !users.some(
-    (user) => user.userId === userId && users.push({ userId, sockeId })
-  );
+const addUser = (userId, socketId) => {
+  if (!users.some((user) => user.userId === userId)) {
+    users.push({ userId, socketId });
+  }
 };
+
 const removeUser = (socketId) => {
-  const users = users.filter((user) => user.sockeId != socketId);
+  users = users.filter((user) => user.socketId !== socketId);
 };
 
 // Socket.io event handlers
+io.on("connection", (socket) => {
+  console.log("New client connected");
 
-  
-
+  socket.on("addUser", (userId) => {
+    addUser(userId, socket.id);
+    io.emit("getUsers", users);
+  });
 
   // Handle admin join room
   socket.on("joinRoom", (roomToJoin) => {
-    const currentRoom = users[roomToJoin];
+    const currentRoom = users.find((user) => user.socketId === socket.id);
     if (currentRoom) {
       socket.leave(currentRoom); // Leave the current room
     }
@@ -54,29 +51,27 @@ const removeUser = (socketId) => {
   });
 
   // Handle admin messages
-  socket.on("adminMessage", ({ room: targetRoom, message }) => {
-    io.to(targetRoom).emit("adminMessage", { room: targetRoom, message }); // Broadcast the message to the specific room
+  socket.on("adminMessage", (data) => {
+    io.to(data.room).emit("sendToUserMessage", data);
+    // Broadcast the message to the specific room
   });
 
   // Handle user messages
   socket.on("userMessage", (data) => {
-    io.emit("userMessage", {
-      message: data.message,
-      data: data.date,
-    }); // Broadcast the message to the specific room
+    io.emit("userMessage", data); // Broadcast the message to all connected clients
+    console.log(data);
   });
 
   // Handle disconnection
   socket.on("disconnect", () => {
     console.log("Client disconnected");
     removeUser(socket.id);
-    io.emit("getUsers", users); // Emit the updated list of opened rooms to
+    io.emit("getUsers", users); // Emit the updated list of users to all connected clients
   });
-  io.emit("getUsers", users);
-  // Emit the initial list of opened rooms to the connected client
-}); 
 
-*/
+  // Emit the initial list of users to the connected client
+  socket.emit("getUsers", users);
+});
 
 MongoClient.connect(process.env.URI_PRODUCT, {
   useNewUrlParser: true,
@@ -87,7 +82,7 @@ MongoClient.connect(process.env.URI_PRODUCT, {
     await FormDAO.injectDB(client);
     await ProductDAO.injectDB(client);
     await UserDao.injectDB(client);
-    httpserver.listen(port, () => {
+    server.listen(port, () => {
       console.log(`Server running at ${port}`);
     });
   });

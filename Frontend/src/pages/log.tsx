@@ -54,7 +54,7 @@ export default function Log() {
         clearTimeout(timeoutId);
       };
     } catch (error) {
-      setVerificationMessage("Email Or Username already exists.");
+      setVerificationMessage(error);
       const timeoutId = setTimeout(() => {
         setVerificationMessage("");
       }, 3000);
@@ -77,7 +77,7 @@ export default function Log() {
 
       userState(true);
     } catch (error) {
-      setVerificationMessagett("Email OR Password Not Correct");
+      setVerificationMessagett(error);
       const timeoutId = setTimeout(() => {
         setVerificationMessagett("");
       }, 3000);
@@ -197,8 +197,9 @@ export default function Log() {
                   <a href="#">Forgot your password?</a>
                   {verificationMessaget && (
                     <div
-                      className={`alert alert-danger  mx-auto  alert-verification ${verificationMessaget &&
-                        "alertfadeup"}`}
+                      className={`alert alert-danger  mx-auto  alert-verification ${
+                        verificationMessaget && "alertfadeup"
+                      }`}
                       style={{ fontSize: "14px" }}
                       role="alert"
                     >
