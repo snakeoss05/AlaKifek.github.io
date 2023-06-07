@@ -15,7 +15,7 @@ const port = process.env.PORT || 8000;
 const server = createServer(app);
 const io = new httpserver(server, {
   cors: {
-    origin: ["http://localhost:5001", "http://localhost:3000"],
+    origin: ["https://alakifekbackend.onrender.com", "http://localhost:3000"],
   },
 });
 let users = [];
