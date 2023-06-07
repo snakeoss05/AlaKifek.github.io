@@ -107,7 +107,7 @@ export function ShoppingCartProvider({ children }: Shoppingcartproviderprops) {
 
   function userState(state: boolean) {
     if (state == true) {
-      navigate("/profile");
+      navigate("/ProfileInformation");
       setUserLog(true);
     } else {
       localStorage.clear();
@@ -137,8 +137,7 @@ export function ShoppingCartProvider({ children }: Shoppingcartproviderprops) {
         cartItems,
         cartQuantity,
         UserLog,
-      }}
-    >
+      }}>
       {children}
       <Shopingcart isOpen={isOpen} />
     </ShoppingCartContext.Provider>

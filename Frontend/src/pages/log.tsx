@@ -41,7 +41,7 @@ export default function Log() {
     e.preventDefault();
     try {
       const response: AxiosResponse = await axios.post(
-        "http://localhost:5000/api/ath/register",
+        "https://alakifekbackend.onrender.com/api/ath/register",
         register
       );
       setsigninmsg(response.data);
@@ -54,7 +54,7 @@ export default function Log() {
         clearTimeout(timeoutId);
       };
     } catch (error) {
-      setVerificationMessage(error);
+      setVerificationMessage(error.response.data);
       const timeoutId = setTimeout(() => {
         setVerificationMessage("");
       }, 3000);
@@ -69,7 +69,7 @@ export default function Log() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/ath/login",
+        "https://alakifekbackend.onrender.com/api/ath/login",
         logform
       );
 
@@ -77,7 +77,8 @@ export default function Log() {
 
       userState(true);
     } catch (error) {
-      setVerificationMessagett(error);
+      setVerificationMessagett(error.response.data);
+      console.log(error.response.data);
       const timeoutId = setTimeout(() => {
         setVerificationMessagett("");
       }, 3000);
@@ -99,13 +100,11 @@ export default function Log() {
         <div
           className="d-flex justify-content-center align-items-center flex-column familyMon  py-5"
           id="logform"
-          style={{ backgroundColor: "#f6f5f7" }}
-        >
+          style={{ backgroundColor: "#f6f5f7" }}>
           <>
             <div
               className={`container ${login ? "right-panel-active" : ""}`}
-              id="container"
-            >
+              id="container">
               <div className="form-container sign-up-container">
                 <form action="#" onSubmit={registerform}>
                   <h1>Create Account</h1>
@@ -146,8 +145,7 @@ export default function Log() {
                     <div
                       className="alert alert-success mx-auto"
                       style={{ fontSize: "14px" }}
-                      role="alert"
-                    >
+                      role="alert">
                       {signinmsg}
                     </div>
                   )}
@@ -155,8 +153,7 @@ export default function Log() {
                     <div
                       className="alert alert-danger  mx-auto"
                       style={{ fontSize: "14px" }}
-                      role="alert"
-                    >
+                      role="alert">
                       {verificationMessage}
                     </div>
                   )}
@@ -201,8 +198,7 @@ export default function Log() {
                         verificationMessaget && "alertfadeup"
                       }`}
                       style={{ fontSize: "14px" }}
-                      role="alert"
-                    >
+                      role="alert">
                       {verificationMessaget}
                     </div>
                   )}

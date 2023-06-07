@@ -51,7 +51,7 @@ export default function Checkout() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/submit-form/post",
+        "https://alakifekbackend.onrender.com/api/submit-form/post",
 
         user ? formDataone : formData
       );
@@ -80,11 +80,14 @@ export default function Checkout() {
     const getUserById = async () => {
       var token = Cookies.get("token");
       try {
-        const response = await axios.get(`http://localhost:5000/api/ath/user`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `https://alakifekbackend.onrender.com/api/ath/user`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         setuser(response.data);
       } catch (error) {
@@ -111,7 +114,7 @@ export default function Checkout() {
                     <div className="col">
                       <img
                         className="irc_mi img-fluid cursor-pointer "
-                        src="https://scontent.ftun2-2.fna.fbcdn.net/v/t39.30808-6/344737817_761779549014226_3919548965889801483_n.png?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=94z0M-vxGX8AX8B8qKV&_nc_ht=scontent.ftun2-2.fna&oh=00_AfDZbSQBASiefwhegMSVBhpsHzJcmCezwtMgQMd3atlxHw&oe=645FBA8C"
+                        src="https://i.imgur.com/YzaiAsz.png"
                         width={80}
                         height={100}
                       />
@@ -134,8 +137,7 @@ export default function Checkout() {
                       <li className="breadcrumb-item font-weight-bold ">
                         <NavLink
                           className="black-text text-uppercase links"
-                          to={`/Category/Accessoires Pc`}
-                        >
+                          to={`/Category/Accessoires Pc`}>
                           <span className="mr-md-3 mr-1 ">BACK TO SHOP</span>
                         </NavLink>
                         <i
@@ -157,8 +159,7 @@ export default function Checkout() {
                       <li className="breadcrumb-item font-weight-bold">
                         <a
                           className="black-text text-uppercase active-2 links"
-                          href="#"
-                        >
+                          href="#">
                           <span className="mr-md-3 mr-1">CHECKOUT</span>
                         </a>
                       </li>
@@ -258,8 +259,7 @@ export default function Checkout() {
                                 <div className="form-group">
                                   <label
                                     htmlFor="NAME"
-                                    className="small text-muted mb-1"
-                                  >
+                                    className="small text-muted mb-1">
                                     City
                                   </label>
                                   <input
@@ -277,8 +277,7 @@ export default function Checkout() {
                                 <div className="form-group">
                                   <label
                                     htmlFor="NAME"
-                                    className="small text-muted mb-1"
-                                  >
+                                    className="small text-muted mb-1">
                                     Code Postal
                                   </label>
                                   <input
@@ -295,15 +294,13 @@ export default function Checkout() {
                               <div className="input-group  form-control-sm my-2 me-auto px-3">
                                 <label
                                   htmlFor="NAME"
-                                  className="small text-muted mb-1 col-12"
-                                >
+                                  className="small text-muted mb-1 col-12">
                                   Phone Number
                                 </label>
 
                                 <span
                                   className="input-group-text "
-                                  id="basic-addon1"
-                                >
+                                  id="basic-addon1">
                                   216
                                 </span>
                                 <input
@@ -348,8 +345,7 @@ export default function Checkout() {
                         return (
                           <div
                             className="d-flex  justify-content-between"
-                            key={item.id}
-                          >
+                            key={item.id}>
                             <div>
                               <div className="d-flex my-1 flex-column flex-sm-row justify-content-between">
                                 <img
@@ -437,8 +433,7 @@ export default function Checkout() {
                       <div className="d-grid mb-5 mt-4">
                         <button
                           type="button"
-                          className="btn btn-block btn-lg btn-outline-primary col-10 col-md-7 col-lg-6 mx-auto"
-                        >
+                          className="btn btn-block btn-lg btn-outline-primary col-10 col-md-7 col-lg-6 mx-auto">
                           ADD GIFT CODE
                         </button>
                       </div>

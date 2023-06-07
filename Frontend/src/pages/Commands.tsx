@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import axios from "axios";
 import io from "socket.io-client";
-const socket = io("http://localhost:5001");
+const socket = io("https://alakifekbackend.onrender.com:5001");
 interface ClientCommand {
   _id: string;
   firstname: string;
@@ -33,7 +33,9 @@ function ClientCommands() {
   useEffect(() => {
     async function getItems() {
       axios
-        .get<Product[]>("http://localhost:5000/api/products/get")
+        .get<Product[]>(
+          "https://alakifekbackend.onrender.com:5000/api/products/get"
+        )
         .then((response) => {
           setItems(response.data);
         });
@@ -44,7 +46,7 @@ function ClientCommands() {
     // Make a GET request to your Express backend to retrieve clientCommands data
     axios
       .get<{ clientCommands: ClientCommand[] }>(
-        "http://localhost:5000/api/submit-form/clientCommands"
+        "https://alakifekbackend.onrender.com:5000/api/submit-form/clientCommands"
       )
       .then((res) => {
         setClientCommands(res.data.clientCommands);
@@ -85,8 +87,7 @@ function ClientCommands() {
                     return (
                       <li
                         key={detail.id}
-                        className="d-flex align-items-center mb-2"
-                      >
+                        className="d-flex align-items-center mb-2">
                         <img
                           src={item?.imgurl.mainimg}
                           width="50"

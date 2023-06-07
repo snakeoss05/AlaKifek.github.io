@@ -6,6 +6,28 @@ body {
 * {
   cursor: auto;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+.letter-spacing {
+  letter-spacing: 4px; /* Adjust the value as per your preference */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffcf30;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+}
 .homegrid-container {
   /*margin-bottom: 1.5rem;*/
   position: relative;
@@ -16,6 +38,7 @@ body {
 }
 a {
   text-decoration: none !important;
+  color: black;
 }
 .homegrid {
   position: relative;

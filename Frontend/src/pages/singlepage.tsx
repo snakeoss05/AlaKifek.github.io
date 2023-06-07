@@ -28,7 +28,9 @@ export default function Singlepage() {
 
   useEffect(() => {
     axios
-      .get<Product>(`http://localhost:5000/api/products/get/${id}`)
+      .get<Product>(
+        `https://alakifekbackend.onrender.com/api/products/get/${id}`
+      )
       .then((response) => {
         setProduct(response.data);
         setmainimg(response.data?.imgurl.mainimg);
@@ -112,8 +114,7 @@ export default function Singlepage() {
                   );
                 }}
                 type="button"
-                className="btn fw-semibold me-auto my-auto btn-outline-dark  rounded-4"
-              >
+                className="btn fw-semibold me-auto my-auto btn-outline-dark  rounded-4">
                 ADD TO CART
               </button>
             </div>

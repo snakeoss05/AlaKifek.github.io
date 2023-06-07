@@ -27,7 +27,9 @@ export default function Items() {
 
   useEffect(() => {
     axios
-      .get<Product[]>("http://localhost:5000/api/products/getpromo")
+      .get<Product[]>(
+        "https://alakifekbackend.onrender.com/api/products/getpromo"
+      )
       .then((response) => {
         setItems(response.data);
       });

@@ -37,7 +37,7 @@ export default function StoreByCategory() {
   const fetchItems = async () => {
     axios
       .get<Product[]>(
-        `http://localhost:5000/api/products/filter/category/${category}`
+        `https://alakifekbackend.onrender.com/api/products/filter/category/${category}`
       )
       .then((response) => {
         setItems(response.data);
@@ -48,15 +48,14 @@ export default function StoreByCategory() {
   }, [category]);
 
   useEffect(() => {
-    let newFilteredItems = items;
-
-    if (selectedCategory !== "All") {
-      newFilteredItems = newFilteredItems.filter(
-        (item) => item.category === selectedCategory
+    const filteredProducts = items.filter((product) => {
+      return (
+        (selectedCategory === "All" || product.category === selectedCategory) &&
+        (selectedMark === "All" || product.mark === selectedMark)
       );
-    }
+    });
 
-    setfiltereditems(newFilteredItems);
+    setfiltereditems(filteredProducts);
   }, [selectedCategory, selectedMark, items]);
 
   const sortByPriceAscending = () => {
@@ -74,10 +73,7 @@ export default function StoreByCategory() {
   return (
     <div className="bg-body-secondry">
       <section className="landing">
-        <img
-          className="hero__image"
-          src="https://i.imgur.com/XFbYF0g.png"
-        />
+        <img className="hero__image" src="https://i.imgur.com/XFbYF0g.png" />
       </section>
       <section className="container-fluid ">
         <div className="row ">
@@ -91,8 +87,7 @@ export default function StoreByCategory() {
               </p>
               <button
                 className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn  text-center m-2 fw-bolder catbtn"
-                onClick={() => setfiltereditems(items)}
-              >
+                onClick={() => setfiltereditems(items)}>
                 <span className="text-muted">All</span>
                 <i className="fa-solid fa-angle-right ms-auto"></i>
               </button>
@@ -102,8 +97,7 @@ export default function StoreByCategory() {
                   <button
                     className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder btn-outline-warning border-0 catbtn"
                     key={category}
-                    onClick={() => setSelectedCategory(category)}
-                  >
+                    onClick={() => setSelectedCategory(category)}>
                     <span className="text-muted">{category}</span>
                     <i className="fa-solid fa-angle-right ms-auto"></i>
                   </button>
@@ -116,15 +110,13 @@ export default function StoreByCategory() {
                 </p>
                 <button
                   className="btn btn-outline-dark  mt-3 rounded-4 border-0"
-                  onClick={sortByPriceAscending}
-                >
+                  onClick={sortByPriceAscending}>
                   Ascending
                   <i className="fa-solid fa-arrow-down-9-1 mx-2 fs-4"></i>
                 </button>
                 <button
                   className="btn btn-outline-dark  mt-3 rounded-4 border-0"
-                  onClick={sortByPricedescending}
-                >
+                  onClick={sortByPricedescending}>
                   Descending
                   <i className="fa-solid fa-arrow-up-9-1 mx-2 fs-4 "></i>
                 </button>
@@ -139,8 +131,7 @@ export default function StoreByCategory() {
                   <button
                     className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center btn-outline-warning border-0 m-2 fw-bolder catbtn"
                     key={mark}
-                    onClick={() => setSelectedMark(mark)}
-                  >
+                    onClick={() => setSelectedMark(mark)}>
                     <span className="text-muted">{mark}</span>
                     <i className="fa-solid fa-angle-right ms-auto"></i>
                   </button>

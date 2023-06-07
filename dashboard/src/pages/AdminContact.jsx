@@ -39,7 +39,6 @@ const AdminContact = () => {
     return () => {
       socket.current.off("addUser");
       socket.current.off("getUsers");
-      socket.current.off("userMessage");
     };
   }, []);
 

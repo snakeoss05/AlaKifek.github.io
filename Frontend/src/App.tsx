@@ -20,18 +20,20 @@ import "react-toastify/dist/ReactToastify.css";
 
 import UserAccount from "./pages/UserAcoount";
 import Log from "./pages/log";
-
+import ProfileInformation from "./pages/ProfileInformation";
+import UserHistorique from "./pages/UserHistorique";
+import SocketComponent from "./components/SocketComponent";
 
 export default function App() {
   return (
     <ShoppingCartProvider>
-     
       <Navbar />
       <div className="mb-4 container-fluid">
         <Routes>
           <Route path="/" element={<Home />} />
-          
-          
+          <Route path="/contactAdmin" element={<SocketComponent />} />
+          <Route path="/UserHistorique" element={<UserHistorique />} />
+          <Route path="/ProfileInformation" element={<ProfileInformation />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/Impression" element={<Impression />} />
           <Route path="/about" element={<About />} />
