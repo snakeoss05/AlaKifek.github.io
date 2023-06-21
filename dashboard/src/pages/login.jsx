@@ -32,7 +32,7 @@ export default function Login() {
               </Link>
             </form>
             <div className="social-login">
-              <h3>log in Actia</h3>
+              <h3>ALA KIFEK</h3>
               <div className="social-icons">
                 <a href="#" className="social-login__icon fab fa-instagram"></a>
                 <a href="#" className="social-login__icon fab fa-facebook"></a>

@@ -10,7 +10,6 @@ const AdminContact = () => {
   );
   const [inputValue, setInputValue] = useState("");
   const [userConversation, setuserConversation] = useState([]);
-
   const scrollRef = useRef();
   const socket = useRef();
 
@@ -19,7 +18,7 @@ const AdminContact = () => {
   }
 
   useEffect(() => {
-    socket.current = io("ws://localhost:5000", {
+    socket.current = io("https://alakifekbackend.onrender.com", {
       reconnectionAttempts: 10,
       timeout: 10000,
       transports: ["websocket"],
@@ -39,6 +38,7 @@ const AdminContact = () => {
     return () => {
       socket.current.off("addUser");
       socket.current.off("getUsers");
+      socket.current.off("userMessage");
     };
   }, []);
 
@@ -98,8 +98,7 @@ const AdminContact = () => {
                     <li
                       className="clearfix"
                       key={room.socketId}
-                      onClick={() => joinRoom(room)}
-                    >
+                      onClick={() => joinRoom(room)}>
                       <div className="about">
                         <div className="name">{room.userId}</div>
                         <div className="status">
@@ -153,8 +152,7 @@ const AdminContact = () => {
                             user.sender ? "text-start" : "text-end"
                           }`}
                           key={index}
-                          ref={scrollRef}
-                        >
+                          ref={scrollRef}>
                           <div className="message-data text-right">
                             <span className="message-data-time">
                               {user.date}
@@ -167,8 +165,7 @@ const AdminContact = () => {
                           <div
                             className={`${
                               user.sender ? "bg-dark" : "me"
-                            } message`}
-                          >
+                            } message`}>
                             {user.message}
                           </div>
                         </li>
@@ -181,8 +178,7 @@ const AdminContact = () => {
                     <div className="input-group-prepend">
                       <button
                         className="btn btn-outline-warning"
-                        onClick={sendMessage}
-                      >
+                        onClick={sendMessage}>
                         <i className="fa-regular fa-paper-plane"></i>
                       </button>
                     </div>
