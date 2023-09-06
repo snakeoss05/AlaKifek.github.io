@@ -8,25 +8,32 @@ import SocketComponent from "../components/SocketComponent";
 import { Link } from "react-router-dom";
 function UserAccount() {
   return (
-    <nav className="w-100 d-flex align-items-center">
-      <ul className="d-flex flex-row justify-content-evenly align-items-center justify-content-center mx-auto bg-secondary-subtle border border-2 border-black rounded-pill mt-3 px-2 fw-medium space">
-        <li className="m-3 px-3 py-2 nav-link  letter-spacing rounded-pill btn btn-outline-warning border">
+    <nav className="d-flex align-items-center">
+      <ul className="container ">
+        <div className="row mx-auto my-3 ">
           <Link
             to="/ContactAdmin"
-            className="text-black text-center btn-outline-dark">
-            Contact <i className="fa-regular fa-comments mx-2"></i>
+            className="m-2 p-2  nav-link rounded-pill btn shadow-sm btn-outline-warning border col-lg-2 col-11 bg-white mx-auto">
+            Contact <i className="fa-regular fa-comments mx-1 mx-2"></i>
           </Link>
-        </li>
-        <li className="m-3 px-3 py-2 nav-link  letter-spacing rounded-pill btn btn-outline-warning border">
-          <Link to="/UserHistorique" className="text-black btn-outline-dark">
-            MyOrder <i className="fa-regular fa-clock mx-2"></i>
+          <Link
+            to="/UserHistorique"
+            className="m-2 p-2   nav-link rounded-pill btn btn-outline-warning border col-lg-2 col-11 bg-white mx-auto shadow-sm">
+            Historique <i className="fa-regular fa-clock mx-1 mx-2"></i>
           </Link>
-        </li>
-        <li className="m-3 px-3 py-2 nav-link  letter-spacing rounded-pill btn btn-outline-warning border">
-          <Link to="/ProfileInformation" className="text-black ">
-            Settings <i className="fa-solid fa-gears mx-2 "></i>
+          <Link
+            to="/MyOrder"
+            className="m-2 p-2   nav-link rounded-pill btn shadow-sm btn-outline-warning border col-lg-2 col-11 bg-white mx-auto">
+            My Order <i className="fa-solid fa-gears mx-1 mx-2 "></i>
           </Link>
-        </li>
+          <Link
+            to="/ProfileInformation"
+            className="m-2 p-2   nav-link rounded-pill btn shadow-sm btn-outline-warning border col-lg-2 col-11 bg-white mx-auto">
+           
+              Settings <i className="fa-solid fa-gears mx-1 mx-2 "></i>
+           
+          </Link>
+        </div>
       </ul>
     </nav>
   );

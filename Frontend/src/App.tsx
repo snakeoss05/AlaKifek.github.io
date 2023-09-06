@@ -23,6 +23,8 @@ import Log from "./pages/log";
 import ProfileInformation from "./pages/ProfileInformation";
 import UserHistorique from "./pages/UserHistorique";
 import SocketComponent from "./components/SocketComponent";
+import BestOffers from "./pages/BestOffers";
+import MyOrder from "./pages/MyOrder";
 
 export default function App() {
   return (
@@ -32,6 +34,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contactAdmin" element={<SocketComponent />} />
+          <Route path="/MyOrder" element={<MyOrder />} />
+          <Route path="/mellieurOffre" element={<BestOffers />} />
           <Route path="/UserHistorique" element={<UserHistorique />} />
           <Route path="/ProfileInformation" element={<ProfileInformation />} />
           <Route path="/contact" element={<Contact />} />

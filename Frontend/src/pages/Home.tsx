@@ -5,8 +5,11 @@ import Items from "../components/Items";
 export default function Home() {
   return (
     <div>
-      <Carouselle />
+      
+        <Carouselle />
+     
       <div>
+        <h3 className="h3">Nos Meilleures Offres | Jusqu'à -40%</h3>
         <Items />
       </div>
       <section id="main" className="breadcrumb col-xs-12 container-fluid">
@@ -55,14 +58,12 @@ export default function Home() {
               <div className=" col-lg">
                 <img
                   src="https://www.tunisianet.com.tn/modules/wblogoslider/views/img/8c6efd560cede847e8daeb38da9988a4331a7081_marque_asus.png"
-                  style={{ maxWidth: "225px", maxHeight: "150px" }}
-                ></img>
+                  style={{ maxWidth: "225px", maxHeight: "150px" }}></img>
               </div>
             </div>
           </div>
         </section>
       </section>
-      
 
       <Footer />
     </div>

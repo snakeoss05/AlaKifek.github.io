@@ -38,7 +38,6 @@ export default function Items() {
   return (
     <div>
       <div className="container">
-        <h3 className="h3">Nos Meilleures Offres | Jusqu'à -40%</h3>
         <div className="row">
           {items ? (
             items.map((item) => {

@@ -69,10 +69,10 @@ export default function UserHistorique() {
   return (
     <>
       <UserAccount />
-      <div className="container py-3 table-responsive">
-        <table className="table text-capitalize ">
+      <div className="py-3 table-container">
+        <table className="table table-striped">
           <thead>
-            <tr className="bg-warning border text-white text-center ">
+            <tr>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Address</th>
@@ -84,22 +84,20 @@ export default function UserHistorique() {
           </thead>
           <tbody>
             {myOrder?.map((clientCommand: any) => (
-              <tr
-                key={clientCommand._id}
-                className="border border-black text-center">
+              <tr key={clientCommand._id} className="border-bottom">
                 <td>{clientCommand.firstname}</td>
                 <td>{clientCommand.lastname}</td>
                 <td>{clientCommand.adresse}</td>
                 <td>{clientCommand.city}</td>
                 <td>{clientCommand.phoneNumber}</td>
-                <td className="col-4">
+                <td>
                   {clientCommand.cartitems.map((detail: any) => {
                     return (
                       <li
                         key={detail.id}
-                        className="d-flex align-items-center justify-content-start my-2 border-bottom">
+                        className="d-flex align-items-center justify-content-start my-2">
                         {" "}
-                        <div className="col">
+                        <div className="col-6">
                           <h6>Item Name:</h6>
                           <p className="me-2"> {detail.title}</p>
                         </div>
@@ -109,7 +107,7 @@ export default function UserHistorique() {
                           height="60"
                           className="mr-2"
                         />
-                        <div className="d-flex flex-column justify-content-start ms-2">
+                        <div className="d-flex flex-column justify-content-start ">
                           <span className="text-muted me-auto">
                             Price : {detail.price} DT
                           </span>

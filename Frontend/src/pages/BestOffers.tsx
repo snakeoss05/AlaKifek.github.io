@@ -1,10 +1,8 @@
-import Card from "../components/storeitem";
-
 import Footer from "../components/footer";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Pagination } from "../context/pagination";
-
+import Items from "../components/Items";
 interface Product {
   _id: string;
   category: string;
@@ -22,7 +20,7 @@ interface Product {
   quantity: number;
 }
 import axios from "axios";
-export default function StoreByCategory() {
+export default function BestOffers() {
   const { category } = useParams();
   const [items, setItems] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -33,21 +31,11 @@ export default function StoreByCategory() {
   const lastpostindex = currentPage * posteperpage;
   const firstpostindex = lastpostindex - posteperpage;
   const currentposts = filtreditems.slice(firstpostindex, lastpostindex);
-  const [dropView,setdropView]=useState({
-    category:false,
-    marks:false,
-    prize:false
-  })
-   const toggleDropdown = (key) => {
-     setdropView((prevDropView) => ({
-       ...prevDropView,
-       [key]: !prevDropView[key],
-     }));
-   };
+
   const fetchItems = async () => {
     axios
       .get<Product[]>(
-        `https://alakifekbackend.onrender.com/api/products/filter/category/${category}`
+        "https://alakifekbackend.onrender.com/api/products/getpromo"
       )
       .then((response) => {
         setItems(response.data);
@@ -92,27 +80,20 @@ export default function StoreByCategory() {
               Filter
             </h1>
             <div className="d-flex flex-lg-column rounded-4 align-content-center  justify-content-center flex-wrap border bg-white px-3 py-2 align-items-start position-relative mx-auto mb-3">
-              <div className=" w-100 rounded-4   p-2 d-flex justify-content-between   text-center ms-auto fs-6  fw-bolder border-bottom">
-                Categorys{" "}
-                <i
-                  className="fa-solid fa-circle-chevron-down me-2 "
-                  onClick={() => toggleDropdown("category")}></i>
-              </div>
-
+              <p className=" w-100 rounded-4  p-2   text-center m-2 fs-6  fw-bolder border">
+                Categorys
+              </p>
               <button
-                className={`${
-                  dropView.category ? "d-flex" : "d-none"
-                } rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn  text-center m-2 fw-bolder catbtn`}
+                className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn  text-center m-2 fw-bolder catbtn"
                 onClick={() => setfiltereditems(items)}>
                 <span className="text-muted">All</span>
+                <i className="fa-solid fa-angle-right ms-auto"></i>
               </button>
 
               {catagorybt.map((category: string) => {
                 return (
                   <button
-                    className={`${
-                      dropView.category ? "d-flex" : "d-none"
-                    } rounded-4 p-2 w-100 text-capitalize  jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder btn-outline-warning border-0 catbtn `}
+                    className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder btn-outline-warning border-0 catbtn"
                     key={category}
                     onClick={() => setSelectedCategory(category)}>
                     <span className="text-muted">{category}</span>
@@ -122,45 +103,33 @@ export default function StoreByCategory() {
               })}
 
               <div className="d-flex flex-column w-100 ">
-                <p className="  rounded-4  p-2   text-center m-2  fs-6 fw-bolder border-bottom">
+                <p className="  rounded-4  p-2   text-center m-2  fs-6 fw-bolder border">
                   Sort By Price
-                  <i
-                    className="fa-solid fa-circle-chevron-down ms-4"
-                    onClick={() => toggleDropdown("prize")}></i>
                 </p>
-
                 <button
-                  className={`${dropView.prize ? "d-block" : "d-none"} 
-                  btn btn-outline-dark  mt-3 rounded-4 border-0 `}
+                  className="btn btn-outline-dark  mt-3 rounded-4 border-0"
                   onClick={sortByPriceAscending}>
                   Ascending
                   <i className="fa-solid fa-arrow-down-9-1 mx-2 fs-4"></i>
                 </button>
                 <button
-                  className={`${
-                    dropView.prize ? "d-block" : "d-none"
-                  } btn btn-outline-dark  mt-3 rounded-4 border-0`}
+                  className="btn btn-outline-dark  mt-3 rounded-4 border-0"
                   onClick={sortByPricedescending}>
                   Descending
                   <i className="fa-solid fa-arrow-up-9-1 mx-2 fs-4 "></i>
                 </button>
               </div>
 
-              <p className="rounded-4 w-100 p-2   text-center m-2 fs-6 fw-bolder border-bottom">
+              <p className="rounded-4 w-100 p-2   text-center m-2 fs-6 fw-bolder border">
                 Mark
-                <i
-                  className="fa-solid fa-circle-chevron-down ms-4"
-                  onClick={() => toggleDropdown("marks")}></i>
               </p>
 
               {marks.map((mark: string) => {
                 return (
                   <button
-                    className={`${
-                      dropView.marks ? "d-flex" : "d-none"
-                    } rounded-4 p-2 w-100 text-capitalize  jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder btn-outline-warning border-0 catbtn `}
+                    className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center btn-outline-warning border-0 m-2 fw-bolder catbtn"
                     key={mark}
-                    onClick={() => setSelectedCategory(mark)}>
+                    onClick={() => setSelectedMark(mark)}>
                     <span className="text-muted">{mark}</span>
                     <i className="fa-solid fa-angle-right ms-auto"></i>
                   </button>
@@ -171,9 +140,7 @@ export default function StoreByCategory() {
           <div className="col-xl-8 col-xxl-9 mx-auto col-md-6  mx-auto my-4 ">
             {currentposts.length !== 0 ? (
               <div className="d-flex align-content-center justify-content-center justify-content-lg-start flex-wrap mx-atuo gap-4 mb-3">
-                {currentposts.map((item) => {
-                  return <Card key={item._id} item={item} />;
-                })}
+                <Items />
               </div>
             ) : (
               <div className="page-404 mt-5">
@@ -196,14 +163,14 @@ export default function StoreByCategory() {
                 </div>
               </div>
             )}
-           
+            <div className=" position-relative">
               <Pagination
                 totalposts={items.length}
                 postperpage={posteperpage}
                 setcurrentpage={setCurrentPage}
                 currentpage={currentPage}
               />
-           
+            </div>
           </div>
         </div>
       </section>

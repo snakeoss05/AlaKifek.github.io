@@ -26,32 +26,29 @@ export const Pagination = ({
     }
   };
   return (
-    <div>
-      <nav className="d-flex align-items-center justify-content-center mt-5 ">
-        <ul className="pagination">
-          <li className="page-item ">
-            <a className="page-link text-black" onClick={handlePrevClick}>
-              Previous
-            </a>
+    <div className="text-center mx-auto mt-auto">
+     
+        <ul >
+          <li className="btn-page" onClick={handlePrevClick}>
+            <i className="fa-solid fa-angles-left"></i>
           </li>
           {pages.map((page, index) => {
             return (
-              <button
+              <li
                 onClick={() => setcurrentpage(page)}
                 key={index}
-                className={page == currentpage ? "active" : ""}
-              >
+                className={
+                  page == currentpage ? "active btn-page " : "btn-page "
+                }>
                 {page}
-              </button>
+              </li>
             );
           })}
-          <li className="page-item">
-            <a className="page-link text-black" onClick={handleNextClick}>
-              Next
-            </a>
+          <li className="btn-page" onClick={handleNextClick}>
+            <i className="fa-solid fa-angles-right"></i>
           </li>
         </ul>
-      </nav>
+     
     </div>
   );
 };
