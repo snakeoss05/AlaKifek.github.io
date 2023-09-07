@@ -31,7 +31,17 @@ export default function BestOffers() {
   const lastpostindex = currentPage * posteperpage;
   const firstpostindex = lastpostindex - posteperpage;
   const currentposts = filtreditems.slice(firstpostindex, lastpostindex);
-
+  const [dropViews, setdropViews] = useState({
+    categorys: true,
+    marke: true,
+    prizes: true,
+  });
+  const toggleDropdownes = (key) => {
+    setdropViews((prevDropView) => ({
+      ...prevDropView,
+      [key]: !prevDropView[key],
+    }));
+  };
   const fetchItems = async () => {
     axios
       .get<Product[]>(
@@ -80,9 +90,12 @@ export default function BestOffers() {
               Filter
             </h1>
             <div className="d-flex flex-lg-column rounded-4 align-content-center  justify-content-center flex-wrap border bg-white px-3 py-2 align-items-start position-relative mx-auto mb-3">
-              <p className=" w-100 rounded-4  p-2   text-center m-2 fs-6  fw-bolder border">
-                Categorys
-              </p>
+              <div className=" w-100 rounded-4   py-2 px-5 d-flex  align-items-center justify-content-between   ms-auto fs-6  fw-bolder border-bottom">
+                <span>Categorys</span>
+                <i
+                  className="fa-solid fa-circle-chevron-down  "
+                  onClick={() => toggleDropdownes("categorys")}></i>
+              </div>
               <button
                 className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn  text-center m-2 fw-bolder catbtn"
                 onClick={() => setfiltereditems(items)}>
@@ -103,9 +116,12 @@ export default function BestOffers() {
               })}
 
               <div className="d-flex flex-column w-100 ">
-                <p className="  rounded-4  p-2   text-center m-2  fs-6 fw-bolder border">
-                  Sort By Price
-                </p>
+                <div className="w-100 rounded-4   py-2 px-5 d-flex  align-items-center justify-content-between   ms-auto fs-6  fw-bolder border-bottom">
+                  <span> Sort By Price</span>
+                  <i
+                    className="fa-solid fa-circle-chevron-down "
+                    onClick={() => toggleDropdownes("prizes")}></i>
+                </div>
                 <button
                   className="btn btn-outline-dark  mt-3 rounded-4 border-0"
                   onClick={sortByPriceAscending}>
@@ -120,9 +136,12 @@ export default function BestOffers() {
                 </button>
               </div>
 
-              <p className="rounded-4 w-100 p-2   text-center m-2 fs-6 fw-bolder border">
+              <div className="w-100 rounded-4   py-2 px-5 d-flex  align-items-center justify-content-between   ms-auto fs-6  fw-bolder border-bottom">
                 Mark
-              </p>
+                <i
+                  className="fa-solid fa-circle-chevron-down "
+                  onClick={() => toggleDropdownes("marke")}></i>
+              </div>
 
               {marks.map((mark: string) => {
                 return (

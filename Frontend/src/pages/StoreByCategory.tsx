@@ -92,10 +92,10 @@ export default function StoreByCategory() {
               Filter
             </h1>
             <div className="d-flex flex-lg-column rounded-4 align-content-center  justify-content-center flex-wrap border bg-white px-3 py-2 align-items-start position-relative mx-auto mb-3">
-              <div className=" w-100 rounded-4   p-2 d-flex justify-content-between   text-center ms-auto fs-6  fw-bolder border-bottom">
-                Categorys{" "}
+              <div className=" w-100 rounded-4   py-2 px-5 d-flex  align-items-center justify-content-between   ms-auto fs-6  fw-bolder border-bottom">
+                <span>Categorys</span>
                 <i
-                  className="fa-solid fa-circle-chevron-down me-2 "
+                  className="fa-solid fa-circle-chevron-down  "
                   onClick={() => toggleDropdown("category")}></i>
               </div>
 
@@ -122,12 +122,12 @@ export default function StoreByCategory() {
               })}
 
               <div className="d-flex flex-column w-100 ">
-                <p className="  rounded-4  p-2   text-center m-2  fs-6 fw-bolder border-bottom">
-                  Sort By Price
+                <div className="w-100 rounded-4   py-2 px-5 d-flex  align-items-center justify-content-between   ms-auto fs-6  fw-bolder border-bottom">
+                  <span> Sort By Price</span>
                   <i
-                    className="fa-solid fa-circle-chevron-down ms-4"
+                    className="fa-solid fa-circle-chevron-down "
                     onClick={() => toggleDropdown("prize")}></i>
-                </p>
+                </div>
 
                 <button
                   className={`${dropView.prize ? "d-block" : "d-none"} 
@@ -146,12 +146,12 @@ export default function StoreByCategory() {
                 </button>
               </div>
 
-              <p className="rounded-4 w-100 p-2   text-center m-2 fs-6 fw-bolder border-bottom">
+              <div className="w-100 rounded-4   py-2 px-5 d-flex  align-items-center justify-content-between   ms-auto fs-6  fw-bolder border-bottom">
                 Mark
                 <i
-                  className="fa-solid fa-circle-chevron-down ms-4"
+                  className="fa-solid fa-circle-chevron-down "
                   onClick={() => toggleDropdown("marks")}></i>
-              </p>
+              </div>
 
               {marks.map((mark: string) => {
                 return (
@@ -196,14 +196,13 @@ export default function StoreByCategory() {
                 </div>
               </div>
             )}
-           
-              <Pagination
-                totalposts={items.length}
-                postperpage={posteperpage}
-                setcurrentpage={setCurrentPage}
-                currentpage={currentPage}
-              />
-           
+
+            <Pagination
+              totalposts={items.length}
+              postperpage={posteperpage}
+              setcurrentpage={setCurrentPage}
+              currentpage={currentPage}
+            />
           </div>
         </div>
       </section>

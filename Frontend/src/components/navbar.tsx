@@ -42,7 +42,7 @@ function Navbar() {
 
     useEffect(() => {
       const handleScroll = () => {
-        if (window.scrollY > 0) {
+        if (window.scrollY > 149) {
           setIsSticky(true);
         } else {
           setIsSticky(false);
@@ -230,21 +230,19 @@ function Navbar() {
         <div className="contanier  ">
           <div className="dropdown">
             <i className="fa-solid fa-bars "></i>
-            <span className="ms-2 fw-semibold">SHOP BY DEPARTMENT</span>
-            <div className="dropdown-content pt-4 pt-lg-2">
-              <ul className="side-links">
+            <span className="ms-2 fw-semibold " style={{lineHeight:"50px"}}>SHOP BY DEPARTMENT</span>
+            <div className="dropdown-content ">
+              <ul className="side-links ">
                 <div
                   className="bg-transparent"
                   style={{ height: "10px" }}></div>
 
-                <a href="#">
-                  <Link to="/mellieurOffre">
-                    <li>top 10 offers</li>
+                <a href="#" >
+                  <Link to="/mellieurOffre" >
+                    <li className="border-top-0 ">top 10 offers</li>
                   </Link>
                 </a>
-                <a href="#" className="position-relative">
-                  <li>new arrivals</li>
-                </a>
+
                 <a href="#" className="toggler">
                   <li>phones &amp; tablets</li>
                   <div className="menu8">
@@ -337,7 +335,7 @@ function Navbar() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="features.html">Features</a>
+              <Link to="/mellieurOffre">New arrivals</Link>
             </li>
             <li>
               <a href="about.html">about us</a>
