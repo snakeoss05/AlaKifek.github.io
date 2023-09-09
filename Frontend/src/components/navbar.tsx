@@ -142,7 +142,7 @@ function Navbar() {
         <div className="contanier d-flex flex-column flex-lg-row align-items-center justify-content-between">
           <Link to="/">
             <img
-              src="../../public/logo/logo black.png"
+              src="https://ala-kifek.netlify.app/public/logo/logo black.png"
               width="100"
               height="100"
               alt=""
@@ -230,15 +230,17 @@ function Navbar() {
         <div className="contanier  ">
           <div className="dropdown">
             <i className="fa-solid fa-bars "></i>
-            <span className="ms-2 fw-semibold " style={{lineHeight:"50px"}}>SHOP BY DEPARTMENT</span>
+            <span className="ms-2 fw-semibold " style={{ lineHeight: "50px" }}>
+              SHOP BY DEPARTMENT
+            </span>
             <div className="dropdown-content ">
               <ul className="side-links ">
                 <div
                   className="bg-transparent"
                   style={{ height: "10px" }}></div>
 
-                <a href="#" >
-                  <Link to="/mellieurOffre" >
+                <a href="#">
+                  <Link to="/mellieurOffre">
                     <li className="border-top-0 ">top 10 offers</li>
                   </Link>
                 </a>

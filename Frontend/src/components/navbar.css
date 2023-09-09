@@ -270,9 +270,9 @@ height: 395px;
     width: 0;
     overflow: hidden;
     display:block;
-    left: 100%;
+    left: 101%;
     box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb),.075)!important;
-    top: 4%;
+    top: 2%;
     height: 380px;
     
     
