@@ -258,7 +258,7 @@ header select option{
 
 .dropdown:hover  .dropdown-content {
   overflow: visible;
-height: 395px;
+height: 341px;
 
   background-color: #fff;
 }
@@ -270,10 +270,11 @@ height: 395px;
     width: 0;
     overflow: hidden;
     display:block;
-    left: 101%;
+    left: 100%;
     box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb),.075)!important;
-    top: 2%;
-    height: 380px;
+    top: 1%;
+    border: var(--border);
+    height: 340px;
     
     
    
@@ -329,7 +330,10 @@ height: 395px;
     .header-top .link-top-heder a{
         padding: 0 10px;
     }
-   
+      header .header-info .search-bar {
+        width: 100%;
+        
+    }
     header .header-info .search-bar input{
         width: 100%;
         
@@ -377,18 +381,19 @@ header .carde {
    .dropdown .dropdown-content{
    height: 0px;
     overflow-y: hidden !important;
-    width: 70vw;
-    top: 120%;
+    width: 0;
+    transition: width ease 0.4s;
+    top: 105%;
    }
     .menu8{
     position: relative ;
     z-index: 99 !important;
     background-color: white;
-    width: 100%;
-    
-  
+    width: 0%;
     flex-direction: column;
     left: 0%;
+      height: 395px;
+    border: none;
     box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb),.075)!important;
     top: 100%;
     height: 0px;
@@ -396,7 +401,7 @@ header .carde {
 }
 .dropdown:hover .dropdown-content{
     overflow-y: auto !important;
-    height: 395px;
+   width: 70vw;
   background-color: #fff;
 }
 
@@ -407,12 +412,12 @@ display: block;
 }
 
 }
-@media (max-width: 950px){
+@media (max-width: 787px){
 header .header-top p, header .header-top a {
     font-size: 12px;
 }
 header .header-info .search-bar {
-        width: 70%;
+        width: 90%;
         margin-bottom: 10px;
     }
  

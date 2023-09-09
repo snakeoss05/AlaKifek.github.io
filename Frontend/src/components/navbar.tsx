@@ -142,7 +142,7 @@ function Navbar() {
         <div className="contanier d-flex flex-column flex-lg-row align-items-center justify-content-between">
           <Link to="/">
             <img
-              src="https://ala-kifek.netlify.app/public/logo/logo black.png"
+              src="https://ala-kifek.netlify.app/logo/logo black.png"
               width="100"
               height="100"
               alt=""
