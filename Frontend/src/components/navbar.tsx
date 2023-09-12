@@ -28,33 +28,33 @@ function Navbar() {
   const [category, setLinkValue] = useState("");
   const elementRef = useRef<HTMLInputElement>(null);
   const [expanded, setExpanded] = useState(false);
- const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
- const handleClose = () => setShow(false);
- const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const handleSelect = () => {
     setExpanded(false);
   };
   const openNav = () => {
     setExpanded(!expanded);
   };
-    const [isSticky, setIsSticky] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
 
-    useEffect(() => {
-      const handleScroll = () => {
-        if (window.scrollY > 149) {
-          setIsSticky(true);
-        } else {
-          setIsSticky(false);
-        }
-      };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 149) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
 
-      window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   useEffect(() => {
     // add event listener to document
     document.addEventListener("click", handleClick);
@@ -87,7 +87,6 @@ function Navbar() {
   };
 
   const handleSearch = async () => {
-   
     try {
       const response = await axios.get<results[]>(
         `https://alakifekbackend.onrender.com/api/products/get/Search/${query}`
@@ -289,11 +288,22 @@ function Navbar() {
                         </Link>
                         <ul className="border-gr">
                           <li>Ecran Gamer</li>
-                          <li>Clavier Gamer</li>
-                          <li>Micro Casque & Écouteur Gaming</li>
+                          <Link to="/Category/Clavier">
+                            <li>Clavier Gamer</li>
+                          </Link>
+                          <Link to="/Category/Casque & Écouteurs">
+                            <li>Micro Casque & Écouteur Gaming</li>
+                          </Link>
                           <li>Haut-Parleur Gamer</li>
-                          <li>Tapis de Souris Gamer</li>
-                          <li>Microphone Gamer</li>
+                          <Link to="/Category/Tapis">
+                            <li>Tapis de Souris Gamer</li>
+                          </Link>
+                          <Link to="/Category/Ensemble Clavier Et Souris">
+                            <li>Ensemble Clavier Et Souris</li>
+                          </Link>
+                          <Link to="/Category/Webcam">
+                            <li>Webcam</li>
+                          </Link>
                         </ul>
                       </div>
                       <div className="col-xl-4 col-md-6 col-12">
@@ -304,12 +314,12 @@ function Navbar() {
                           <li>Barrettes</li>
                           <li>Mémoire Carte</li>
                           <li>Mère Boîtier</li>
-                          <li>Bloc d'alimentation</li>
                           <li>Disque Dur Interne</li>
                         </ul>
                       </div>
                       <div className="col-xl-4 col-md-6 col-12 ">
                         <ul className="border-gr ">
+                          <li>Bloc d'alimentation</li>
                           <li> Disque Dur Externe</li>
                           <li>Clé USB</li>
                         </ul>

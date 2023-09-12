@@ -97,16 +97,19 @@ export default function BestOffers() {
                   onClick={() => toggleDropdownes("categorys")}></i>
               </div>
               <button
-                className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn  text-center m-2 fw-bolder catbtn"
+                className={`${
+                  dropViews.categorys ? "d-flex" : "d-none"
+                } rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn  text-center m-2 fw-bolder catbtn`}
                 onClick={() => setfiltereditems(items)}>
                 <span className="text-muted">All</span>
-                <i className="fa-solid fa-angle-right ms-auto"></i>
               </button>
 
               {catagorybt.map((category: string) => {
                 return (
                   <button
-                    className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder btn-outline-warning border-0 catbtn"
+                    className={`${
+                      dropViews.categorys ? "d-flex" : "d-none"
+                    } rounded-4 p-2 w-100 text-capitalize  jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder btn-outline-warning border-0 catbtn `}
                     key={category}
                     onClick={() => setSelectedCategory(category)}>
                     <span className="text-muted">{category}</span>
@@ -123,13 +126,16 @@ export default function BestOffers() {
                     onClick={() => toggleDropdownes("prizes")}></i>
                 </div>
                 <button
-                  className="btn btn-outline-dark  mt-3 rounded-4 border-0"
+                  className={`${dropViews.prizes ? "d-block" : "d-none"} 
+                  btn btn-outline-dark  mt-3 rounded-4 border-0 `}
                   onClick={sortByPriceAscending}>
                   Ascending
                   <i className="fa-solid fa-arrow-down-9-1 mx-2 fs-4"></i>
                 </button>
                 <button
-                  className="btn btn-outline-dark  mt-3 rounded-4 border-0"
+                  className={`${
+                    dropViews.prizes ? "d-block" : "d-none"
+                  } btn btn-outline-dark  mt-3 rounded-4 border-0`}
                   onClick={sortByPricedescending}>
                   Descending
                   <i className="fa-solid fa-arrow-up-9-1 mx-2 fs-4 "></i>
@@ -146,9 +152,11 @@ export default function BestOffers() {
               {marks.map((mark: string) => {
                 return (
                   <button
-                    className="rounded-4 p-2 w-100 text-capitalize d-flex jsutfy-content-space-between align-items-center  btn text-center btn-outline-warning border-0 m-2 fw-bolder catbtn"
+                    className={`${
+                      dropViews.marke ? "d-flex" : "d-none"
+                    } rounded-4 p-2 w-100 text-capitalize  jsutfy-content-space-between align-items-center  btn text-center m-2 fw-bolder btn-outline-warning border-0 catbtn `}
                     key={mark}
-                    onClick={() => setSelectedMark(mark)}>
+                    onClick={() => setSelectedCategory(mark)}>
                     <span className="text-muted">{mark}</span>
                     <i className="fa-solid fa-angle-right ms-auto"></i>
                   </button>
