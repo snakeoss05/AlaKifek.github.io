@@ -268,10 +268,15 @@ ul {
   overflow: hidden;
   display: block;
   left: 100%;
-  box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb), 0.075) !important;
+  height: 0;
   top: 1%;
   border: var(--border);
+}
+.toggler:hover .menu8 {
+  width: 60vw;
+  overflow-y: auto;
   height: 340px;
+  box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb), 0.075) !important;
 }
 .menu8 li {
   border-top: none !important;
@@ -280,11 +285,6 @@ ul {
 .menu8 h6 {
   color: var(--main-color);
   padding: 10px;
-}
-
-.toggler:hover .menu8 {
-  width: 60vw;
-  overflow-y: auto;
 }
 
 .dropdown .dropdown-content a li {
