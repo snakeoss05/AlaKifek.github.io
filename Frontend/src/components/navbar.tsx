@@ -65,20 +65,6 @@ function Navbar() {
     };
   }, []);
 
-  const ChangLogoutIcon = () => {
-    if (UserLog) {
-      return (
-        <li className="nav-item mx-2 me-lg-0 ">
-          <i
-            className="fa-solid fa-right-from-bracket"
-            onClick={() => userState(false)}></i>
-        </li>
-      );
-    } else {
-      <></>;
-    }
-  };
-
   const handleClick = (e: any) => {
     // check if click occurred outside of element
     if (elementRef.current && !elementRef.current.contains(e.target)) {
@@ -132,7 +118,9 @@ function Navbar() {
             {UserLog && <Link to="/ProfileInformation">My Account</Link>}
 
             <a href="#">My Wishlist</a>
-            <Link to="/login">Sign In</Link>
+            <Link to="/login" onClick={UserLog && (() => userState(false))}>
+              {UserLog ? "Sign Out" : "Sign In"}
+            </Link>
             <a href="#">Compare</a>
           </div>
         </div>
