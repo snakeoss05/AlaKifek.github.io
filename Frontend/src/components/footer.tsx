@@ -5,8 +5,7 @@ const Footer = () => {
     <div>
       <footer
         className="text-center text-lg-start text-current border  "
-        style={{ backgroundColor: "#f3f5f8" }}
-      >
+        style={{ backgroundColor: "#f3f5f8" }}>
         <section className="d-flex justify-content-center  p-4 border-bottom">
           <div className="me-5 d-none d-lg-block ">
             <span>Get connected with us on social networks:</span>
@@ -20,13 +19,19 @@ const Footer = () => {
               <a href="" className="me-4 text-reset">
                 <i className="fab fa-google"></i>
               </a>
-              <a href="" className="me-4 text-reset">
+              <a
+                href="https://www.instagram.com/noussaier.bi/"
+                className="me-4 text-reset">
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="" className="me-4 text-reset">
+              <a
+                href="https://www.linkedin.com/in/noussaier-bibani/"
+                className="me-4 text-reset">
                 <i className="fab fa-linkedin"></i>
               </a>
-              <a href="" className="me-4 text-reset">
+              <a
+                href="https://github.com/snakeoss05"
+                className="me-4 text-reset">
                 <i className="fab fa-github"></i>
               </a>
             </div>
@@ -118,7 +123,7 @@ const Footer = () => {
                 </p>
                 <p>
                   <i className="fas fa-envelope me-3"></i>
-                  Alakifek@mail.com
+                  bibani.noussaier@gmail.com
                 </p>
                 <p>
                   <i className="fas fa-phone me-3"></i> +216 27768325
@@ -131,7 +136,7 @@ const Footer = () => {
         <div className="text-center p-4">
           © 2021 Copyright:
           <a className="text-reset fw-bold" href="https://Alakifek.tn">
-            Alakifek.tn
+            Noussaier Bibani
           </a>
         </div>
       </footer>
