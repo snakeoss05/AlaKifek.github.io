@@ -2,7 +2,7 @@
 mern stack project
 
 
-You need to create env file and link your database (mongodb) and u can to go dashboard and add products  
+You need to create env file and link your database (mongodb) and u can go to the dashboard and add products  
 1 First setup the env file name the variable connection URI_CONNECTION and link ur database and PORT=5000
 
 2 run the server nodemon server
